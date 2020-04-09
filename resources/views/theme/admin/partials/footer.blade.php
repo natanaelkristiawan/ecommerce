@@ -1,67 +1,24 @@
-<!-- Mainly scripts -->
-<script src="{{ asset('template/admin') }}/js/jquery-3.1.1.min.js"></script>
-<script src="{{ asset('template/admin') }}/js/popper.min.js"></script>
-<script src="{{ asset('template/admin') }}/js/bootstrap.js"></script>
-<script src="{{ asset('template/admin') }}/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="{{ asset('template/admin') }}/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<!-- Core -->
+<script src="{{ asset('template/argon') }}/assets/vendor/jquery/dist/jquery.min.js"></script>
+<script src="{{ asset('template/argon') }}/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('template/argon') }}/assets/vendor/js-cookie/js.cookie.js"></script>
+<script src="{{ asset('template/argon') }}/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+<script src="{{ asset('template/argon') }}/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+<!-- Optional JS -->
+<script src="{{ asset('template/argon') }}/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('template/argon') }}/assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ asset('template/argon') }}/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{ asset('template/argon') }}/assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="{{ asset('template/argon') }}/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="{{ asset('template/argon') }}/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+<script src="{{ asset('template/argon') }}/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="{{ asset('template/argon') }}/assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+  <script src="{{ asset('template/argon') }}/assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+  <script src="{{ asset('template/argon') }}/assets/vendor/bootstrap-notify/bootstrap-notify.min.js"></script>
+<!-- Argon JS -->
+<script src="{{ asset('template/argon') }}/assets/js/argon.js?v=1.1.0"></script>
 
-
-<script src="{{ asset('template/admin') }}/js/plugins/dataTables/datatables.min.js"></script>
-<script src="{{ asset('template/admin') }}/js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
-
-<!-- mustache -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
-
-<script src="{{ asset('template/admin') }}/js/plugins/chosen/chosen.jquery.js"></script>
-
-<script src="{{ asset('template/admin') }}/js/plugins/datapicker/bootstrap-datepicker.js"></script>
-
-<script src="{{ asset('template/admin') }}/js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
-
-<script src="{{ asset('template/admin') }}/js/plugins/dropzone/dropzone.js"></script>
-
-<script src="{{ asset('template/admin') }}/additional/sortable/Sortable.min.js"></script>
-<script src="{{ asset('template/admin') }}/additional/sortable/jquery-sortable.js"></script>
-
-<script src="{{ asset('template/admin') }}/js/plugins/toastr/toastr.min.js"></script>
-
-<script src="{{ asset('template/admin') }}/js/plugins/summernote/summernote-bs4.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
-
-
-<!-- Custom and plugin javascript -->
-<script src="{{ asset('template/admin') }}/js/inspinia.js"></script>
-<script src="{{ asset('template/admin') }}/js/plugins/pace/pace.min.js"></script>
 <script type="text/javascript">
-    var toogleMinimalize = (window.localStorage.getItem('minimize') == 'true' ? true : false)  ;
-    $(document).ready(function(){
-        $('.navbar-minimalize').on('click', function(){
-            toogleMinimalize = !Boolean(toogleMinimalize);
-            window.localStorage.setItem('minimize', toogleMinimalize);
-        });
-        if (toogleMinimalize) {
-            $('body').addClass('mini-navbar');
-        }
-
-
-        $('.chosen-select').chosen({width: "100%"});
-
-        var mem = $('.datepicker').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true,
-            format: "yyyy-mm-dd"
-        });
-
-        $('.tagsinput').tagsinput({
-            tagClass: 'label label-primary'
-        });
-    });
-
-
     function sendFile(file, editor, uploadUrl) {
       
       data = new FormData();

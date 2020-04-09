@@ -10,7 +10,7 @@ class CategoriesRepository extends BaseRepository implements CategoriesRepositor
 	private $pageLimit;
 
 	protected $fieldSearchable = [
-		'name'      => 'like',
+		'title'      => 'like',
 		'status'    => '='
 	];
 

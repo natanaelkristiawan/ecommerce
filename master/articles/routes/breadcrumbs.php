@@ -1,7 +1,6 @@
 <?php
 
 Breadcrumbs::for('articles', function ($trail) {
-  $trail->parent('dashboard');
   $trail->push('Articles', route('admin.articles'));
 });
 
@@ -16,7 +15,6 @@ Breadcrumbs::for('articles.edit', function ($trail) {
 });
 
 Breadcrumbs::for('categories', function ($trail) {
-  $trail->parent('dashboard');
   $trail->push('Categories', route('admin.categories'));
 });
 

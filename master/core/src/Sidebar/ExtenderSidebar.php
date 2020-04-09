@@ -16,7 +16,7 @@ class ExtenderSidebar implements SidebarExtender
 		$menu->group('Main Navigator', function(Group $group) {
 			$group->item('Dashboard', function(Item $item){
 				$item->url(route('admin.dashboard'));
-				$item->icon('fa fa-dashboard');
+				$item->icon('ni ni-shop text-primary');
 			});
 		});
 		return $menu;
