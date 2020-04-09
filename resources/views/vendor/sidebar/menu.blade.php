@@ -18,7 +18,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link">
+    <a href="{{ route('admin.logout') }}" class="nav-link">
       <i class="ni ni-button-power"></i>
       <span class="nav-link-text">Logout</span>
     </a>
