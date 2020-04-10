@@ -99,10 +99,10 @@
                 </a>
                 <div class="btn-container">
                     <a href="#" class="move-image">
-                        <i class="fa fa-arrows"></i>
+                        <i class="fa fa-arrows-alt"></i>
                     </a>
                     <a href="#" class="edit-image">
-                        <i class="fa fa-pencil"></i>
+                        <i class="fa fa-pencil-alt"></i>
                     </a>
                     <a href="#" class="remove-image">
                         <i class="fa fa-times"></i>

@@ -17,7 +17,7 @@
         </div>
         <div class="col-lg-6 col-5 text-right">
           <a href="{{ route('admin.categories.create') }}" class="btn btn-sm btn-neutral">New</a>
-          <button type="button" data-toggle="modal" data-target="#modal-filter" class="btn btn-sm btn-neutral">Filter</button>
+          <a href="{{ route('admin.categories') }}" class="btn btn-sm btn-danger">Close</a>
         </div>
       </div>
     </div>
@@ -33,70 +33,61 @@
     </div>
     <!-- Card body -->
     <div class="card-body">
-      <!-- Form groups used in grid -->
-      <div class="row">
-        <div class="col-md-4">
-          <div class="form-group">
-            <label class="form-control-label" for="example3cols1Input">One of three cols</label>
-            <input type="text" class="form-control" id="example3cols1Input" placeholder="One of three cols">
+      <form role="form" method="POST" action="" data-toggle="validator" role="form" data-disable="false">
+      @csrf
+        <div class="form-group">
+          <label class="form-control-label">Title <span class="required">*</span></label> 
+          <input required="" data-error="Please enter title" type="text" value="{{ $data->title }}" placeholder="Title" id="title" name="title" class="form-control">
+          <div class="help-block with-errors error"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-control-label">Slug <span class="required">*</span></label> 
+          <input required="" data-error="Please enter slug" type="text" value="{{ $data->slug }}" placeholder="Slug" id="slug" name="slug" class="form-control">
+          <div class="help-block with-errors error"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-control-label">Order <span class="required">*</span></label> 
+          <input required="" type="number" data-error="Please enter order"  placeholder="Order" value="{{ $data->order }}" name="order" class="form-control">
+          <div class="help-block with-errors error"></div>
+        </div>
+        <div class="form-group">
+          <label>Status</label> 
+          <div class="form-control-label">
+            <input type="hidden" name="status" value="0">
+            <input type="checkbox" class="js-switch" name="status" value="1" {{ (bool)$data->status ?  'checked' : ''}} />
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            <label class="form-control-label" for="example3cols2Input">One of three cols</label>
-            <input type="text" class="form-control" id="example3cols2Input" placeholder="One of three cols">
+        <div class="form-group row">
+          <div class="col-sm-4 col-sm-offset-2">
+            <button class="btn btn-primary btn-sm" name="submit" value="submit" type="submit">Save</button>
+            <button class="btn btn-primary btn-sm" name="submit" value="submit_exit" type="submit">Save & Exit</button>
+            <a href="{{ route('admin.categories') }}" class="btn btn-danger btn-sm" >Cancel</a>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            <label class="form-control-label" for="example3cols3Input">One of three cols</label>
-            <input type="text" class="form-control" id="example3cols3Input" placeholder="One of three cols">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 col-md-3">
-          <div class="form-group">
-            <label class="form-control-label" for="example4cols1Input">One of four cols</label>
-            <input type="text" class="form-control" id="example4cols1Input" placeholder="One of four cols">
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-          <div class="form-group">
-            <label class="form-control-label" for="example4cols2Input">One of four cols</label>
-            <input type="text" class="form-control" id="example4cols2Input" placeholder="One of four cols">
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-          <div class="form-group">
-            <label class="form-control-label" for="example4cols3Input">One of four cols</label>
-            <input type="text" class="form-control" id="example4cols3Input" placeholder="One of four cols">
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-          <div class="form-group">
-            <label class="form-control-label" for="example4cols3Input">One of four cols</label>
-            <input type="text" class="form-control" id="example4cols3Input" placeholder="One of four cols">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="form-control-label" for="example2cols1Input">One of two cols</label>
-            <input type="text" class="form-control" id="example2cols1Input" placeholder="One of two cols">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="form-control-label" for="example2cols2Input">One of two cols</label>
-            <input type="text" class="form-control" id="example2cols2Input" placeholder="One of two cols">
-          </div>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
   <!-- Footer -->
   @include('theme.admin.partials.copyright')
 </div>
+@stop
+
+
+@section('script')
+@parent
+<script type="text/javascript">
+
+  var elem = document.querySelector('.js-switch');
+  var switchery = new Switchery(elem, { color: '#1AB394' });
+
+  $(document).ready(function(){
+    $('#title').on('keyup', function(){
+      var title = $(this).val();
+      var slug = slugify(title);
+      $('#slug').val(slug);
+    });
+  });
+
+
+</script>
 @stop

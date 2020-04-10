@@ -1,4 +1,4 @@
-<table class="table table-flush" id="datatable" style="width:100%">
+<table class="table table-flush" id="datatable">
   <thead class="thead-light">
     <tr>
       <th>Title</th>
