@@ -40,6 +40,7 @@ return [
 
     'files' => [
         base_path('master/articles/routes/breadcrumbs.php'),
+        base_path('master/settings/routes/breadcrumbs.php'),
     ],
 
     /*

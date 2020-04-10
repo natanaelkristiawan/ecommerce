@@ -1,0 +1,21 @@
+{
+    "name": "master/settings",
+    "description": "This module additional",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Master\\Settings\\": "src"
+        },
+        "classmap": [ "src" ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Master\\Settings\\SettingsServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev"
+}

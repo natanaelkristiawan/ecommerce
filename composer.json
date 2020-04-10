@@ -12,10 +12,10 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
-        "master/core": "@dev",
         "master/articles": "@dev",
+        "master/core": "@dev",
+        "master/settings": "@dev",
         "master/upload": "@dev"
-
     },
     "repositories" : [
         {
@@ -35,6 +35,13 @@
         {
             "type"      : "path",
             "url"       : "master/upload",
+            "options"   : {
+                "symlink" : true
+            }
+        },
+        {
+            "type"      : "path",
+            "url"       : "master/settings",
             "options"   : {
                 "symlink" : true
             }
