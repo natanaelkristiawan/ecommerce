@@ -10,10 +10,11 @@
     Dropzone.autoDiscover = false; 
     $(function () {
        
+        var i = 0;
         $("div#{!!$field!!}").dropzone({
             url: "{!! $url !!}",
             maxFiles: {!!$count!!},
-            acceptedFiles: "image/*",
+            // acceptedFiles: "image/*",
             parallelUploads : 1,
             maxfilesexceeded: function(file) {
                 toastr.error('Files maximum size.', 'Error');
@@ -27,7 +28,7 @@
                     if (response === ""){
                         toastr.error('Files maximum size.', 'Error');
                     } else {  
-                        response['i'] = ++i;
+                        response['i'] = i;
                         if(["jpg", "jpeg", "png"].indexOf(response.file.split('.').pop()) >= 0){
                             rendered = Mustache.render(template_image_{!!$field!!}, response);
                         } else {
@@ -35,6 +36,7 @@
                         }
                         $('#sortable_{!!$field!!}').append(rendered);
                         toastr.success('Files uploaded successfully.', 'Success');
+                        ++i;
                     }
                 });
 
@@ -54,7 +56,6 @@
         Mustache.parse(template_image_{!!$field!!});
         Mustache.parse(template_file_{!!$field!!});
         var rendered = '';
-        var i = 1;
         $.each({!!$field!!}_files, function( index, value ) {
             i = index;
             value['i'] = index;

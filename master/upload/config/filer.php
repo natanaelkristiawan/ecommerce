@@ -56,7 +56,7 @@ return [
 
     // [True] will change all uploaded file names to an obfuscated name. (Example_Image.jpg becomes Example_Image_p4n8wfnt8nwh5gc7ynwn8gtu4se8u.jpg)
     // [False] attempts to leaves the filename as is.
-    'obfuscate_filenames'      => true, // True/False
+    'obfuscate_filenames'      => false, // True/False
 
     /*
     |--------------------------------------------------------------------------

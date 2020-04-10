@@ -15,3 +15,4 @@ $route->group(['prefix' => 'upload','middleware' => 'web'], function($route) {
 	$route->post('{config}/{path?}/', 'UploadPublicController@upload')->where('path', '(.*)')->name('public.upload');
 });
 
+Route::get('file/download/{path?}', 'FileController@download')->where('path', '(.*)');

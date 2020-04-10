@@ -24,29 +24,27 @@ class SettingsResourceController extends Controller
 		return view('settings::admin.settings.index');	
 	}
 
-	public function create(Request $request)
-	{
-
-	}
-
 	public function store(Request $request)
 	{
-	 
+
+		dd($request->all());
+
+		$dataSection1 = array(
+
+		);
+		
 	}
 
-	public function edit(Request $request, Settings $data)
-	{
-	  
-	}
 
-	public function update(Request $request, Settings $data)
-	{
-	  
-	}
-
-	public function delete(Request $request, Settings $data)
-	{
+	private function section1($data){
 
 	}
 
+	private function section2($data){
+		
+	}
+
+	private function section3($data){
+		
+	}
 }
