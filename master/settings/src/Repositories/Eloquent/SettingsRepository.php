@@ -42,4 +42,20 @@ class SettingsRepository extends BaseRepository implements SettingsRepositoryInt
 		return $data;
 	}
 
+
+	public function insertData($name, $slug, $data, $default = '')
+	{
+		$dataInsert = array(
+			'name'=> $name,
+			'slug'=> $slug,
+			'default'=> '',
+			'value'=> $data,
+			'status'=> 1
+		);
+		$this->model->updateOrCreate(array('slug'=>$slug), $dataInsert);
+		$this->resetModel();
+
+		return true;
+	}
+
 }

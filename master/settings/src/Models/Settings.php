@@ -11,6 +11,14 @@ class Settings extends Model
 	protected $fillable = [
 		'name',
 		'slug',
+    'default',
+    'value',
 		'status',
 	];
+
+  protected $casts = array(
+    'default' => 'array',
+    'value' => 'array'
+
+  ); 
 }

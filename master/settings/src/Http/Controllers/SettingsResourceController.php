@@ -26,25 +26,21 @@ class SettingsResourceController extends Controller
 
 	public function store(Request $request)
 	{
+		// logo
+		$logo = is_null($request->logo) ? array() : array_values($request->logo);
+		// insert logo
+		$this->repository->insertData('logo', 'logo', $logo, array());
 
-		dd($request->all());
 
-		$dataSection1 = array(
+		// background
+		$background = is_null($request->background) ? array() : array_values($request->background);
+		$this->repository->insertData('background', 'background', $background, array());
 
-		);
+
+
+		return redirect()->back();
 		
 	}
 
-
-	private function section1($data){
-
-	}
-
-	private function section2($data){
-		
-	}
-
-	private function section3($data){
-		
-	}
+	
 }

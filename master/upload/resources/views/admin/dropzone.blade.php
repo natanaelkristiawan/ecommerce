@@ -60,6 +60,9 @@
             i = index;
             value['i'] = index;
 
+
+
+
             if(["jpg", "jpeg", "png"].indexOf(value.file.split('.').pop()) >= 0){
                 rendered = rendered + Mustache.render(template_image_{!!$field!!}, value);
             } else {
@@ -75,15 +78,19 @@
 
     <!-- End dropzone. -->
     <script id="template_file_{!!$field!!}" type="x-tmpl-mustache">
-        <div class="file-box" id="image_box_@{{i}}">
-            <div class="file-container">
+        <div class="img-box" id="image_box_@{{i}}">
+            <div class="img-container">
                 <a href="{!!url("/file/download")!!}/@{{path}}" target="_blank" >
-                    @{{file}}
-                </a> 
-                <a href="#" class="remove-file">
-                    <i class="fa fa-times"></i>
+                    <img src="{!! url("img/file.png") !!}" class="img-responsive" alt="">
                 </a>
-            </div>                
+                <span style="font-size:12px; display:inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 13ch;">@{{file}}</span>
+                <div class="btn-container">
+                    <a href="#" class="remove-image">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+
             <input class="form-control" type="hidden" name="{!!$field!!}[@{{i}}][folder]" value="@{{folder}}">
             <input class="form-control" type="hidden" name="{!!$field!!}[@{{i}}][time]" value="@{{time}}">
             <input class="form-control" type="hidden" name="{!!$field!!}[@{{i}}][path]" value="@{{path}}">
@@ -98,6 +105,7 @@
                 <a href="{!!url("/image/original")!!}/@{{path}}" target="_blank" >
                     <img src="{!!url("/image/preview")!!}/@{{path}}" class="img-responsive" alt="">
                 </a>
+                <span style="font-size:12px; display:inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 13ch;">@{{file}}</span>
                 <div class="btn-container">
                     <a href="#" class="move-image">
                         <i class="fa fa-arrows-alt"></i>
