@@ -106,7 +106,7 @@
                       <tfoot>
                         <tr>
                           <td></td>
-                          <td width="10%"><button class="btn btn-sm btn-primary btn-add-data">Add Data</button></td>
+                          <td width="10%"><button type="button" class="btn btn-sm btn-primary btn-add-data">Add Data</button></td>
                         </tr>
                       </tfoot>
                       <tbody>
@@ -138,7 +138,7 @@
                       <tfoot>
                         <tr>
                           <td></td>
-                          <td width="10%"><button class="btn btn-sm btn-primary btn-add-quote">Add Quote</button></td>
+                          <td width="10%"><button type="button" class="btn btn-sm btn-primary btn-add-quote">Add Quote</button></td>
                         </tr>
                       </tfoot>
                       <tbody>
@@ -184,14 +184,14 @@
 
 <script type="x-tmpl-mustache" id="template">
   <tr id="data@{{count}}">
-    <td><input type="text" name="" class="form-control" name="setting[section2_data][@{{count}}]"></td>
+    <td><input type="text"  class="form-control" name="setting[section2_data][@{{count}}]"></td>
     <td><button onclick="$('#data@{{count}}').remove()" class="btn btn-sm btn-danger">Delete</button></td>
   </tr>
 </script>
 <script type="x-tmpl-mustache" id="template-quote">
-  <tr id="data@{{count}}">
-    <td><input type="text" name="" class="form-control" name="setting[section3_quote][@{{count}}]"></td>
-    <td><button onclick="$('#data@{{count}}').remove()" class="btn btn-sm btn-danger">Delete</button></td>
+  <tr id="data_quote@{{count}}">
+    <td><input type="text"  class="form-control" name="setting[section3_quote][@{{count}}]"></td>
+    <td><button onclick="$('#data_quote@{{count}}').remove()" class="btn btn-sm btn-danger">Delete</button></td>
   </tr>
 </script>
 

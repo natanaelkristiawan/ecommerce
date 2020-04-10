@@ -43,7 +43,7 @@ class SettingsRepository extends BaseRepository implements SettingsRepositoryInt
 	}
 
 
-	public function insertData($name, $slug, $data, $default = '')
+	public function insertData($name, $slug, $data, $default = array())
 	{
 		$dataInsert = array(
 			'name'=> $name,

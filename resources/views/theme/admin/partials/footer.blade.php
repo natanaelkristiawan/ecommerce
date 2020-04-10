@@ -74,7 +74,26 @@
       .replace(/-+$/, '');            // Trim - from end of text
   }
   $(window).on('load', function(){
-    $('.chosen-select').chosen({width: "100%"});
+
+    $('.chosen-select').chosen({width: "100%"}).change(function(event, info) {
+
+
+      if (info.selected) {
+        var allSelected = this.querySelectorAll('option[selected]');
+        var lastSelected = allSelected[allSelected.length - 1];
+        var selected = this.querySelector(`option[value="${info.selected}"]`);
+        selected.setAttribute('selected', '');
+
+        if (typeof lastSelected !== "undefined") {
+          lastSelected.insertAdjacentElement('afterEnd', selected);
+        }
+      } else { // info.deselected
+        var removed = this.querySelector(`option[value="${info.deselected}"]`);
+        removed.setAttribute('selected', false); // this step is required for Edge
+        removed.removeAttribute('selected');
+      }
+      $(this).trigger("chosen:updated");
+    });
     $('.tagsinput').tagsinput({
       tagClass: 'btn btn-sm pr-4 mb-2 btn-primary'
     });
