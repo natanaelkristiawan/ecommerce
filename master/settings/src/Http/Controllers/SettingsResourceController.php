@@ -23,7 +23,7 @@ class SettingsResourceController extends Controller
 	public function index(Request $request)
 	{
 
-		$setting = new \StdClass;
+		$setting = $this->repository->newInstance(array());
 
 		// get all data
 
@@ -32,7 +32,7 @@ class SettingsResourceController extends Controller
 
 
 		foreach ($settings as $key => $value) {
-			$setting->{$value->slug} = empty($value->value) ? $value->default : $value->value;
+			$setting->{$value->slug} = $value->value;
 		}
 
 		$products = Products::all();
@@ -55,7 +55,6 @@ class SettingsResourceController extends Controller
 					
 			}
 		}
-
 
 		return view('settings::admin.settings.index', compact('setting', 'products'));	
 	}

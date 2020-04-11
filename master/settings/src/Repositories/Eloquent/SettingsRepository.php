@@ -48,7 +48,7 @@ class SettingsRepository extends BaseRepository implements SettingsRepositoryInt
 		$dataInsert = array(
 			'name'=> $name,
 			'slug'=> $slug,
-			'default'=> '',
+			'default'=> $default,
 			'value'=> $data,
 			'status'=> 1
 		);

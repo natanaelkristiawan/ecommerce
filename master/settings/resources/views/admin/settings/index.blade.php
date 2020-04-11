@@ -122,7 +122,7 @@
                     <label class="form-control-label">Product</label>
                     <select name="setting[section3_product][]" data-placeholder="Choose a Product..." multiple class="chosen-select" tabindex="4">
                       @foreach($products as $product)
-                      <option {{ in_array($product->id, $setting->section3_product) ? 'selected' : '' }} value="{{ $product->id }}">{{ $product->name }}</option>
+                      <option @if(!is_null($setting->section3_product)) {{ in_array($product->id, $setting->section3_product) ? 'selected' : '' }} @endif value="{{ $product->id }}">{{ $product->name }}</option>
                       @endforeach
                     </select>
                   </div>
