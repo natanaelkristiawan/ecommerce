@@ -30,7 +30,6 @@
 <script src="{{ asset('template/argon') }}/assets/js/argon.js?v=1.1.0"></script>
 
 <script type="text/javascript">
-
   function sendFile(file, editor, uploadUrl) { 
     data = new FormData();
     data.append("file", file);
@@ -97,7 +96,26 @@
     $('.tagsinput').tagsinput({
       tagClass: 'btn btn-sm pr-4 mb-2 btn-primary'
     });
+
+
+    $('.bootstrap-tagsinput input').keydown(function( event ) {
+      if ( event.which == 13 ) {
+          $(this).blur();
+          $(this).focus();
+          return false;
+      }
+    });
   });
+
+
+@if(session()->has('status'))
+  toastr.success("{{session()->get('status')}}");
+@endif
+
+
+@if(session()->has('status_error'))
+  toastr.error("{{session()->get('status_error')}}");
+@endif
 </script>
 
 @section('script')

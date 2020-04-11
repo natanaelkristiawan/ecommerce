@@ -112,7 +112,7 @@ class ArticlesResourceController extends Controller {
 
 	public function edit(Request $request, Articles $data)
 	{
-		$method = 'create';
+		$method = 'edit';
 
 		$categories = $this->category->all();
 

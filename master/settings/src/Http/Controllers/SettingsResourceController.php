@@ -8,6 +8,7 @@ use Master\Settings\Interfaces\SettingsRepositoryInterface;
 use Master\Settings\Models\Settings;
 use Validator;
 use Meta;
+use Products;
 class SettingsResourceController extends Controller
 {
 	protected $repository;
@@ -21,13 +22,47 @@ class SettingsResourceController extends Controller
 
 	public function index(Request $request)
 	{
-		return view('settings::admin.settings.index');	
+
+		$setting = new \StdClass;
+
+		// get all data
+
+
+		$settings = $this->repository->all();
+
+
+		foreach ($settings as $key => $value) {
+			$setting->{$value->slug} = empty($value->value) ? $value->default : $value->value;
+		}
+
+		$products = Products::all();
+
+		if (isset($setting->section3_product)) {
+			if ((bool)!empty($setting->section3_product)) {
+				
+				$products = Products::findByOrder('id', $setting->section3_product);
+
+				// nambah product
+
+				$productNotSelected = Products::findWhereNotIn('id', $setting->section3_product);
+
+				if (!is_null($productNotSelected)) {
+					
+					foreach ($productNotSelected as $key => $value) {
+						$products[] = $value;
+					}
+				}
+					
+			}
+		}
+
+
+		return view('settings::admin.settings.index', compact('setting', 'products'));	
 	}
 
 	public function store(Request $request)
 	{
 		// statik dulu nanti dicarikan caranya biar bisa gampang
-
 
 		// logo
 		$logo = is_null($request->logo) ? array() : array_values($request->logo);
@@ -62,11 +97,23 @@ class SettingsResourceController extends Controller
 
 
 		// section 3
-		$section3_product = $request->setting['section3_product'];
+		$section3_product = isset($request->setting['section3_product']) ? $request->setting['section3_product'] : array();
 		$this->repository->insertData('section3_product', 'section3_product', $section3_product);
 
+		$section3_quote = isset($request->setting['section3_quote']) ? $request->setting['section3_quote'] : array();
+		$this->repository->insertData('section3_quote', 'section3_quote', $section3_quote);
 
 
+		// meta
+		$meta_title = $request->setting['meta_title'];
+		$this->repository->insertData('meta_title', 'meta_title', $meta_title);
+		$meta_tag = $request->setting['meta_tag'];
+		$this->repository->insertData('meta_tag', 'meta_tag', $meta_tag);
+		$meta_description = $request->setting['meta_description'];
+		$this->repository->insertData('meta_description', 'meta_description', $meta_description);
+
+
+		$request->session()->flash('status', 'Data has been update!');
 
 		return redirect()->back();
 		

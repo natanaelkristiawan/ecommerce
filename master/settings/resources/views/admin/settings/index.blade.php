@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form method="POST" action="" >
+<form method="POST" action="" data-toggle="validator" role="form" data-disable="false">
   @csrf
   <div class="header bg-primary pb-6">
     <div class="container-fluid">
@@ -15,7 +15,7 @@
             </nav>
           </div>
           <div class="col-lg-6 col-5 text-right">
-            <button type="submit" class="btn btn-sm btn-neutral">Save</button>
+            <button type="submit" class="btn btn-sm btn-danger">Save</button>
             <a href="" class="btn btn-sm btn-neutral">Reset</a>
           </div>
         </div>
@@ -56,31 +56,31 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label">Logo</label>
-                          {!! Upload::setForm('logo', 'master.settings', array()) !!}
+                          {!! Upload::setForm('logo', 'master.settings', $setting->logo) !!}
                       </div>
                     </div>
 
                      <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label">Background</label>
-                          {!! Upload::setForm('background', 'master.settings', array()) !!}
+                          {!! Upload::setForm('background', 'master.settings', $setting->background) !!}
                       </div>
                     </div>
                   </div>
                   
                   <div class="form-group">
                     <label class="form-control-label">Title</label> 
-                    <input type="text" value="" placeholder="Title"name="setting[section1_title]" class="form-control">
+                    <input type="text"  placeholder="Title"name="setting[section1_title]" value="{{ $setting->section1_title }}" class="form-control">
                   </div> 
 
                   <div class="form-group">
                     <label class="form-control-label">Caption 1</label> 
-                    <input type="text" value="" placeholder="Caption 1" name="setting[section1_caption_1]" class="form-control">
+                    <input type="text"  placeholder="Caption 1" name="setting[section1_caption_1]" value="{{ $setting->section1_caption_1 }}"  class="form-control">
                   </div> 
 
                   <div class="form-group">
                     <label class="form-control-label">Caption 2</label> 
-                    <input type="text" value="" placeholder="Caption 2" name="setting[section1_caption_2]" class="form-control">
+                    <input type="text"  placeholder="Caption 2" name="setting[section1_caption_2]" value="{{ $setting->section1_caption_2 }}" class="form-control">
                   </div>
                 </div>
               </div>
@@ -88,11 +88,11 @@
                 <div class="mt-4">
                   <div class="form-group">
                     <label class="form-control-label">Title</label> 
-                    <input type="text" value="" placeholder="Title" name="setting[section2_title]" class="form-control">
+                    <input type="text"  placeholder="Title" name="setting[section2_title]" value="{{ $setting->section2_title }}" class="form-control">
                   </div> 
                   <div class="form-group">
                     <label class="form-control-label">Sub Title</label> 
-                    <input type="text" value="" placeholder="Sub Title" name="setting[section2_sub_title]" class="form-control">
+                    <input type="text"  placeholder="Sub Title" name="setting[section2_sub_title]" value="{{ $setting->section2_title }}" class="form-control">
                   </div>
                   <div class="form-group">
                     <label class="form-control-label">Data</label> 
@@ -121,9 +121,9 @@
                   <div class="form-group">
                     <label class="form-control-label">Product</label>
                     <select name="setting[section3_product][]" data-placeholder="Choose a Product..." multiple class="chosen-select" tabindex="4">
-                      <option value="1">Product 1</option>
-                      <option value="2">Product 2</option>
-                      <option value="3">Product 3</option>
+                      @foreach($products as $product)
+                      <option {{ in_array($product->id, $setting->section3_product) ? 'selected' : '' }} value="{{ $product->id }}">{{ $product->name }}</option>
+                      @endforeach
                     </select>
                   </div>
                   <div class="form-group">
@@ -153,15 +153,15 @@
                 <div class="mt-4">
                   <div class="form-group">
                     <label class="form-control-label">Meta Title</label> 
-                    <input type="text" placeholder="Meta Title" name="setting[meta_title]" value="" class="form-control">
+                    <input type="text" placeholder="Meta Title" name="setting[meta_title]" value="{{ $setting->meta_title }}" class="form-control">
                   </div>
                   <div class="form-group">
                     <label class="form-control-label">Meta Tag</label>
-                    <input  type="text" placeholder="Meta Tag" value="" name="setting[meta_tag]" class="form-control tagsinput">
+                    <input  type="text" placeholder="Meta Tag"  name="setting[meta_tag]" value="{{ $setting->meta_tag }}" class="form-control tagsinput">
                   </div>
                   <div class="form-group">
                     <label class="form-control-label">Meta Description</label>
-                    <textarea class="form-control" rows="5" name="setting[meta_description]"></textarea>
+                    <textarea class="form-control" rows="5" name="setting[meta_description]">{!! $setting->meta_description  !!}</textarea>
                   </div>
                 </div>
               </div>
@@ -184,13 +184,13 @@
 
 <script type="x-tmpl-mustache" id="template">
   <tr id="data@{{count}}">
-    <td><input type="text"  class="form-control" name="setting[section2_data][@{{count}}]"></td>
+    <td><input type="text"  class="form-control" value="@{{data}}" name="setting[section2_data][@{{count}}]"></td>
     <td><button onclick="$('#data@{{count}}').remove()" class="btn btn-sm btn-danger">Delete</button></td>
   </tr>
 </script>
 <script type="x-tmpl-mustache" id="template-quote">
   <tr id="data_quote@{{count}}">
-    <td><input type="text"  class="form-control" name="setting[section3_quote][@{{count}}]"></td>
+    <td><input type="text"  class="form-control" value="@{{data}}" name="setting[section3_quote][@{{count}}]"></td>
     <td><button onclick="$('#data_quote@{{count}}').remove()" class="btn btn-sm btn-danger">Delete</button></td>
   </tr>
 </script>
@@ -200,6 +200,43 @@
   var count=0;
   var count_quote=0;
   $(document).ready(function() {
+
+    var data = {!! json_encode($setting->section2_data) !!};
+
+    var quote = {!! json_encode($setting->section3_quote) !!};
+
+
+    $.each(data, function(key, value){
+      var template = $('#template').html();
+
+      var data = {
+        count : count,
+        data: value
+      };
+
+      htmlBody = Mustache.render(template, data);
+
+      $('#table-data tbody').append(htmlBody);
+      count++;
+    });
+
+    $.each(quote, function(key, value){
+      var template = $('#template-quote').html();
+
+      var data = {
+        count : count,
+        data: value
+      };
+
+      htmlBody = Mustache.render(template, data);
+
+      $('#table-qoute tbody').append(htmlBody);
+      count++;
+
+    })
+
+
+
     $('.btn-add-data').on('click', function(){
       var template = $('#template').html();
 

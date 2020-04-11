@@ -12,8 +12,10 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
+        "league/flysystem-sftp": "^1.0",
         "master/articles": "@dev",
         "master/core": "@dev",
+        "master/products": "@dev",
         "master/settings": "@dev",
         "master/upload": "@dev"
     },
@@ -42,6 +44,13 @@
         {
             "type"      : "path",
             "url"       : "master/settings",
+            "options"   : {
+                "symlink" : true
+            }
+        },
+        {
+            "type"      : "path",
+            "url"       : "master/products",
             "options"   : {
                 "symlink" : true
             }

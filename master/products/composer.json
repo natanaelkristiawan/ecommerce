@@ -1,0 +1,25 @@
+{
+    "name": "master/products",
+    "description": "This module additional",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Master\\Products\\": "src"
+        },
+        "classmap": [ "src" ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Master\\Products\\ProductsServiceProvider"
+            ],
+            "aliases" : {
+                "Products" : "Master\\Products\\Facades\\Products"
+            }
+            
+        }
+    },
+    "minimum-stability": "dev"
+}

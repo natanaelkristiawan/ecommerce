@@ -82,7 +82,7 @@ class CategoriesResourceController extends Controller
 
 	public function edit(Request $request, Categories $data)
 	{
-		$method = 'create';
+			$method = 'edit';
 
 	  	return view('articles::admin.categories.form', compact('data', 'method'));
 	}
