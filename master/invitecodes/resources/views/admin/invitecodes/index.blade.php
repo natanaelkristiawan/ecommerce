@@ -8,11 +8,11 @@
         <div class="col-lg-6 col-7">
           <h6 class="h2 text-white d-inline-block mb-0">{!! Meta::get('title') !!}</h6>
           <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-          {{ Breadcrumbs::render('products') }}
+          {{ Breadcrumbs::render('invitecodes') }}
           </nav>
         </div>
         <div class="col-lg-6 col-5 text-right">
-          <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-neutral">New</a>
+          <button type="button" data-toggle="modal" data-target="#modal-generate" class="btn btn-sm btn-neutral">Generate</button>
           <button type="button" data-toggle="modal" data-target="#modal-filter" class="btn btn-sm btn-neutral">Filter</button>
         </div>
       </div>
@@ -31,7 +31,7 @@
           <h3 class="mb-0">Data</h3>
         </div>
         <div class="table-responsive py-4">
-          @include('products::admin.products.partials.table')
+          @include('invitecodes::admin.invitecodes.partials.table')
         </div>
       </div>
     </div>
@@ -39,12 +39,14 @@
   <!-- Footer -->
   @include('theme.admin.partials.copyright')
 </div>
+
 @stop
+
 
 @section('modal')
 @parent
 
-@include('products::admin.products.partials.filter')
+@include('invitecodes::admin.invitecodes.partials.filter')
 @stop
 
 
@@ -61,7 +63,7 @@ $(document).ready(function() {
     dom: 'lrtip',
     order: [[ 0, "asc" ]],
     columnDefs: [
-      { orderable: false, targets: 5 },
+      { orderable: false, targets: 3 },
     ],
     processing: true,
     serverSide: true,
@@ -72,7 +74,7 @@ $(document).ready(function() {
       }
     },
     ajax: {
-      url: "{{ route('admin.products') }}",
+      url: "{{ route('admin.invitecodes') }}",
       dataType: "json",
       type: "GET",
       data: function ( d ) {
@@ -90,10 +92,8 @@ $(document).ready(function() {
       page = parseInt(api.rows().page()) + 1;
     },
     columns: [
-      {data : 'name'},
-      {data : 'price_idr'},
-      {data : 'price_dollar'},
-      {data : 'detail'},
+      {data : 'code'},
+      {data : 'customer'},
       {data : 'status'},
       {data : 'action'},
     ],
@@ -112,5 +112,3 @@ $(document).ready(function() {
 </script>
 
 @stop
-
-

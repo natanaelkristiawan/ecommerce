@@ -1,23 +1,22 @@
 <?php
 
-namespace Master\Customers\Repositories\Eloquent;
+namespace Master\Invitecodes\Repositories\Eloquent;
 
-use Master\Customers\Interfaces\CustomersRepositoryInterface;
+use Master\Invitecodes\Interfaces\InvitecodesRepositoryInterface;
 use Prettus\Repository\Eloquent\BaseRepository;
 
-class CustomersRepository extends BaseRepository implements CustomersRepositoryInterface
+class InvitecodesRepository extends BaseRepository implements InvitecodesRepositoryInterface
 {
 	private $pageLimit;
 
 	protected $fieldSearchable = [
-		'name'      => 'like',
-		'email'     => 'like',
+		'code'      => 'like',
 		'status'    => '='
 	];
 
 	public function model()
 	{
-		return \Master\Customers\Models\Customers::class;
+		return \Master\Invitecodes\Models\Invitecodes::class;
 	}
 
 	public function newInstance(array $attributes)

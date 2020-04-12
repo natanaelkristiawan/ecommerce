@@ -6,6 +6,7 @@ return [
     '\Master\Products\Sidebar\ExtenderSidebar',
 		'\Master\Customers\Sidebar\ExtenderSidebar',
     '\Master\Articles\Sidebar\ExtenderSidebar',
+    '\Master\Invitecodes\Sidebar\ExtenderSidebar',
     '\Master\Settings\Sidebar\ExtenderSidebar'
 	]
 ];

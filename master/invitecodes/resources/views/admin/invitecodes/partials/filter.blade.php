@@ -5,23 +5,10 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="form-group">
-              <label>Name</label> 
-              <input type="text" placeholder="Search Name" name="search[name]" class="form-control filter-field">
+              <label>Code</label> 
+              <input type="text" placeholder="Search Code" name="search[code]" class="form-control filter-field">
             </div>
           </div>
-          <div class="col-lg-6">
-            <div class="form-group">
-              <label>Email</label> 
-              <input type="text" placeholder="Search Email" name="search[email]" class="form-control filter-field">
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="form-group">
-              <label>Invite Code</label> 
-              <input type="text" placeholder="Search Invite Code" name="search[invite_code]" class="form-control filter-field">
-            </div>
-          </div>
-
           <div class="col-lg-6">
             <div class="form-group">
               <label>Status</label> 
