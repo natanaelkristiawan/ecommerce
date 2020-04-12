@@ -15,6 +15,7 @@
         "league/flysystem-sftp": "^1.0",
         "master/articles": "@dev",
         "master/core": "@dev",
+        "master/customers": "@dev",
         "master/products": "@dev",
         "master/settings": "@dev",
         "master/upload": "@dev",
@@ -59,6 +60,13 @@
         {
             "type"      : "path",
             "url"       : "module/site",
+            "options"   : {
+                "symlink" : true
+            }
+        },
+        {
+            "type"      : "path",
+            "url"       : "master/customers",
             "options"   : {
                 "symlink" : true
             }

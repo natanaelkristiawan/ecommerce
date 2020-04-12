@@ -101,7 +101,7 @@
         @foreach($products as $key => $product)
          
             @foreach($product as $list)
-            <div class="col-lg-3 col-md-6 {{ (bool)$key ? 'mt-4' : '' }}">
+            <div class="col-lg-3 col-md-6 {{ (bool)$key ? 'mt-5' : 'mt-4' }}">
               <div class="box" data-aos="zoom-in" data-aos-delay="100">
                 <h3>{{ $list->name }}</h3>
                 <h4><sup>$</sup>{{ $list->price_dollar }}<span> ({{ $list->price_idr }} IDR)</span></h4>

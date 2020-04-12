@@ -4,15 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SiteTable extends Migration
+class CustomersTable extends Migration
 {
 
 	public function up()
 	{
-		Schema::create('site', function (Blueprint $table) {
+		Schema::create('customers', function (Blueprint $table) {
 		$table->increments('id');
 		$table->string('name')->nullable();
-		$table->string('slug')->nullable();
+		$table->string('email')->nullable();
+		$table->string('password')->nullable();
+		$table->string('phone')->nullable();
+		$table->string('photo')->nullable();
+		$table->string('invite_code')->nullable();
 		$table->tinyinteger('status')->default(0);
 		$table->timestamps();
 		$table->softDeletes();
@@ -21,6 +25,6 @@ class SiteTable extends Migration
 
 	public function down()
 	{
-		Schema::drop('site');
+		Schema::drop('customers');
 	}
 }

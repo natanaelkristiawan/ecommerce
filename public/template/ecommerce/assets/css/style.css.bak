@@ -396,7 +396,7 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   background: url("../img/rnd.png");
   position: relative;
-  padding: 100px 0 0 0;
+  padding: 100px 100px 105px 0;
   z-index: 10;
   margin: 0%;
 
