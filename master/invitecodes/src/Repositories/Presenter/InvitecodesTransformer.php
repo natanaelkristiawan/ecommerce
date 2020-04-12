@@ -11,7 +11,7 @@ class InvitecodesTransformer extends TransformerAbstract
 		return [
 			'id'   => $model->id,
 			'code' => $model->code,
-      'customer' => '',
+      'customer' => is_null($model->customer) ? null : $model->customer->name,
 			'status'=> $model->status == 0 ? 'Draft' : 'Live',
 			'action'=> ''
 		];

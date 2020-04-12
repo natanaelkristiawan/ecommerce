@@ -47,6 +47,7 @@
 @parent
 
 @include('invitecodes::admin.invitecodes.partials.filter')
+@include('invitecodes::admin.invitecodes.partials.generate')
 @stop
 
 
@@ -61,8 +62,9 @@ $(document).ready(function() {
     pageLength: 10,
     responsive: true,
     dom: 'lrtip',
-    order: [[ 0, "asc" ]],
+    order: [[ 2, "asc" ]],
     columnDefs: [
+      { orderable: false, targets: 1 },
       { orderable: false, targets: 3 },
     ],
     processing: true,
