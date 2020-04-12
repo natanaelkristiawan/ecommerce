@@ -5,9 +5,10 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>RG43SMARKET - Solution For Your Marketing Tools!</title>
-  <meta content="" name="descriptison">
-  <meta content="" name="keywords">
+  <title>{!! Meta::get('title') !!}</title>
+  <meta content="{!! Meta::get('title') !!}" name ="title"> 
+  <meta content="{!! Meta::get('description') !!}" name ="description"> 
+  <meta content="{!! Meta::get('tag') !!}" name ="tag"> 
 
   <!-- Favicons -->
   <link href="{{ asset('template/ecommerce') }}/assets/img/resize.png" rel="icon">

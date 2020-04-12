@@ -17,14 +17,17 @@ class Settings
     $data = $this->repository->findWhere(array('slug'=>$slug))->first();
     
     if (is_null($data)) {
-      return;
+      return '';
     }
 
     $result = empty($data->value) ? $data->default : $data->value;
 
-    return $return; 
+    return $result; 
+  }
 
-
+  public function all()
+  {
+    return $this->repository->all();
   }
 
 }

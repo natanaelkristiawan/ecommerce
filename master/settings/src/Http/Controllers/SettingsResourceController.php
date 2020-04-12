@@ -92,15 +92,15 @@ class SettingsResourceController extends Controller
 		$this->repository->insertData('section2_sub_title', 'section2_sub_title', $section2_sub_title);
 
 		$section2_data = isset($request->setting['section2_data']) ? $request->setting['section2_data'] : array();
-		$this->repository->insertData('section2_data', 'section2_data', $section2_data);
+		$this->repository->insertData('section2_data', 'section2_data', $section2_data, array());
 
 
 		// section 3
 		$section3_product = isset($request->setting['section3_product']) ? $request->setting['section3_product'] : array();
-		$this->repository->insertData('section3_product', 'section3_product', $section3_product);
+		$this->repository->insertData('section3_product', 'section3_product', $section3_product, array());
 
 		$section3_quote = isset($request->setting['section3_quote']) ? $request->setting['section3_quote'] : array();
-		$this->repository->insertData('section3_quote', 'section3_quote', $section3_quote);
+		$this->repository->insertData('section3_quote', 'section3_quote', $section3_quote, array());
 
 
 		// meta

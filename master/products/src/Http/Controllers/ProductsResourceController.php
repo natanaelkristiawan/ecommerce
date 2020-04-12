@@ -17,6 +17,7 @@ class ProductsResourceController extends Controller
 	{
 		$this->middleware('auth:admin');
 		$this->repository = $repository;
+		$this->repository->pushCriteria(\Master\Core\Repositories\Criteria\RequestCriteria::class);
 		Meta::title('Products');
 	}
 

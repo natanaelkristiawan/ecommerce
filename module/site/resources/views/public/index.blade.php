@@ -8,7 +8,8 @@
   <div class="container d-flex align-items-center">
 
     <div class="logo mr-auto">
-      <h1 class="text-light"><a href="index.html"><span>RG43S</span></a></h1>
+      <h1 class="text-light"><a href="index.html"><span>
+      {{ $section1_title }}</span></a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html"><img src="{{ asset('template/ecommerce') }}/assets/img/logo.png" alt="" class="img-fluid"></a>-->
     </div>
@@ -28,20 +29,21 @@
 </header><!-- End Header -->
 
 <!-- ======= Hero Section ======= -->
-<section id="hero">
+<section id="hero" style="background: url('{{ url('image/original/'.$background['path']) }}')">
   <div class="container">
     <div class="row">
       <div class="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex align-items-center">
         <div data-aos="zoom-out">
-          <h1>Solution For Your Marketing Tools <span>RG43S</span></h1>
-          <h2>We have a new product</h2>
+          <h1>{{ $section1_caption_1 }}<span>
+          {{ $section1_title }}</span></h1>
+          <h2>{{ $section1_caption_2 }}</h2>
           <div class="text-center text-lg-left">
             <a href="#pricing" class="btn-get-started scrollto">View Product</a>
           </div>
         </div>
       </div>
       <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
-        <img align="middle" src="{{ asset('template/ecommerce') }}/assets/img/img.png" class="img-fluid animated" alt="logo-market">
+        <img align="middle" src="{{ url('image/original/'.$logo['path']) }}" class="img-fluid animated" alt="logo-market">
       </div>
     </div>
   </div>
@@ -64,59 +66,23 @@
     <div class="container">
 
       <div class="section-title" data-aos="fade-up">
-        <h2>Features</h2>
-        <p>Check The Features</p>
+        <h2>{{ $section2_title }}</h2>
+        <p>{{ $section2_sub_title }}</p>
       </div>
 
       <div class="row" data-aos="fade-left">
+
+        @foreach($section2_data as $key => $data)
+
         <div class="col-lg-3 col-md-4 mt-4">
           <div class="icon-box" data-aos="zoom-in" data-aos-delay="50">
-            <i class="ri-store-line" style="color: #ffbb2c;"></i>
-            <h3><a href="" target="_blank">A Product</a></h3>
+            <i class="{{ $dataIcon[ $key % 8 ]  }}" style="color: {{ $dataColor[ $key % 8 ]  }};"></i>
+            <h3><a href="" target="_blank">{{ $data }}</a></h3>
           </div>
         </div>
-        <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
-            <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
-            <h3><a href="">B Product</a></h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box" data-aos="zoom-in" data-aos-delay="150">
-            <i class="ri-calendar-todo-line" style="color: #e80368;"></i>
-            <h3><a href="">C Product</a></h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 mt-4 ">
-          <div class="icon-box" data-aos="zoom-in" data-aos-delay="250">
-            <i class="ri-database-2-line" style="color: #47aeff;"></i>
-            <h3><a href="">D Product</a></h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box" data-aos="zoom-in" data-aos-delay="350">
-            <i class="ri-file-list-3-line" style="color: #11dbcf;"></i>
-            <h3><a href="">E Product</a></h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box" data-aos="zoom-in" data-aos-delay="400">
-            <i class="ri-price-tag-2-line" style="color: #4233ff;"></i>
-            <h3><a href="">F Product</a></h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box" data-aos="zoom-in" data-aos-delay="450">
-            <i class="ri-anchor-line" style="color: #b2904f;"></i>
-            <h3><a href="">G Product</a></h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box" data-aos="zoom-in" data-aos-delay="500">
-            <i class="ri-disc-line" style="color: #b20969;"></i>
-            <h3><a href="">H Product</a></h3>
-          </div>
-        </div>
+        @endforeach
+      </div>
+
 
     </div>
   </section><!-- End Features Section -->
@@ -132,141 +98,26 @@
 
       <div class="row" data-aos="fade-left">
 
-        <div class="col-lg-3 col-md-6">
-          <div class="box" data-aos="zoom-in" data-aos-delay="100">
-            <h3>A Product<br>(Ready)</h3>
-            <h4><sup>$</sup>150<span> (1.500.000 IDR)</span></h4>
-            <ul>
-              <li>Aida dere</li>
-              <li>Nec feugiat nisl</li>
-              <li>Nulla at volutpat dola</li>
-              <li>Pharetra massa</li>
-              <li>Massa ultricies mi</li>
-            </ul>
-            <div class="btn-wrap">
-              <a href="#" class="btn-buy">Buy Now</a>
+        @foreach($products as $key => $product)
+         
+            @foreach($product as $list)
+            <div class="col-lg-3 col-md-6 {{ (bool)$key ? 'mt-4' : '' }}">
+              <div class="box" data-aos="zoom-in" data-aos-delay="100">
+                <h3>{{ $list->name }}</h3>
+                <h4><sup>$</sup>{{ $list->price_dollar }}<span> ({{ $list->price_idr }} IDR)</span></h4>
+                {!! $list->detail !!}
+                <div class="btn-wrap">
+                  <a href="#" class="btn-buy">Buy Now</a>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+            @endforeach
+      
+        @endforeach
 
-        <div class="col-lg-3 col-md-6">
-          <div class="box" data-aos="zoom-in" data-aos-delay="400">
-            <h3>B Product<br>(Open Bookings)</h3>
-            <h4><sup>$</sup>100<span> (1.000.000 IDR)</span></h4>
-            <ul>
-              <li>Aida dere</li>
-              <li>Nec feugiat nisl</li>
-              <li>Nulla at volutpat dola</li>
-              <li>Pharetra massa</li>
-              <li>Massa ultricies mi</li>
-            </ul>
-            <div class="btn-wrap">
-              <a href="#" class="btn-buy">Buy Now</a>
-            </div>
-          </div>
-        </div>
 
-        <div class="col-lg-3 col-md-6">
-          <div class="box" data-aos="zoom-in" data-aos-delay="200">
-            <h3>C Product<br>(Open Bookings)</h3>
-            <h4><sup>$</sup>150<span> (1.500.000 IDR)</span></h4>
-            <ul>
-              <li>Aida dere</li>
-              <li>Nec feugiat nisl</li>
-              <li>Nulla at volutpat dola</li>
-              <li>Pharetra massa</li>
-              <li>Massa ultricies mi</li>
-            </ul>
-            <div class="btn-wrap">
-              <a href="#" class="btn-buy">Buy Now</a>
-            </div>
-          </div>
-        </div>
 
-        <div class="col-lg-3 col-md-6">
-          <div class="box" data-aos="zoom-in" data-aos-delay="300">
-            <h3>D Product<br>(Open Bookings)</h3>
-            <h4><sup>$</sup>150<span> (1.500.000 IDR)</span></h4>
-            <ul>
-              <li>Aida dere</li>
-              <li>Nec feugiat nisl</li>
-              <li>Nulla at volutpat dola</li>
-              <li>Pharetra massa</li>
-              <li>Massa ultricies mi</li>
-            </ul>
-            <div class="btn-wrap">
-              <a href="#" class="btn-buy">Buy Now</a>
-            </div>
-          </div>
-        </div>
 
-        <div class="col-lg-3 col-md-6">
-          <div class="box" data-aos="zoom-in" data-aos-delay="400">
-            <h3>E Product<br>(Open Bookings)</h3>
-            <h4><sup>$</sup>150<span> (1.500.000 IDR)</span></h4>
-            <ul>
-              <li>Aida dere</li>
-              <li>Nec feugiat nisl</li>
-              <li>Nulla at volutpat dola</li>
-              <li>Pharetra massa</li>
-              <li>Massa ultricies mi</li>
-            </ul>
-            <div class="btn-wrap">
-              <a href="#" class="btn-buy">Buy Now</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-          <div class="box" data-aos="zoom-in" data-aos-delay="400">
-            <h3>F Product<br>(Open Bookings)</h3>
-            <h4><sup>$</sup>150<span> (1.500.000 IDR)</span></h4>
-            <ul>
-              <li>Aida dere</li>
-              <li>Nec feugiat nisl</li>
-              <li>Nulla at volutpat dola</li>
-              <li>Pharetra massa</li>
-              <li>Massa ultricies mi</li>
-            </ul>
-            <div class="btn-wrap">
-              <a href="#" class="btn-buy">Buy Now</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-          <div class="box" data-aos="zoom-in" data-aos-delay="400">
-            <h3>G Product<br>(Open Bookings)</h3>
-            <h4><sup>$</sup>150<span> (1.500.000 IDR)</span></h4>
-            <ul>
-              <li>Aida dere</li>
-              <li>Nec feugiat nisl</li>
-              <li>Nulla at volutpat dola</li>
-              <li>Pharetra massa</li>
-              <li>Massa ultricies mi</li>
-            </ul>
-            <div class="btn-wrap">
-              <a href="#" class="btn-buy">Buy Now</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-          <div class="box" data-aos="zoom-in" data-aos-delay="400">
-            <h3>H Product<br>(Open Bookings)</h3>
-            <h4><sup>$</sup>150<span> (1.500.000 IDR)</span></h4>
-            <ul>
-              <li>Aida dere</li>
-              <li>Nec feugiat nisl</li>
-              <li>Nulla at volutpat dola</li>
-              <li>Pharetra massa</li>
-              <li>Massa ultricies mi</li>
-            </ul>
-            <div class="btn-wrap">
-              <a href="#" class="btn-buy">Buy Now</a>
-            </div>
-          </div>
-        </div>
 
       </div>
 
@@ -278,55 +129,20 @@
     <div class="container">
 
       <div class="owl-carousel testimonials-carousel" data-aos="zoom-in">
+        
+        @foreach($section3_quote as $list)
 
         <div class="testimonial-item">
           <p>
             <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-            Dolor Sit Amet Akakakakakakak.
+            {!! $list !!}
             <i class="bx bxs-quote-alt-right quote-icon-right"></i>
           </p>
         </div>
 
-        <div class="testimonial-item">
-          <p>
-            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-            Dolor Sit Amet Akakakakakakak.
-            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-          </p>
-        </div>
+        @endforeach
 
-        <div class="testimonial-item">
-          <p>
-            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-            Dolor Sit Amet Akakakakakakak.
-            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-          </p>
-        </div>
 
-        <div class="testimonial-item">
-
-          <p>
-            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-            Dolor Sit Amet Akakakakakakak.
-            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-          </p>
-        </div>
-
-        <div class="testimonial-item">
-          <p>
-            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-            Dolor Sit Amet Akakakakakakak.
-            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-          </p>
-        </div>
-
-        <div class="testimonial-item">
-          <p>
-            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-            Dolor Sit Amet Akakakakakakak.
-            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-          </p>
-        </div>
 
       </div>
 
@@ -344,11 +160,15 @@
 
   <div class="container">
     <div class="copyright">
-      Copyright &copy; 2020 <strong><span>RG43SMARKET</span></strong>. All Rights Reserved
+      Copyright &copy; {{ date('Y') }} <strong><span>Bootslander</span></strong>. All Rights Reserved
     </div>
-    <div class="credits">
-      Designed by <a href="" target="_blank">RG43SADMIN</a>
-    </div>
+   <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bootslander-free-bootstrap-landing-page-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
   </div>
 </footer><!-- End Footer -->
 

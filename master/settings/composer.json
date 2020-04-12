@@ -14,7 +14,10 @@
         "laravel": {
             "providers": [
                 "Master\\Settings\\SettingsServiceProvider"
-            ]
+            ],
+            "aliases" : {
+                "Settings" : "Master\\Settings\\Facades\\Settings"
+            }
         }
     },
     "minimum-stability": "dev"
