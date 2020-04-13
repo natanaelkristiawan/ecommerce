@@ -115,7 +115,7 @@ class SiteResourceController extends Controller
 
 	public function doLogin(Request $request)
 	{
-		
+		echo "on Development";
 	}
 
 	public function register()
@@ -125,7 +125,7 @@ class SiteResourceController extends Controller
 
 	public function doRegister(Request $request)
 	{
-		
+		echo "on Development";
 	}
 
 	public function logout()
