@@ -20,7 +20,7 @@
         <li><a href="#features">Features</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="" target="_blank">Contact Us</a></li>
-        <li><a href="login/login.html">Sign In</a></li>
+        <li><a href="{{ route('login') }}">Sign In</a></li>
 
       </ul>
     </nav><!-- .nav-menu -->

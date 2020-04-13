@@ -69,8 +69,6 @@
       order: -1;
    }
 
-   .modal-title
-
 </style>
 
 <script type="text/javascript">

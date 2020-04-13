@@ -1,12 +1,14 @@
 <?php
 
 namespace Master\Customers\Models;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Customers extends Model 
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
+class Customers extends Authenticatable 
 {
-	use SoftDeletes;
+	use SoftDeletes, Notifiable;
 	protected $table = 'customers';
 	protected $fillable = [
     'name',

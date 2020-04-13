@@ -11,6 +11,7 @@ use Settings;
 use Products;
 
 use Meta;
+use Auth;
 
 class SiteResourceController extends Controller
 {
@@ -19,7 +20,7 @@ class SiteResourceController extends Controller
 
 	public function __construct()
 	{
-		# code...
+		$this->middleware('guest:web')->except('logout');
 	}
 
 	public function index(Request $request)
@@ -103,5 +104,32 @@ class SiteResourceController extends Controller
 				'meta_description',
 			)
 		);
+	}
+
+
+	public function login()
+	{
+		return view("site::public.login");
+	}
+
+
+	public function doLogin(Request $request)
+	{
+		
+	}
+
+	public function register()
+	{
+		return view("site::public.register");
+	}
+
+	public function doRegister(Request $request)
+	{
+		
+	}
+
+	public function logout()
+	{
+		
 	}
 }
