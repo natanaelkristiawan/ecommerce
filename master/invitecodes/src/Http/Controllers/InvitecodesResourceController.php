@@ -34,4 +34,39 @@ class InvitecodesResourceController extends Controller
 
 		return view('invitecodes::admin.invitecodes.index');
 	}
+
+  public function generateCode(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'number'       => 'required',
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json(array(
+        'status' => false
+      ));
+    }
+
+
+    for ($i=0; $i < $request->number; $i++) { 
+      $data = array(
+        'code' => uniqid(),
+        'status' => 0
+      );
+
+      $this->repository->create($data);
+    } 
+
+    return response()->json(array(
+      'status' => true
+    ));
+  }
+
+  public function delete(Request $request, Invitecodes $data)
+  {
+    $data = $this->repository->delete($data->id);
+    $request->session()->flash('status', 'Success Delete Data!');
+
+    return redirect()->route('admin.invitecodes');
+  }
 }

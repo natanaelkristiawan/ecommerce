@@ -57,6 +57,31 @@
 <script type="text/javascript">
 var oTable;
 var page = 1;
+
+
+$(document).on('click', '.btn-generate', function(){
+  $.ajax({
+    url : "{{ route('admin.invitecodes.generatecode') }}",
+    data : $.extend(false, TOKEN, {number : $('#generate-code-number').val()}),
+    type: 'POST',
+    dataType: 'json',
+    beforeSend: function(){
+      $('#generate-code-number').val('');
+      $('#modal-generate').modal('hide')
+    },
+    success: function(result){
+      if (result.status == true) {
+        oTable.api().draw();
+      }
+    },
+    complete: function() {
+
+    }
+
+  });
+});
+
+
 $(document).ready(function() {
   oTable = $('#datatable').dataTable({
     pageLength: 10,

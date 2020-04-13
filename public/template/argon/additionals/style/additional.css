@@ -190,3 +190,12 @@ td.center {
 .img-responsive {
     max-width: 100% !important;
 }
+
+
+.modal-body {
+    padding-bottom: 0 !important;
+}
+.modal-footer {
+
+    padding-top:0 !important;
+}

@@ -130,7 +130,11 @@ class ProductsResourceController extends Controller
 
 	public function delete(Request $request, Products $data)
 	{
+		
+		$data = $this->repository->delete($data->id);
+		$request->session()->flash('status', 'Success Delete Data!');
 
+		return redirect()->route('admin.products');
 	}
 
 }
