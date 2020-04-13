@@ -99,13 +99,14 @@
                     <table class="table" id="table-data">
                       <thead>
                         <tr>
-                          <th>Data</th>
+                          <th width="20%">Data</th>
+                          <th width="70%">Detail</th>
                           <th width="10%">Action</th>
                         </tr>
                       </thead>
                       <tfoot>
                         <tr>
-                          <td></td>
+                          <td colspan="2"></td>
                           <td width="10%"><button type="button" class="btn btn-sm btn-primary btn-add-data">Add Data</button></td>
                         </tr>
                       </tfoot>
@@ -184,7 +185,8 @@
 
 <script type="x-tmpl-mustache" id="template">
   <tr id="data@{{count}}">
-    <td><input type="text"  class="form-control" value="@{{data}}" name="setting[section2_data][@{{count}}]"></td>
+    <td><input type="text"  class="form-control" value="@{{data}}" name="setting[section2_data][@{{count}}][data]"></td>
+    <td><textarea type="text" class="form-control textarea@{{count}}" name="setting[section2_data][@{{count}}][detail]">@{{detail}}</textarea></td>
     <td><button onclick="$('#data@{{count}}').remove()" class="btn btn-sm btn-danger">Delete</button></td>
   </tr>
 </script>
@@ -211,12 +213,19 @@
 
       var data = {
         count : count,
-        data: value
+        data: value.data,
+        detail: value.detail
       };
 
       htmlBody = Mustache.render(template, data);
 
       $('#table-data tbody').append(htmlBody);
+
+      $('.textarea'+count).summernote({
+        toolbar: [
+          ['view', ['codeview']],
+        ]
+      });
       count++;
     });
 
@@ -235,7 +244,7 @@
 
     })
 
-
+   
 
     $('.btn-add-data').on('click', function(){
       var template = $('#template').html();
@@ -247,6 +256,11 @@
       htmlBody = Mustache.render(template, data);
 
       $('#table-data tbody').append(htmlBody);
+      $('.textarea'+count).summernote({
+        toolbar: [
+          ['view', ['codeview']],
+        ]
+      });
       count++;
     });
 

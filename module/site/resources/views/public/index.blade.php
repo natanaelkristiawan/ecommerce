@@ -77,7 +77,7 @@
         <div class="col-lg-3 col-md-4 mt-4">
           <div class="icon-box" data-aos="zoom-in" data-aos-delay="50">
             <i class="{{ $dataIcon[ $key % 8 ]  }}" style="color: {{ $dataColor[ $key % 8 ]  }};"></i>
-            <h3><a href="" target="_blank">{{ $data }}</a></h3>
+            <h3><a data-modal='{!! $data['detail'] !!}' class="popup" href="javascript:;">{{ $data['data'] }}</a></h3>
           </div>
         </div>
         @endforeach
@@ -175,4 +175,36 @@
 <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 <div id="preloader"></div>
 
+
+
+<div class="modal fade" id="modal-filter" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="modal-filter" aria-hidden="true">
+  <div style="margin-top: 30vh" class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Term Of Service / Term Of Use/ Disclaimer</h3>
+      </div>
+      <div class="modal-body" id="modal-data">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+@stop
+
+@section('script')
+@parent
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.popup').on('click', function(){
+      var content = $(this).attr('data-modal');
+
+      $('#modal-data').html(content);
+
+      $('#modal-filter').modal('show');
+    });
+  });
+</script>
 @stop

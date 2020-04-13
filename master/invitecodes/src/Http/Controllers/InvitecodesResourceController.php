@@ -46,11 +46,10 @@ class InvitecodesResourceController extends Controller
         'status' => false
       ));
     }
-
-
+    
     for ($i=0; $i < $request->number; $i++) { 
       $data = array(
-        'code' => uniqid(),
+        'code' => 'RG43S_'.strtoupper(uniqid()),
         'status' => 0
       );
 
