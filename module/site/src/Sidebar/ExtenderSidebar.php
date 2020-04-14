@@ -13,7 +13,7 @@ class ExtenderSidebar implements SidebarExtender
 {
   public function extendWith(Menu $menu)
   {
-    $menu->group('Main Navigator', function(Group $group) {
+    $menu->group('Public Navigator', function(Group $group) {
       $group->item('Dashboard', function(Item $item){
         $item->url(route('dashboard'));
         $item->icon('ni ni-shop text-primary');

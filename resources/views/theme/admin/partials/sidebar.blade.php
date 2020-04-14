@@ -19,7 +19,11 @@
     <div class="navbar-inner">
       <!-- Collapse -->
       <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+        @if ($guard_now == 'admin')
         {!! $sidebar !!}
+        @else
+        {!! $sidebar_public !!}
+        @endif
       </div>
     </div>
   </div>

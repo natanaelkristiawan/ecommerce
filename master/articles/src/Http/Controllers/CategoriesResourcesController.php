@@ -8,6 +8,7 @@ use Master\Articles\Interfaces\CategoriesRepositoryInterface;
 use Master\Articles\Models\Categories;
 use Validator;
 use Meta;
+use Auth;
 class CategoriesResourceController extends Controller
 {
 	protected $repository;

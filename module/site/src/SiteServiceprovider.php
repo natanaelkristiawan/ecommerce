@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Maatwebsite\Sidebar\SidebarManager;
 use Illuminate\Support\Facades\View;
 use Invitecodes;
+
 class SiteServiceProvider extends ServiceProvider
 {
 

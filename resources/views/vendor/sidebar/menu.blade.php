@@ -4,7 +4,6 @@
   @endforeach
 </ul>
 
-
 <!-- Divider -->
 <hr class="my-3">
 <!-- Heading -->
@@ -18,10 +17,10 @@
     </a>
   </li>
   <li class="nav-item">
-    @if (Auth::guard('web')->check())
-    <a href="{{ route('logout') }}" class="nav-link">
-    @else
+    @if ($guard_now == 'admin')
     <a href="{{ route('admin.logout') }}" class="nav-link">
+    @else
+    <a href="{{ route('logout') }}" class="nav-link">
     @endif
       <i class="ni ni-button-power"></i>
       <span class="nav-link-text">Logout</span>

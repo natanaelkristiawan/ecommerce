@@ -15,7 +15,7 @@ class SidebarCreator
 
   public function create($view)
   {
-    $view->sidebar = $this->renderer->render(
+    $view->sidebar_public = $this->renderer->render(
       $this->sidebar
     );
   }

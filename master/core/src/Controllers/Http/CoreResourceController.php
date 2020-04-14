@@ -54,7 +54,7 @@ class CoreResourceController extends Controller
 	public function logout()
 	{
 		Auth::guard('admin')->logout();
-    session()->flush();
+		session()->flush();
     return redirect()->route('admin.login');
 	}
 }
