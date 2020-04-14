@@ -151,7 +151,7 @@ class SiteResourceController extends Controller
 			'status'	=> 1
 		);
 
-		$this
+		
 	}
 
 	public function logout()
