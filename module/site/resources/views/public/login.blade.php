@@ -6,6 +6,18 @@
     <div class="col-lg-5 col-md-7">
       <div class="card bg-secondary border-0 mb-0">
         <div class="card-body px-lg-5 py-lg-5">
+          @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <ul>
+                  @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <form role="form" method="POST" role="form" action="{{ route('login') }}"  data-toggle="validator" data-disable="false">
             @csrf
             <div class="form-group mb-3">

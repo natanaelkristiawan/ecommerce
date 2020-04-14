@@ -115,7 +115,29 @@ class SiteResourceController extends Controller
 
 	public function doLogin(Request $request)
 	{
-		echo "on Development";
+		$validator = Validator::make($request->all(), [
+      'email' => 'required|email',
+      'password'  => 'required',
+    ]);
+
+    if ($validator->fails()) {
+      return redirect()->back()
+                    ->withErrors(array('message' => 'Login Failed, Check Your Email and Password'))
+                    ->withInput();
+    }
+
+    $credentials = $request->only('email', 'password'); 
+    $remember = $request->remember;
+
+    if (Auth::guard('web')->attempt($credentials, $remember)) {
+      session()->flash('success_login', 'Task was successful!');
+      return redirect()->route('dashboard');
+    }
+
+    return redirect()->back()
+                    ->withErrors(array('message' => 'Login Failed, Check Your Email and Password'))
+                    ->withInput();
+
 	}
 
 	public function register()
@@ -170,6 +192,8 @@ class SiteResourceController extends Controller
 
 	public function logout()
 	{
-		
+		Auth::guard('web')->logout();
+    session()->flush();
+    return redirect()->route('login');	
 	}
 }
