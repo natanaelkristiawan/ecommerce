@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="{{ asset('template/argon') }}/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{ asset('template/argon') }}/assets/css/argon.css?v=1.1.0" type="text/css">
+  <link rel="stylesheet" href="{{ asset('template/argon') }}/additionals/toastr/toastr.min.css">
   <style type="text/css">
     .has-danger .form-control {
       border-color: #f5365c;
@@ -81,7 +82,7 @@
   <!-- Argon JS -->
   <script src="{{ asset('template/argon') }}/assets/js/argon.js?v=1.1.0"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
-
+  <script src="{{ asset('template/argon') }}/additionals/toastr/toastr.min.js"></script>
 
   @section('script')
   @show

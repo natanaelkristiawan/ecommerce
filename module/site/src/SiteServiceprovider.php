@@ -3,7 +3,7 @@
 namespace Module\Site;
 
 use Illuminate\Support\ServiceProvider;
-
+use Invitecodes;
 class SiteServiceProvider extends ServiceProvider
 {
 
@@ -11,6 +11,25 @@ class SiteServiceProvider extends ServiceProvider
 
 	public function boot()
 	{
+		$validator = app()->make(\Illuminate\Validation\Factory::class);
+	  $validator->extend('inviteCode', function ($attribute, $value, $parameters, $validator) {
+			$findCode = Invitecodes::findCode($value);
+
+			if (is_null($findCode)) {
+				return false;
+			}
+
+			return true;
+
+    });
+
+    $validator->replacer('inviteCode', function ($message, $attribute, $rule, $parameters) {
+        return 'Invalid Code';
+    });
+
+
+
+
 		// Load view
 		$this->loadViewsFrom(__DIR__ . '/../resources/views', 'site');
 		// Load migrations

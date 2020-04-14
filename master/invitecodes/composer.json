@@ -14,7 +14,10 @@
         "laravel": {
             "providers": [
                 "Master\\Invitecodes\\InvitecodesServiceProvider"
-            ]
+            ],
+            "aliases" : {
+                "Invitecodes" : "Master\\Invitecodes\\Facades\\Invitecodes"
+            }
         }
     },
     "minimum-stability": "dev"

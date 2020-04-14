@@ -399,7 +399,10 @@ h1, h2, h3, h4, h5, h6 {
   padding: 100px 0 0 0;
   z-index: 10;
   margin: 0%;
+}
 
+#hero .container {
+  height: 45vh;
 }
 
 #hero:before {
@@ -487,6 +490,15 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 575px) {
   #hero .hero-img img {
     width: 80%;
+  }
+  #hero .container {
+    height: 50vh;
+  }  
+}
+@media (max-width: 375px) {
+
+  #hero .container {
+    height: 60vh;
   }
 }
 

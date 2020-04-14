@@ -12,7 +12,7 @@ use Products;
 
 use Meta;
 use Auth;
-
+use Invitecodes;
 class SiteResourceController extends Controller
 {
 	protected $repository;
@@ -125,7 +125,33 @@ class SiteResourceController extends Controller
 
 	public function doRegister(Request $request)
 	{
-		echo "on Development";
+		$validator = Validator::make($request->all(), [
+      'email' => 'required|email|unique:customers',
+      'name' => 'required',
+      'invite_code' => 'required|inviteCode',
+      'password'  => 'required',
+    ]);
+
+
+    if ($validator->fails()) {
+      return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+    }
+
+
+    // check apakah invite codenya udah bener apa g
+		$findCode = Invitecodes::findCode($request->invite_code);
+
+		$dataInsert = array(
+			'email' => $request->email,
+			'name' => $request->name,
+			'password' => bcrypt($request->password),
+			'invite_code' => $request->invite_code,
+			'status'	=> 1
+		);
+
+		$this
 	}
 
 	public function logout()
