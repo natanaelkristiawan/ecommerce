@@ -39,7 +39,7 @@
                     <img alt="Image placeholder" src="{{ asset('template/argon') }}/assets/img/theme/team-4.jpg">
                   </span>
                   <div class="media-body ml-2 d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                    <span class="mb-0 text-sm  font-weight-bold">{{ Auth::guard('web')->user()->name }}</span>
                   </div>
                 </div>
               </a>
@@ -52,7 +52,7 @@
                   <span>My profile</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="{{ route('admin.logout') }}" class="dropdown-item">
+                <a href="{{ route('logout') }}" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
                   <span>Logout</span>
                 </a>

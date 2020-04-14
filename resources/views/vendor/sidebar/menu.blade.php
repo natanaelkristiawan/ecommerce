@@ -16,6 +16,14 @@
       <span class="nav-link-text">Profile</span>
     </a>
   </li>
+  @if ($guard_now == 'web')
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('public') }}">
+      <i class="ni ni-app"></i>
+      <span class="nav-link-text">Go To Site</span>
+    </a>
+  </li>
+  @endif
   <li class="nav-item">
     @if ($guard_now == 'admin')
     <a href="{{ route('admin.logout') }}" class="nav-link">

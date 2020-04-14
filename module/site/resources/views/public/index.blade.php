@@ -20,8 +20,11 @@
         <li><a href="#features">Features</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="" target="_blank">Contact Us</a></li>
+        @if(Auth::guard('web')->check())
+        <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+        @else
         <li><a href="{{ route('login') }}">Sign In</a></li>
-
+        @endif
       </ul>
     </nav><!-- .nav-menu -->
 

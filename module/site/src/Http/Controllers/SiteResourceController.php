@@ -185,7 +185,7 @@ class SiteResourceController extends Controller
       return $e->getMessage();
     }
 
-    return redirect()->route('public');
+    return redirect()->route('dashboard');
 
 
 	}
