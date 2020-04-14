@@ -1,3 +1,7 @@
 <?php 
 
-return [];
+return [
+  'menuExtends' => [
+    '\Module\Site\Sidebar\ExtenderSidebar'
+  ]
+];

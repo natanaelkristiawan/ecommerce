@@ -3,13 +3,15 @@
 namespace Module\Site;
 
 use Illuminate\Support\ServiceProvider;
+use Maatwebsite\Sidebar\SidebarManager;
+use Illuminate\Support\Facades\View;
 use Invitecodes;
 class SiteServiceProvider extends ServiceProvider
 {
 
 	protected $defer = false;
 
-	public function boot()
+	public function boot(SidebarManager $manager)
 	{
 		$validator = app()->make(\Illuminate\Validation\Factory::class);
 	  $validator->extend('inviteCode', function ($attribute, $value, $parameters, $validator) {
@@ -27,6 +29,14 @@ class SiteServiceProvider extends ServiceProvider
         return 'Invalid Code';
     });
 
+    $manager->register('Module\Site\Sidebar\ConfigSidebar');
+
+		View::creator(
+			'theme.admin.partials.sidebar',
+			\Module\Site\View\Creator\SidebarCreator::class
+		);
+
+		$this->publishResources();
 
 
 

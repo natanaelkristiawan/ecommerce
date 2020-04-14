@@ -25,7 +25,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                 </div>
-                <input class="form-control" name="name" required="" placeholder="Name" type="text">
+                <input class="form-control" name="name" required="" value="{{ old('name') }}" placeholder="Name" type="text">
               </div>
               <div class="help-block with-errors error"></div>
             </div>
@@ -34,7 +34,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                 </div>
-                <input class="form-control" required="" name="email" placeholder="Email" type="email">
+                <input class="form-control" required="" value="{{ old('email') }}" name="email" placeholder="Email" type="email">
               </div>
               <div class="help-block with-errors error"></div>
             </div>

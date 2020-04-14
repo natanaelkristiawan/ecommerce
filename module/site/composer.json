@@ -13,7 +13,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Module\\Site\\SiteServiceProvider"
+                "Module\\Site\\SiteServiceProvider",
+                "Maatwebsite\\Sidebar\\SidebarServiceProvider"
             ]
         }
     },

@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Module\Site\Models\Site;
 use Validator;
-
 use Settings;
 use Products;
-
 use Meta;
 use Auth;
 use Invitecodes;
+use Customers;
+
 class SiteResourceController extends Controller
 {
 	protected $repository;
@@ -20,7 +20,7 @@ class SiteResourceController extends Controller
 
 	public function __construct()
 	{
-		$this->middleware('guest:web')->except('logout');
+		$this->middleware('guest:web')->except(array('logout', 'index'));
 	}
 
 	public function index(Request $request)
@@ -151,7 +151,21 @@ class SiteResourceController extends Controller
 			'status'	=> 1
 		);
 
-		
+		$customer = Customers::create($dataInsert);
+
+
+		Invitecodes::setUsed($customer->id, $findCode->id);
+
+	 try{
+      Auth::guard('web')->loginUsingId($customer->id);
+    }
+    catch (Exception $e){
+      return $e->getMessage();
+    }
+
+    return redirect()->route('public');
+
+
 	}
 
 	public function logout()

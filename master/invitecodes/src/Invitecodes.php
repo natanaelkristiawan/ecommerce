@@ -19,4 +19,9 @@ class Invitecodes
     return $this->repository->findWhere(array('code'=>$code, 'status' => 0))->first();
   }
 
+  public function setUsed($customer_id = '', $code_id = '')
+  {
+    return $this->repository->update(array('status'=>1, 'customer_id' => $customer_id), $code_id);
+  }
+
 }
