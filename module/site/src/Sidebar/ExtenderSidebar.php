@@ -18,6 +18,24 @@ class ExtenderSidebar implements SidebarExtender
         $item->url(route('dashboard'));
         $item->icon('ni ni-shop text-primary');
       });
+
+
+      $group->item('Orders', function(Item $item){
+        $item->icon('ni ni-box-2 text-green');
+        $item->url('Orders');
+
+        $item->item('Waiting', function(Item $item){
+          // $item->url(route('admin.categories'));
+        });
+        
+        $item->item('Success', function(Item $item){
+          // $item->url(route('admin.articles'));
+        });
+      });
+
+      $group->item('Histories', function(Item $item){
+        $item->icon('ni ni-archive-2 text-pink');
+      });
     });
     return $menu;
   }

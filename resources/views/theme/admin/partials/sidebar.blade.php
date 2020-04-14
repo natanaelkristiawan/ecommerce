@@ -2,7 +2,7 @@
   <div class="scrollbar-inner">
     <!-- Brand -->
     <div class="sidenav-header d-flex align-items-center">
-      <a class="navbar-brand" href="{{ asset('template/argon') }}/pages/dashboards/dashboard.html">
+      <a class="navbar-brand" href="javascript:;">
         <img src="{{ asset('template/argon') }}/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
       </a>
       <div class="ml-auto">
