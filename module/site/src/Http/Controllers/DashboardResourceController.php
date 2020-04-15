@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Module\Site\Models\Site;
 use Products;
+use Settings;
 
 class DashboardResourceController extends Controller
 {
@@ -19,6 +20,8 @@ class DashboardResourceController extends Controller
   {
     $products = Products::all();
 
-    return view('site::dashboard.index', compact('products'));
+    $accounts = Settings::find('account');
+
+    return view('site::dashboard.index', compact('products', 'accounts'));
   }
 }

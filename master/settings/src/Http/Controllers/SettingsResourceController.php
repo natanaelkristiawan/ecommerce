@@ -112,6 +112,11 @@ class SettingsResourceController extends Controller
 		$this->repository->insertData('meta_description', 'meta_description', $meta_description);
 
 
+
+		// bank account
+		$account = isset($request->setting['account']) ?  array_values($request->setting['account']) : array();
+		$this->repository->insertData('account', 'account', $account, array());
+
 		$request->session()->flash('status', 'Data has been update!');
 
 		return redirect()->back();

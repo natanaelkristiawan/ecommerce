@@ -15,7 +15,7 @@
           <div class="display-3">${{ number_format($product->price_dollar) }}</div>
           <span class=" text-muted">{{ number_format($product->price_idr) }} IDR</span>
           {!! $product->detail !!}
-          <button data-product="{{ $product->name }}" data-description='{!! $product->detail !!}' data-price_idr="{{ number_format($product->price_idr) }}" data-price_dollar="{{ number_format($product->price_dollar) }}" type="button" class="btn btn-primary mb-3 btn-buy">Buy</button>
+          <button data-unique={{ mt_rand(0, 1000) }} data-product="{{ $product->name }}" data-description='{!! $product->detail !!}' data-price_idr="{{ number_format($product->price_idr) }}" data-price_dollar="{{ number_format($product->price_dollar) }}" type="button" class="btn btn-primary mb-3 btn-buy">Buy</button>
         </div>
       </div>
     </div>
@@ -60,21 +60,25 @@
         <div class="product-title">@{{ product }}</div>
         <p class="product-description">@{{{ description }}}</p>
       </div>
-      <div class="product-price">@{{ price_dollar }} / Rp.@{{ price_idr }}</div>
-      <div class="product-line-price">@{{ price_dollar }}  / Rp.@{{ price_idr }}</div>
+      <div class="product-price">@{{ price_idr }}</div>
+      <div class="product-line-price">@{{ price_idr }}</div>
     </div>
    
     <div class="totals">
       <div class="totals-item totals-item-total">
+        <label>Code</label>
+        <div class="totals-value" id="cart-total">@{{ unique }}</div>
+      </div>
+      <div class="totals-item totals-item-total">
         <label>Grand Total</label>
-        <div class="totals-value" id="cart-total">@{{ price_dollar }}  / Rp.@{{ price_idr }}</div>
+        <div class="totals-value" id="cart-total">@{{ price_idr }}</div>
       </div>
     </div>  
     <button class="btn btn-primary pull-right checkout">Checkout</button>
     <div class="mt-3">
-      <div class="text-muted" style="font-size: 1em">BCA - 0123456789 (Lorem Ipsum)</div>
-      <div class="text-muted" style="font-size: 1em">BCA - 0123456789 (Lorem Ipsum)</div>
-      <div class="text-muted" style="font-size: 1em">BCA - 0123456789 (Lorem Ipsum)</div>
+      @foreach($accounts as $account)
+      <div class="text-muted" style="font-size: 1em">{{ $account['bank'] }} - {{ $account['account'] }} ({{ $account['name'] }})</div>
+      @endforeach
     </div>
   </div>
 </script>
@@ -88,12 +92,14 @@
       var description = $(this).data('description');
       var price_dollar = $(this).data('price_dollar');
       var price_idr = $(this).data('price_idr');
+      var unique = $(this).data('unique');
 
       var data = {
         product : product,
         description : description,
         price_dollar : price_dollar,
         price_idr : price_idr,
+        unique : unique
       };
 
       htmlBody = Mustache.render(template, data);

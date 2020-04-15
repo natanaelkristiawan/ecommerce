@@ -47,6 +47,9 @@
               </li> 
               <li class="nav-item">
                 <a class="nav-link" id="metadata-tab" data-toggle="tab" href="#metadata" role="tab" aria-controls="metadata" aria-selected="false">Metadata</a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="false">Bank Account</a>
               </li>
             </ul>
             <div class="tab-content" id="myTabContent">
@@ -166,6 +169,34 @@
                   </div>
                 </div>
               </div>
+
+              <div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="account-tab">
+                <div class="mt-4">
+                  <div class="form-group">
+                    <label class="form-control-label">List</label>
+                    <table class="table" id="table-account">
+                      <thead>
+                        <tr>
+                          <th>Bank</th>
+                          <th>Account</th>
+                          <th>Name</th>
+                          <th width="10%">Action</th>
+                        </tr>
+                      </thead>
+                      <tfoot>
+                        <tr>
+                          <td colspan="3"></td>
+                          <td width="10%"><button type="button" class="btn btn-sm btn-primary btn-add-account">Add Account</button></td>
+                        </tr>
+                      </tfoot>
+                      <tbody>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -190,6 +221,7 @@
     <td><button onclick="$('#data@{{count}}').remove()" class="btn btn-sm btn-danger">Delete</button></td>
   </tr>
 </script>
+
 <script type="x-tmpl-mustache" id="template-quote">
   <tr id="data_quote@{{count}}">
     <td><input type="text"  class="form-control" value="@{{data}}" name="setting[section3_quote][@{{count}}]"></td>
@@ -198,14 +230,27 @@
 </script>
 
 
+<script type="x-tmpl-mustache" id="template-account">
+  <tr id="data_account@{{count}}">
+    <td><input type="text"  class="form-control" value="@{{bank}}" name="setting[account][@{{count}}][bank]"></td>
+    <td><input type="text"  class="form-control" value="@{{account}}" name="setting[account][@{{count}}][account]"></td>
+    <td><input type="text"  class="form-control" value="@{{name}}" name="setting[account][@{{count}}][name]"></td>
+    <td><button onclick="$('#data_account@{{count}}').remove()" class="btn btn-sm btn-danger">Delete</button></td>
+  </tr>
+</script>
+
+
 <script type="text/javascript">
   var count=0;
   var count_quote=0;
+  var count_account=0;
   $(document).ready(function() {
 
     var data = {!! json_encode($setting->section2_data) !!};
 
     var quote = {!! json_encode($setting->section3_quote) !!};
+
+    var account = {!! json_encode($setting->account) !!};
 
 
     $.each(data, function(key, value){
@@ -244,6 +289,25 @@
 
     })
 
+
+    $.each(account, function(key, value){
+      var template = $('#template-account').html();
+
+      var data = {
+        count : count,
+        bank: value.bank,
+        account: value.account,
+        name: value.name
+      };
+
+      htmlBody = Mustache.render(template, data);
+
+      $('#table-account tbody').append(htmlBody);
+      count++;
+
+    })
+
+
    
 
     $('.btn-add-data').on('click', function(){
@@ -264,7 +328,7 @@
       count++;
     });
 
-     $('.btn-add-quote').on('click', function(){
+    $('.btn-add-quote').on('click', function(){
       var template = $('#template-quote').html();
 
       var data = {
@@ -275,6 +339,20 @@
 
       $('#table-qoute tbody').append(htmlBody);
       count_quote++;
+    });
+
+
+    $('.btn-add-account').on('click', function(){
+      var template = $('#template-account').html();
+
+      var data = {
+        count : count_account,
+      };
+
+      htmlBody = Mustache.render(template, data);
+
+      $('#table-account tbody').append(htmlBody);
+      count_account++;
     });
 
   })
