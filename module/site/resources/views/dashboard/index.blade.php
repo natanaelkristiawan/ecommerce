@@ -15,7 +15,7 @@
           <div class="display-3">${{ number_format($product->price_dollar) }}</div>
           <span class=" text-muted">{{ number_format($product->price_idr) }} IDR</span>
           {!! $product->detail !!}
-          <button data-product="{{ $product->name }}" data-description='{!! $product->detail !!}' data-price_idr="{{ $product->price_idr }}" data-price_dollar="{{ $product->price_dollar }}" type="button" class="btn btn-primary mb-3 btn-buy">Buy</button>
+          <button data-product="{{ $product->name }}" data-description='{!! $product->detail !!}' data-price_idr="{{ number_format($product->price_idr) }}" data-price_dollar="{{ number_format($product->price_dollar) }}" type="button" class="btn btn-primary mb-3 btn-buy">Buy</button>
         </div>
       </div>
     </div>
