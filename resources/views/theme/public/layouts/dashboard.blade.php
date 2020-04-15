@@ -96,7 +96,225 @@
   <script src="{{ asset('template/argon') }}/assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="{{ asset('template/argon') }}/assets/js/argon.js?v=1.1.0"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+  <style type="text/css">
+    ul {
+      padding-left: 0;
+      list-style: none;
 
+    }
+    .nambah-padding ul {
+      margin-top: 1.5rem !important;
+      margin-bottom: 1.5rem !important;
+    }
+
+
+   
+    .product-details {
+      float: left;
+      width: 50%;
+    }
+     
+    .product-price {
+      float: left;
+      width: 25%;
+    }
+     
+    .product-line-price {
+      float: left;
+      width: 25%;
+      text-align: right;
+    }
+     
+    /* This is used as the traditional .clearfix class */
+    .group:before, .shopping-cart:before, .column-labels:before, .product:before, .totals-item:before,
+    .group:after,
+    .shopping-cart:after,
+    .column-labels:after,
+    .product:after,
+    .totals-item:after {
+      content: '';
+      display: table;
+    }
+     
+    .group:after, .shopping-cart:after, .column-labels:after, .product:after, .totals-item:after {
+      clear: both;
+    }
+     
+    .group, .shopping-cart, .column-labels, .product, .totals-item {
+      zoom: 1;
+    }
+     
+    /* Apply clearfix in a few places */
+    /* Apply dollar signs */
+    .product .product-price:before, .product .product-line-price:before, .totals-value:before {
+      content: '$';
+    }
+     
+    label {
+      color: #aaa;
+    }
+     
+    .shopping-cart {
+      margin: 1em 1em 2em 1em;
+    }
+     
+    /* Column headers */
+    .column-labels label {
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    .column-labels .product-image, .column-labels .product-details, .column-labels .product-removal {
+      text-indent: -9999px;
+    }
+     
+    /* Product entries */
+    .product {
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .product .product-image {
+      text-align: center;
+    }
+    .product .product-image img {
+      width: 100px;
+    }
+    .product .product-details .product-title {
+      margin-right: 20px;
+      
+    }
+    .product .product-details .product-description {
+      margin: 5px 20px 5px 0;
+      line-height: 1.4em;
+    }
+    .product .product-quantity input {
+      width: 40px;
+    }
+    .product .remove-product {
+      border: 0;
+      padding: 4px 8px;
+      background-color: #c66;
+      color: #fff;
+      
+      font-size: 12px;
+      border-radius: 3px;
+    }
+    .product .remove-product:hover {
+      background-color: #a44;
+    }
+     
+    /* Totals section */
+    .totals .totals-item {
+      float: right;
+      clear: both;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .totals .totals-item label {
+      float: left;
+      clear: both;
+      width: 79%;
+      text-align: right;
+    }
+    .totals .totals-item .totals-value {
+      float: right;
+      width: 21%;
+      text-align: right;
+    }
+    .totals .totals-item-total {
+      
+    }
+     
+    .checkout {
+      float: right;
+      border: 0;
+      margin-top: 20px;
+      padding: 6px 25px;
+
+    }
+     
+    .checkout:hover {
+      background-color: #494;
+    }
+     
+    /* Make adjustments for tablet */
+    @media screen and (max-width: 650px) {
+      .shopping-cart {
+        padding: 20px 0;
+        border-top: 1px solid #eee;
+      }
+     
+      .column-labels {
+        display: none;
+      }
+     
+      .product-image {
+        float: right;
+        width: auto;
+      }
+      .product-image img {
+        margin: 0 0 10px 10px;
+      }
+     
+      .product-details {
+        float: none;
+        margin-bottom: 10px;
+        width: auto;
+      }
+     
+      .product-price {
+        clear: both;
+        width: 70px;
+      }
+     
+      .product-quantity {
+        width: 100px;
+      }
+      .product-quantity input {
+        margin-left: 20px;
+      }
+     
+      .product-quantity:before {
+        content: 'x';
+      }
+     
+      .product-removal {
+        width: auto;
+      }
+     
+      .product-line-price {
+        float: right;
+        width: 70px;
+      }
+    }
+    /* Make more adjustments for phone */
+    @media screen and (max-width: 350px) {
+      .product-removal {
+        float: right;
+      }
+     
+      .product-line-price {
+        float: right;
+        clear: left;
+        width: auto;
+        margin-top: 10px;
+      }
+     
+      .product .product-line-price:before {
+        content: 'Item Total: $';
+      }
+     
+      .totals .totals-item label {
+        width: 60%;
+      }
+      .totals .totals-item .totals-value {
+        width: 40%;
+      }
+
+    }
+  </style>
   @section('script')
   @show
 </body>
