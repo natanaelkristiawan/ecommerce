@@ -14,7 +14,10 @@
         "laravel": {
             "providers": [
                 "Master\\Orders\\OrdersServiceProvider"
-            ]
+            ],
+            "aliases" : {
+                "Orders": "Master\\Orders\\Facades\\Orders"
+            }
         }
     },
     "minimum-stability": "dev"

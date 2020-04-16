@@ -24,12 +24,12 @@ class ExtenderSidebar implements SidebarExtender
         $item->icon('ni ni-box-2 text-green');
         $item->url('Orders');
 
-        $item->item('Waiting', function(Item $item){
-          // $item->url(route('admin.categories'));
+        $item->item('Pending', function(Item $item){
+          $item->url(route('public.orderPending'));
         });
         
         $item->item('Success', function(Item $item){
-          // $item->url(route('admin.articles'));
+          $item->url(route('public.orderSuccess'));
         });
       });
 

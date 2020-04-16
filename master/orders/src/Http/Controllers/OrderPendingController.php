@@ -30,9 +30,6 @@ class OrderPendingController extends Controller {
       $columns = $request->columns;
       $order   = $request->order;
 
-
-      $counter = (int)$request->start;
-
       $query = DB::table('orders')->select(DB::raw('
                 customers.email as email,
                 products.name as product,
@@ -110,7 +107,6 @@ class OrderPendingController extends Controller {
       );
 
       return response()->json($response);
-
     }
 
     return view('orders::admin.pending.index');

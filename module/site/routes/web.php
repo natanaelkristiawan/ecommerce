@@ -11,4 +11,7 @@ $route->group(['middleware' => ['web']], function ($route) {
   // dashboard
 
   $route->get('dashboard', 'DashboardResourceController@index')->name('dashboard');
+
+  $route->get('order-pending', 'DashboardResourceController@orderPending')->name('public.orderPending');
+  $route->get('order-success', 'DashboardResourceController@orderSuccess')->name('public.orderSuccess');
 });
