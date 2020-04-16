@@ -15,8 +15,15 @@ class ExtenderSidebar implements SidebarExtender
 	{
 		$menu->group('Main Navigator', function(Group $group) {
 			$group->item('Orders', function(Item $item){
-				$item->icon('fa fa-fw fa-rss');
-				$item->url(route('admin.orders'));
+				$item->icon('ni ni-cart text-purple');
+        $item->url('orders');
+				$item->item('Pending', function(Item $item){
+          $item->url(route('admin.orderPending'));
+        });
+        
+        $item->item('Success', function(Item $item){
+          $item->url(route('admin.orderSuccess'));
+        });
 			});
 		});
 		return $menu;

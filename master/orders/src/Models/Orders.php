@@ -9,8 +9,14 @@ class Orders extends Model
 	use SoftDeletes;
 	protected $table = 'orders';
 	protected $fillable = [
-		'name',
-		'slug',
-		'status',
+	'customer_id',
+    'product_id',
+    'unique_code',
+    'transfer_confirmation',
+    'download_link',
+    'invoice',
+    'total',
+    'timeout',
+    'status',
 	];
 }
