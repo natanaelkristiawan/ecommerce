@@ -5,13 +5,13 @@
   <div class="container-fluid">
     <div class="header-body">
       <div class="row align-items-center py-4">
-        <div class="col-lg-6 col-7">
+        <div class="col-lg-6 col-5">
           <h6 class="h2 text-white d-inline-block mb-0">{!! Meta::get('title') !!}</h6>
           <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
           {{ Breadcrumbs::render('invitecodes') }}
           </nav>
         </div>
-        <div class="col-lg-6 col-5 text-right">
+        <div class="col-lg-6 col-7 text-right">
           <button type="button" data-toggle="modal" data-target="#modal-generate" class="btn btn-sm btn-neutral">Generate</button>
           <button type="button" data-toggle="modal" data-target="#modal-filter" class="btn btn-sm btn-neutral">Filter</button>
         </div>

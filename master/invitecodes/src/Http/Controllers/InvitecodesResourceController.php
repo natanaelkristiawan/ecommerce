@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Master\Invitecodes\Interfaces\InvitecodesRepositoryInterface;
 use Master\Invitecodes\Models\Invitecodes;
 use Validator;
-
+use Meta;
 class InvitecodesResourceController extends Controller
 {
 	protected $repository;
@@ -17,6 +17,7 @@ class InvitecodesResourceController extends Controller
 		$this->middleware('auth:admin');
 		$this->repository = $repository;
 		$this->repository->pushCriteria(\Master\Core\Repositories\Criteria\RequestCriteria::class);
+    Meta::title('Invite Code');
 	}
 
 	public function index(Request $request)
