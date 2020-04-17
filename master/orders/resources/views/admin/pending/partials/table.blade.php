@@ -2,8 +2,7 @@
   <thead class="thead-light">
     <tr>
       <th>Created At</th>
-      <th>Invoice</th>
-      <th>Customer</th>
+      <th>Email</th>
       <th>Product</th>
       <th>Unique Code</th>
       <th>Transfer Confirmation</th>
@@ -16,8 +15,7 @@
   <tfoot>
     <tr>
       <th>Created At</th>
-      <th>Invoice</th>
-      <th>Customer</th>
+      <th>Email</th>
       <th>Product</th>
       <th>Unique Code</th>
       <th>Transfer Confirmation</th>

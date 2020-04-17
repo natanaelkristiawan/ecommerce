@@ -49,7 +49,7 @@ $(document).ready(function() {
     dom: 'lrtip',
     order: [[ 0, "asc" ]],
     columnDefs: [
-      { orderable: false, targets: 5},
+      { orderable: false, targets: 7},
     ],
     processing: true,
     serverSide: true,
@@ -79,13 +79,12 @@ $(document).ready(function() {
     },
     columns: [
       {data : 'created_at'},
-      {data : 'invoice'},
-      {data : 'customer'},
+      {data : 'email'},
       {data : 'product'},
       {data : 'unique_code'},
       {data : 'transfer_confirmation'},
       {data : 'total'},
-      {data : 'time_out'},
+      {data : 'timeout'},
       {data : 'status'}
     ],
   });

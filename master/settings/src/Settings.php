@@ -30,4 +30,10 @@ class Settings
     return $this->repository->all();
   }
 
+
+  public function updateCreate($slug='', $value='')
+  {
+    
+  }
+
 }

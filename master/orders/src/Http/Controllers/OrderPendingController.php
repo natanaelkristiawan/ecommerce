@@ -31,22 +31,22 @@ class OrderPendingController extends Controller {
       $order   = $request->order;
 
       $query = DB::table('orders')->select(DB::raw('
-                customers.email as email,
-                products.name as product,
-                orders.id as order_id,
-                orders.unique_code as unique_code,
-                orders.transfer_confirmation as transfer_confirmation,
-                orders.invoice as invoice,
-                orders.total as total,
-                orders.timeout as timeout,
-                orders.status as status,
-                orders.created_at as created_at,
-              '))->join('customers', function ($join) use ($filtered) {
+                default_customers.email as email,
+                default_products.name as product,
+                default_orders.id as order_id,
+                default_orders.unique_code as unique_code,
+                default_orders.transfer_confirmation as transfer_confirmation,
+                default_orders.invoice as invoice,
+                default_orders.total as total,
+                default_orders.timeout as timeout,
+                default_orders.status as status,
+                default_orders.created_at as created_at
+              '))->join('customers', function ($join){
                 $join->on('orders.customer_id', '=', 'customers.id');
                 if (!(bool)empty($filtered['email'])) {
                   $join->where('customers.email', 'like', "%{$filtered['email']}%");
                 }
-              })->join('products', function($join) use ($filtered){
+              })->join('products', function($join){
                 $join->on('orders.product_id', '=', 'products.id');
               })->where('orders.status', 0);
 
@@ -57,12 +57,12 @@ class OrderPendingController extends Controller {
       $headerOrder = array(
         'created_at',
         'invoice',
-        'customer',
+        'email',
         'product',
         'unique_code',
         'transfer_confirmation',
         'total',
-        'time_out',
+        'timeout',
         'status',
       );
       
@@ -86,12 +86,12 @@ class OrderPendingController extends Controller {
         $dataList[] = array(
           'created_at'=> $value->created_at,
           'invoice'=> $value->invoice,
-          'customer'=> $value->customer,
+          'email'=> $value->email,
           'product'=> $value->product,
           'unique_code'=> $value->unique_code,
           'transfer_confirmation'=> $value->transfer_confirmation,
           'total'=> $value->total,
-          'time_out'=> $value->time_out,
+          'timeout'=> $value->timeout,
           'status'=> $value->status,
           'action' => ''
         );
@@ -110,11 +110,5 @@ class OrderPendingController extends Controller {
     }
 
     return view('orders::admin.pending.index');
-  }
-
-
-  public function create()
-  {
-    # code...
   }
 }

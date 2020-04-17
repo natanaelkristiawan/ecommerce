@@ -10,6 +10,7 @@ use Settings;
 use Auth;
 use Orders;
 use Meta;
+use Validator;
 class DashboardResourceController extends Controller
 {
 
@@ -26,6 +27,45 @@ class DashboardResourceController extends Controller
     $accounts = Settings::find('account');
 
     return view('site::dashboard.index', compact('products', 'accounts'));
+  }
+
+
+
+  public function orderCreate(Request $request)
+  {
+    $customer = Auth::guard('web')->user();
+
+
+    $validator = Validator::make($request->all(), [
+      'product_id'  => 'required',
+      'unique_code' => 'required',
+      'total'       => 'required',
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json(array(
+        'status' => false
+      ));
+    }
+    $dataInsert = array(
+      'product_id' => $request->product_id,
+      'customer_id' => $customer->id,
+      'unique_code' => $request->unique_code,
+      'total' => $request->total,
+      'timeout' => date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' +1 day')),
+      'status'  => 0
+    );
+
+    $data = Orders::createOrder($dataInsert);
+
+
+    return response()->json(
+      array(
+        'status' => true
+      )
+    );
+
+
   }
 
   public function orderPending(Request $request)
@@ -51,7 +91,7 @@ class DashboardResourceController extends Controller
         'unique_code',
         'transfer_confirmation',
         'total',
-        'time_out',
+        'timeout',
         'status',
       );
       
@@ -74,12 +114,12 @@ class DashboardResourceController extends Controller
         $dataList[] = array(
           'created_at'=> $value->created_at,
           'invoice'=> $value->invoice,
-          'customer'=> $value->customer,
+          'email'=> $value->email,
           'product'=> $value->product,
           'unique_code'=> $value->unique_code,
           'transfer_confirmation'=> $value->transfer_confirmation,
           'total'=> $value->total,
-          'time_out'=> $value->time_out,
+          'timeout'=> $value->timeout,
           'status'=> $value->status,
           'action' => ''
         );
@@ -104,7 +144,8 @@ class DashboardResourceController extends Controller
   public function orderSuccess(Request $request)
   {
     $customer = Auth::guard('web')->user();
-        if($request->ajax()){
+    
+    if($request->ajax()){
       $pageLimit = $request->length;
       $filtered = $request->search;
       $columns = $request->columns;
@@ -123,7 +164,7 @@ class DashboardResourceController extends Controller
         'unique_code',
         'transfer_confirmation',
         'total',
-        'time_out',
+        'timeout',
         'status',
       );
       
@@ -151,7 +192,7 @@ class DashboardResourceController extends Controller
           'unique_code'=> $value->unique_code,
           'transfer_confirmation'=> $value->transfer_confirmation,
           'total'=> $value->total,
-          'time_out'=> $value->time_out,
+          'timeout'=> $value->timeout,
           'status'=> $value->status,
           'action' => ''
         );

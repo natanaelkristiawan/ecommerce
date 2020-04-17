@@ -4,6 +4,7 @@ namespace Master\Orders;
 
 use Illuminate\Support\ServiceProvider;
 
+
 class OrdersServiceProvider extends ServiceProvider
 {
 

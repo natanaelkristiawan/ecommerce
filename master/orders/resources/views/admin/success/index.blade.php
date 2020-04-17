@@ -92,7 +92,7 @@ $(document).ready(function() {
     columns: [
       {data : 'updated_At'},
       {data : 'invoice'},
-      {data : 'customer'},
+      {data : 'email'},
       {data : 'product'},
       {data : 'unique_code'},
       {data : 'transfer_confirmation'},
