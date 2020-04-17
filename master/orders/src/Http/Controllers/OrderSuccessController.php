@@ -22,7 +22,7 @@ class OrderSuccessController extends Controller {
 
   public function index(Request $request)
   {
-        if($request->ajax()){
+    if($request->ajax()){
       $pageLimit = $request->length;
       $filtered = $request->search;
       $columns = $request->columns;

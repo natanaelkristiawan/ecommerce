@@ -17,7 +17,7 @@
           {!! $product->detail !!}
           <button 
             data-unique="{{ mt_rand(0, 1000) }}" 
-            data-product="{{ $product->name }}" 
+            data-product="{{ $product->id }}" 
             data-description='{!! $product->detail !!}' 
             data-price_idr="{{ number_format($product->price_idr) }}" 
             data-price_dollar="{{ number_format($product->price_dollar) }}" 
@@ -70,7 +70,7 @@
         </button>
       </div>
       <div class="modal-body">
-        
+
       </div>
 
     </div>
