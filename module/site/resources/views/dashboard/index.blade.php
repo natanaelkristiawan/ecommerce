@@ -152,7 +152,7 @@
       var unique = $(this).data('unique');
       var price_idr_nonformat = $(this).data('price_idr-nonformat');
       var price_dollar_nonformat = $(this).data('price_dollar-nonformat');
-      var total_price = parseInt(price_idr) + parseInt(unique);
+      var total_price = parseInt(price_idr_nonformat) + parseInt(unique);
 
       var data = {
         product : product,
