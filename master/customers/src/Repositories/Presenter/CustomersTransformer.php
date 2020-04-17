@@ -18,7 +18,7 @@ class CustomersTransformer extends TransformerAbstract
       'status' => $model->status == 0 ? 'Draft' : 'Live',
       'action' => '
         <div class="btn-group">
-          <a href="" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-pencil-alt"></i></a>
+          <a href="'.route('admin.customers.profile', array('id'=>$model->id)).'" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-pencil-alt"></i></a>
         </div>
       ',
 		];

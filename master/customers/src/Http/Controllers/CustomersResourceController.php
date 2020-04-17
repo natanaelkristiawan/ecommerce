@@ -8,6 +8,7 @@ use Master\Customers\Interfaces\CustomersRepositoryInterface;
 use Master\Customers\Models\Customers;
 use Validator;
 use Meta;
+use Orders;
 
 class CustomersResourceController extends Controller
 {
@@ -36,4 +37,65 @@ class CustomersResourceController extends Controller
     }
     return view('customers::admin.customers.index');
 	}
+
+
+  public function profile(Request $request, Customers $data)
+  {
+    if($request->ajax()){
+
+      $pageLimit = $request->length;
+      $filtered = $request->search;
+      $columns = $request->columns;
+      $order   = $request->order;
+      $query = Orders::datatable($request, $data->id);
+
+      $query->where('orders.status', 1);
+
+      $headerOrder = array(
+        'created_at',
+        'product',
+        'total',
+        'download_link',
+        'transfer_confirmation',
+        'status'
+      );
+      
+
+      $sortBy = $headerOrder[$order[0]['column']];
+      $sortOrder = $order[0]['dir'];
+
+      if (isset($sortBy) && !empty($sortBy)) {
+        $query->orderBy($sortBy, $sortOrder);
+      }
+
+
+      $dataFromModel = $query->paginate($pageLimit);
+      $dataList = array();
+
+      
+      $paginationMeta = $dataFromModel->toArray();
+
+      foreach ($dataFromModel->items() as $key => $value) {
+        $dataList[] = array(
+          'created_at'=> $value->created_at,
+          'product'=> $value->product,
+          'total'=> $value->total,
+          'download_link'=> $value->download_link,
+          'transfer_confirmation'=> $value->transfer_confirmation,
+          'status'=> $value->status,
+        );
+
+      }
+
+      $response = array(
+        'draw' => $request->draw,
+        'data' => $dataList,
+        'recordsTotal' => (int)$paginationMeta['to'],
+        'recordsFiltered' => (int)$paginationMeta['total'], 
+      );
+
+      return response()->json($response);
+    }
+    return view('customers::admin.customers.profile', compact('data'));
+  }
 }
