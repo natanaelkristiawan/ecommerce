@@ -61,7 +61,7 @@
 </div>
 
 <div data-backdrop="static" data-keyboard="false" class="modal fade" id="modal-success" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-  <div style="min-height: calc(80vh)" class="modal-dialog modal-lg modal-" role="document">
+  <div style="min-height: calc(50vh)" class="modal-dialog modal-lg modal-" role="document">
     <div class="modal-content">
       <div class="modal-header pb-0">
         <h6 class="modal-title" id="modal-title-default">Notification</h6>
@@ -73,6 +73,34 @@
 
       </div>
 
+    </div>
+  </div>
+</div>
+
+<div class="modal fade show" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-modal="true">
+  <div style="min-height: calc(50vh)"  class="modal-dialog modal-danger modal-" role="document">
+    <div class="modal-content bg-gradient-danger">
+      <div class="modal-header">
+        <h6 class="modal-title" id="modal-title-notification">Notification</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="py-3 text-center">
+          <i class="ni ni-bell-55 ni-3x"></i>
+          <h4 class="heading mt-4">Success</h4>
+          <p>Lorem Ipsum</p>
+
+           @foreach($accounts as $account)
+            <p>{{ $account['bank'] }} - {{ $account['account'] }} ({{ $account['name'] }})</p>
+          @endforeach
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="{{ route('public.orderPending') }}" class="btn btn-white">Pending Order</a>
+        <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
 </div>
@@ -133,8 +161,12 @@
       beforeSend: function(){
         $('#modal-default').modal('hide');
       },
-      success: function(){
+      success: function(result){
+        console.log(result);
+        if (result.status == true) {
+          $('#modal-notification').modal('show');
 
+        }
       }
     });
   });
