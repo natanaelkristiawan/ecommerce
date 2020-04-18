@@ -30,7 +30,7 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="{{ asset('template/argon') }}/assets/img/theme/team-4.jpg">
+                    <img class="profile-pic" alt="Image placeholder" src="{{ is_null(Auth::guard('admin')->user()->photo) ?  asset('template/argon/assets/img/theme/team-4.jpg') : url('image/profile/'.Auth::guard('admin')->user()->photo) }}">
                   </span>
                   <div class="media-body ml-2 d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold">{{ Auth::guard('admin')->user()->name }}</span>
@@ -41,7 +41,7 @@
                 <div class="dropdown-header noti-title">
                   <h6 class="text-overflow m-0">Welcome!</h6>
                 </div>
-                <a href="#!" class="dropdown-item">
+                <a href="{{ route('admin.profile') }}" class="dropdown-item">
                   <i class="ni ni-single-02"></i>
                   <span>My profile</span>
                 </a>

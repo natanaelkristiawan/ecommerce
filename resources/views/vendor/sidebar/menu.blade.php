@@ -12,7 +12,7 @@
 <ul class="navbar-nav mb-md-3">
   <li class="nav-item">
     @if ($guard_now == 'admin')
-    <a class="nav-link" href="">
+    <a class="nav-link" href="{{ route('admin.profile') }}">
     @else
     <a class="nav-link" href="{{ route('public.profile') }}">
     @endif

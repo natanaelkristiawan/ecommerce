@@ -30,7 +30,7 @@
           <div class="col-lg-3 order-lg-2">
             <div class="card-profile-image">
               <a href="#">
-                <img src="{{ asset('template/argon') }}/assets/img/theme/team-4.jpg" class="rounded-circle">
+                <img src="{{ is_null($data->photo) ? asset('template/argon/assets/img/theme/team-4.jpg') : url('image/profile/'.$data->photo) }}" class="rounded-circle">
               </a>
             </div>
           </div>
