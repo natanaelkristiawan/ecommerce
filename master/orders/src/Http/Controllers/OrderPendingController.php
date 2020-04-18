@@ -9,6 +9,7 @@ use Master\Orders\Models\Orders;
 use Validator;
 use Meta;
 use DB;
+use Settings;
 class OrderPendingController extends Controller {
   
 
@@ -48,7 +49,7 @@ class OrderPendingController extends Controller {
                 }
               })->join('products', function($join){
                 $join->on('orders.product_id', '=', 'products.id');
-              })->where('orders.status', 0);
+              })->whereNotIn('orders.status', array(1, 4));
 
       if (!(bool)empty($filtered['unique_code'])) {
         $query->where('unique_code', 'like', '%'.$filtered['unique_code'].'%');
@@ -83,17 +84,30 @@ class OrderPendingController extends Controller {
 
 
       foreach ($dataFromModel->items() as $key => $value) {
+
+        $transfer_confirmation = '';
+        $btn = '<div class="btn-group">
+              <a href="'.route('admin.orderPending.delete', ['id'=>$value->order_id]).'" onclick="return confirm(\'Are you delete this item?\')" class="btn btn-sm btn-danger btn-flat btn-delete" data-id="'.$value->order_id.'"><i class="fa fa-fw fa-trash"></i></a>
+            </div>';
+
+        if ($value->transfer_confirmation !== '' && !(bool)is_null($value->transfer_confirmation)) {
+          $transfer_confirmation = '<a href="'.url('image/original/').'/'.$value->transfer_confirmation.'" data-featherlight="image"><img style="max-width:100px; display:block; margin:auto; border-radius:10px" class="img-fluid mb-2" alt="Responsive image" src="'.url('image/preview/').'/'.$value->transfer_confirmation.'"></img></a>';
+          $btn = '<div class="btn-group">
+              <a href="'.route('admin.orderPending.confirm', ['id'=>$value->order_id]).'" onclick="return confirm(\'Are you confirm this item?\')" class="btn btn-sm btn-primary btn-flat btn-save" data-id="'.$value->order_id.'"><i class="fa fa-fw fa-save"></i></a>
+              <a href="'.route('admin.orderPending.delete', ['id'=>$value->order_id]).'" onclick="return confirm(\'Are you delete this item?\')" class="btn btn-sm btn-danger btn-flat btn-delete" data-id="'.$value->order_id.'"><i class="fa fa-fw fa-trash"></i></a>
+            </div>';
+        }
         $dataList[] = array(
           'created_at'=> $value->created_at,
           'invoice'=> $value->invoice,
           'email'=> $value->email,
           'product'=> $value->product,
           'unique_code'=> $value->unique_code,
-          'transfer_confirmation'=> $value->transfer_confirmation,
+          'transfer_confirmation'=> $transfer_confirmation,
           'total'=> $value->total,
           'timeout'=> $value->timeout,
-          'status'=> $value->status,
-          'action' => ''
+          'status'=> '<span class="badge badge-'.config('master.orders.color.'.$value->status).'">'.config('master.orders.status.'.$value->status).'</span>',
+          'action' => $btn
         );
 
       }
@@ -108,7 +122,57 @@ class OrderPendingController extends Controller {
 
       return response()->json($response);
     }
-
     return view('orders::admin.pending.index');
+  }
+
+
+  public function delete(Request $request, $id = '')
+  {
+    $order = $this->repository->find($id);
+
+    $order->status = 4;
+    $order->save();
+
+    $request->session()->flash('status', 'Success Delete Data!');
+
+    return redirect()->back();
+    
+  } 
+
+
+  public function confirm(Request $request, $id = '')
+  {
+
+    $latestInv = (int)Settings::find('invoice');
+
+    $latestInv = $latestInv + 1;
+    $invoice = self::invoice_num($latestInv, 5, 'RG43S/'.date('Y/m/'));
+
+
+    $order = $this->repository->find($id);
+
+    $order->status = 1;
+    $order->invoice = $invoice;
+    $order->save();
+
+
+    Settings::updateCreate('invoice', $latestInv);
+
+    // nanti di sini dibuatkan download linknya
+
+
+    $request->session()->flash('status', 'Success Confirm Data!');
+
+    return redirect()->back();
+  }
+
+  private function invoice_num ($input, $pad_len = 7, $prefix = null) {
+    if ($pad_len <= strlen($input))
+        trigger_error('<strong>$pad_len</strong> cannot be less than or equal to the length of <strong>$input</strong> to generate invoice number', E_USER_ERROR);
+
+    if (is_string($prefix))
+        return sprintf("%s%s", $prefix, str_pad($input, $pad_len, "0", STR_PAD_LEFT));
+
+    return str_pad($input, $pad_len, "0", STR_PAD_LEFT);
   }
 }

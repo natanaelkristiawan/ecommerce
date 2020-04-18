@@ -32,16 +32,18 @@ class OrderSuccessController extends Controller {
       $counter = (int)$request->start;
 
       $query = DB::table('orders')->select(DB::raw('
-                customers.email as email,
-                products.name as product,
-                orders.id as order_id,
-                orders.unique_code as unique_code,
-                orders.transfer_confirmation as transfer_confirmation,
-                orders.invoice as invoice,
-                orders.total as total,
-                orders.download_link as download_link,
-                orders.status as status,
-                orders.updated_at as updated_at,
+               default_customers.email as email,
+                default_products.name as product,
+                default_orders.id as order_id,
+                default_orders.unique_code as unique_code,
+                default_orders.transfer_confirmation as transfer_confirmation,
+                default_orders.invoice as invoice,
+                default_orders.total as total,
+                default_orders.timeout as timeout,
+                default_orders.status as status,
+                default_orders.download_link as download_link,
+                default_orders.created_at as created_at,
+                default_orders.updated_at as updated_at
               '))->join('customers', function ($join) use ($filtered) {
                 $join->on('orders.customer_id', '=', 'customers.id');
                 if (!(bool)empty($filtered['email'])) {
@@ -86,15 +88,14 @@ class OrderSuccessController extends Controller {
       foreach ($dataFromModel->items() as $key => $value) {
         $dataList[] = array(
           'updated_at'=> $value->updated_at,
-          'invoice'=> $value->invoice,
-          'customer'=> $value->customer,
+          'invoice'=> '<a target="_blank" href="'.route('admin.orderSuccess.invoice', array('id'=>$value->order_id)).'">'.$value->invoice.'</a>',
+          'email'=> $value->email,
           'product'=> $value->product,
           'unique_code'=> $value->unique_code,
-          'transfer_confirmation'=> $value->transfer_confirmation,
+          'transfer_confirmation'=> '<a href="'.url('image/original/').'/'.$value->transfer_confirmation.'" data-featherlight="image"><img style="max-width:100px; display:block; margin:auto; border-radius:10px" class="img-fluid mb-2" alt="Responsive image" src="'.url('image/preview/').'/'.$value->transfer_confirmation.'"></img></a>',
           'total'=> $value->total,
           'download_link'=> $value->download_link,
-          'status'=> $value->status,
-          'action' => ''
+          'status'=> '<span class="badge badge-'.config('master.orders.color.'.$value->status).'">'.config('master.orders.status.'.$value->status).'</span>'
         );
 
       }
@@ -111,5 +112,11 @@ class OrderSuccessController extends Controller {
 
     }
     return view('orders::admin.success.index');
+  }
+
+
+  public function invoice(Request $request, Orders $data)
+  {
+    return view('orders::admin.invoice.index', compact('data'));
   }
 }

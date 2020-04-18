@@ -51,6 +51,10 @@
 @section('script')
 @parent
 
+<link href="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+<script src="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+
 <script type="text/javascript">
 var oTable;
 var page = 1;
@@ -72,7 +76,7 @@ $(document).ready(function() {
       }
     },
     ajax: {
-      url: "{{ route('admin.orderPending') }}",
+      url: "{{ route('admin.orderSuccess') }}",
       dataType: "json",
       type: "GET",
       data: function ( d ) {
@@ -90,7 +94,7 @@ $(document).ready(function() {
       page = parseInt(api.rows().page()) + 1;
     },
     columns: [
-      {data : 'updated_At'},
+      {data : 'updated_at'},
       {data : 'invoice'},
       {data : 'email'},
       {data : 'product'},

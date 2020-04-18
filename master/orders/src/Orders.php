@@ -53,4 +53,15 @@ class Orders
     return $this->repository->create($data);
   }
 
+
+  public function findOrder($order_id = '')
+  {
+    return $this->repository->find($order_id);
+  }
+
+  public function findWhere($params = array())
+  {
+    return $this->repository->findWhere($params);
+  }
+
 }

@@ -15,7 +15,7 @@ class CustomersTransformer extends TransformerAbstract
       'email' => $model->email,
       'phone' => $model->phone,
       'invite_code' => $model->invite_code,
-      'status' => $model->status == 0 ? 'Draft' : 'Live',
+      'status' => '<span class="badge badge-'.config('color.status.'.$model->status).'">'.($model->status == 0 ? 'Draft' : 'Live').'</span>',
       'action' => '
         <div class="btn-group">
           <a href="'.route('admin.customers.profile', array('id'=>$model->id)).'" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-pencil-alt"></i></a>

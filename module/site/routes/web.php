@@ -16,4 +16,9 @@ $route->group(['middleware' => ['web']], function ($route) {
   $route->get('order-success', 'DashboardResourceController@orderSuccess')->name('public.orderSuccess');
 
   $route->post('order-create', 'DashboardResourceController@orderCreate')->name('public.orderCreate');
+  $route->post('order-waiting', 'DashboardResourceController@orderWaitingConfirmation')->name('public.orderWaitingConfirmation');
+
+
+  $route->get('order-delete/{id}', 'DashboardResourceController@deleteOrder')->name('public.orderDelete');
+  $route->get('invoice/{id}', 'DashboardResourceController@invoice')->name('public.invoice');
 });

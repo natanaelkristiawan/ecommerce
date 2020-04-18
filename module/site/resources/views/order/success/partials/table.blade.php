@@ -3,7 +3,7 @@
     <tr>
       <th>Updated At</th>
       <th>Invoice</th>
-      <th>Customer</th>
+      <th>Email</th>
       <th>Product</th>
       <th>Unique Code</th>
       <th>Transfer Confirmation</th>
@@ -16,7 +16,7 @@
     <tr>
       <th>Updated At</th>
       <th>Invoice</th>
-      <th>Customer</th>
+      <th>Email</th>
       <th>Product</th>
       <th>Unique Code</th>
       <th>Transfer Confirmation</th>

@@ -33,7 +33,7 @@ class Settings
 
   public function updateCreate($slug='', $value='')
   {
-    
+    return $this->repository->updateOrCreate(array('slug'=>$slug), array('slug'=>$slug, 'value'=>$value));
   }
 
 }

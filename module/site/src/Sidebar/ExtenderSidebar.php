@@ -33,9 +33,6 @@ class ExtenderSidebar implements SidebarExtender
         });
       });
 
-      $group->item('Histories', function(Item $item){
-        $item->icon('ni ni-archive-2 text-pink');
-      });
     });
     return $menu;
   }

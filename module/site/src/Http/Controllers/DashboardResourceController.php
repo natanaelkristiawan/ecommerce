@@ -81,7 +81,7 @@ class DashboardResourceController extends Controller
 
       $query = Orders::datatable($request, $customer->id);
 
-      $query->whereNotIn('orders.status', array(1, 5));
+      $query->whereNotIn('orders.status', array(1, 4));
 
       $headerOrder = array(
         'created_at',
@@ -110,18 +110,32 @@ class DashboardResourceController extends Controller
       
       $paginationMeta = $dataFromModel->toArray();
 
+
       foreach ($dataFromModel->items() as $key => $value) {
+
+        $additional = '';
+
+        $textUpload = 'Upload File';
+
+        if ($value->transfer_confirmation !== '' && !(bool)is_null($value->transfer_confirmation)) {
+          $additional = '<a href="'.url('image/original/').'/'.$value->transfer_confirmation.'" data-featherlight="image"><img style="max-width:100px; display:block; margin:auto; border-radius:10px" class="img-fluid mb-2" alt="Responsive image" src="'.url('image/preview/').'/'.$value->transfer_confirmation.'"></img></a>';
+          $textUpload = 'Change File';
+        }
+
+
         $dataList[] = array(
           'created_at'=> $value->created_at,
           'invoice'=> $value->invoice,
           'email'=> $value->email,
           'product'=> $value->product,
           'unique_code'=> $value->unique_code,
-          'transfer_confirmation'=> $value->transfer_confirmation,
+          'transfer_confirmation'=> '<div style="text-align:center">'.$additional.'<button data-id="'.$value->order_id.'" class="btn btn-primary btn-sm btn-upload">'.$textUpload.'</button></div>',
           'total'=> $value->total,
           'timeout'=> $value->timeout,
-          'status'=> $value->status,
-          'action' => ''
+          'status'=> '<span class="badge badge-'.config('master.orders.color.'.$value->status).'">'.config('master.orders.status.'.$value->status).'</span>',
+          'action' => '<div class="btn-group">
+                  <a href="'.route('public.orderDelete', array('id'=>$value->order_id)).'" onclick="return confirm(\'Are you delete this item?\')" class="btn btn-sm btn-danger btn-flat btn-delete" data-id="'.$value->order_id.'"><i class="fa fa-fw fa-trash"></i></a>
+                  </div>'
         );
 
       }
@@ -135,8 +149,38 @@ class DashboardResourceController extends Controller
 
       return response()->json($response);
     }
-    return view('site::order.pending.index');
+
+    $accounts = Settings::find('account');
+    return view('site::order.pending.index', compact('accounts'));
     
+  }
+
+  public function orderWaitingConfirmation(Request $request)
+  {
+    $customer = Auth::guard('web')->user();
+    $validator = Validator::make($request->all(), [
+      'order_id'  => 'required',
+      'transfer_confirmation' => 'required',
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json(array(
+        'status' => false
+      ));
+    }
+
+
+    $order = Orders::findOrder($request->order_id);
+    $order->transfer_confirmation = $request->transfer_confirmation;
+    $order->status = 2;
+    $order->save();
+
+
+    return response()->json(array(
+      'status' => true
+    ));
+
+
   }
 
 
@@ -159,7 +203,7 @@ class DashboardResourceController extends Controller
       $headerOrder = array(
         'created_at',
         'invoice',
-        'customer',
+        'email',
         'product',
         'unique_code',
         'transfer_confirmation',
@@ -184,17 +228,17 @@ class DashboardResourceController extends Controller
       $paginationMeta = $dataFromModel->toArray();
 
       foreach ($dataFromModel->items() as $key => $value) {
+        $transfer_confirmation = '<a href="'.url('image/original/').'/'.$value->transfer_confirmation.'" data-featherlight="image"><img style="max-width:100px; display:block; margin:auto; border-radius:10px" class="img-fluid mb-2" alt="Responsive image" src="'.url('image/preview/').'/'.$value->transfer_confirmation.'"></img></a>';
         $dataList[] = array(
           'created_at'=> $value->created_at,
-          'invoice'=> $value->invoice,
-          'customer'=> $value->customer,
+          'invoice'=> '<a target="_blank" href="'.route('public.invoice', array('id'=>$value->order_id)).'">'.$value->invoice.'</a>',
+          'email'=> $value->email,
           'product'=> $value->product,
           'unique_code'=> $value->unique_code,
-          'transfer_confirmation'=> $value->transfer_confirmation,
+          'transfer_confirmation'=> $transfer_confirmation,
           'total'=> $value->total,
-          'timeout'=> $value->timeout,
+          'download_link'=> $value->download_link,
           'status'=> $value->status,
-          'action' => ''
         );
 
       }
@@ -209,5 +253,49 @@ class DashboardResourceController extends Controller
       return response()->json($response);
     }
     return view('site::order.success.index');
+  }
+
+  public function deleteOrder(Request $request, $id = '')
+  {
+    $customer = Auth::guard('web')->user();
+
+    $params = array(
+      'id' => $id,
+      'customer_id' => $customer->id
+    );
+
+    $order = Orders::findWhere($params)->first();
+
+    if (is_null($order)) {
+      abort(404);
+    }
+
+
+    $order->status = 4;
+    $order->save();
+
+    $request->session()->flash('status', 'Success Delete Data!');
+
+    return redirect()->back();
+  }
+
+
+
+  public function invoice($id='')
+  {
+    $customer = Auth::guard('web')->user();
+    $params = array(
+      'id' => $id,
+      'customer_id' => $customer->id,
+      'status' => 1
+    );
+
+    $data = Orders::findWhere($params)->first();
+
+    if (is_null($data)) {
+      abort(404);
+    }
+    return view('orders::admin.invoice.index', compact('data'));
+
   }
 }

@@ -76,13 +76,15 @@ class CustomersResourceController extends Controller
       $paginationMeta = $dataFromModel->toArray();
 
       foreach ($dataFromModel->items() as $key => $value) {
+        $transfer_confirmation = '<a href="'.url('image/original/').'/'.$value->transfer_confirmation.'" data-featherlight="image"><img style="max-width:100px; display:block; margin:auto; border-radius:10px" class="img-fluid mb-2" alt="Responsive image" src="'.url('image/preview/').'/'.$value->transfer_confirmation.'"></img></a>';
+
         $dataList[] = array(
           'created_at'=> $value->created_at,
           'product'=> $value->product,
           'total'=> $value->total,
           'download_link'=> $value->download_link,
-          'transfer_confirmation'=> $value->transfer_confirmation,
-          'status'=> $value->status,
+          'transfer_confirmation'=> $transfer_confirmation,
+          'status'=> '<span class="badge badge-'.config('master.orders.color.'.$value->status).'">'.config('master.orders.status.'.$value->status).'</span>',
         );
 
       }

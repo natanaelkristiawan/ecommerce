@@ -19,4 +19,16 @@ class Orders extends Model
     'timeout',
     'status',
 	];
+
+
+    public function product()
+    {
+        return $this->belongsTo(\Master\Products\Models\Products::class, 'product_id', 'id');
+    }
+
+
+    public function customer()
+    {
+        return $this->belongsTo(\Master\Customers\Models\Customers::class, 'customer_id', 'id');
+    }
 }

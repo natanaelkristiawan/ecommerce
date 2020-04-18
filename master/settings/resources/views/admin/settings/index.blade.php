@@ -99,7 +99,7 @@
                   </div>
                   <div class="form-group">
                     <label class="form-control-label">Data</label> 
-                    <table class="table" id="table-data">
+                    <table  class="table table-responsive" id="table-data">
                       <thead>
                         <tr>
                           <th width="20%">Data</th>
@@ -132,7 +132,7 @@
                   </div>
                   <div class="form-group">
                     <label class="form-control-label">Quotes</label>
-                    <table class="table" id="table-qoute">
+                    <table class="table table-responsive" id="table-qoute">
                       <thead>
                         <tr>
                           <th>Quote</th>
@@ -174,7 +174,7 @@
                 <div class="mt-4">
                   <div class="form-group">
                     <label class="form-control-label">List</label>
-                    <table class="table" id="table-account">
+                    <table class="table table-responsive" id="table-account">
                       <thead>
                         <tr>
                           <th>Bank</th>

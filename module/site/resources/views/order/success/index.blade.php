@@ -39,6 +39,9 @@
 
 @section('script')
 @parent
+<link href="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+<script src="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
 <script type="text/javascript">
 var oTable;
 var page = 1;
@@ -49,7 +52,7 @@ $(document).ready(function() {
     dom: 'lrtip',
     order: [[ 0, "asc" ]],
     columnDefs: [
-      { orderable: false, targets: 5},
+      { orderable: false, targets: 8},
     ],
     processing: true,
     serverSide: true,
@@ -80,7 +83,7 @@ $(document).ready(function() {
     columns: [
       {data : 'created_at'},
       {data : 'invoice'},
-      {data : 'customer'},
+      {data : 'email'},
       {data : 'product'},
       {data : 'unique_code'},
       {data : 'transfer_confirmation'},

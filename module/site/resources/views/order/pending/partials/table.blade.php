@@ -9,6 +9,7 @@
       <th>Total</th>
       <th>Time Out</th>
       <th>Status</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tfoot>
@@ -21,6 +22,7 @@
       <th>Total</th>
       <th>Time Out</th>
       <th>Status</th>
+      <th>Action</th>
     </tr>
   </tfoot>
   <tbody>

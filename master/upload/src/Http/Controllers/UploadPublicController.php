@@ -13,12 +13,11 @@ use Master\Upload\Http\Traits\UploadTrait;
 
 class UploadPublicController extends Controller
 {	
-    use UploadTrait;
-    public $filer;
+  use UploadTrait;
+  public $filer;
 	public function __construct(Filer $filer)
 	{
-  		// $this->middleware('auth');
-        $this->filer = $filer;
+    $this->filer = $filer;
 	}
 
 }

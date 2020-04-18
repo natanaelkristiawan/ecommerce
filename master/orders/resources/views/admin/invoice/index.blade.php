@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>A simple, clean, and responsive HTML invoice template</title>
+    <title>Invoice RG43S</title>
     
     <style>
     .invoice-box {
@@ -106,14 +106,13 @@
                 <td colspan="2">
                     <table>
                         <tr>
-                            <td class="title">
-                                <img src="https://www.sparksuite.com/images/logo.png" style="width:100%; max-width:300px;">
+                            <td>
+                                <h1>RG43S</h1>
                             </td>
                             
                             <td>
-                                Invoice #: 123<br>
-                                Created: January 1, 2015<br>
-                                Due: February 1, 2015
+                                Invoice #: {{ $data->invoice }}<br>
+                                Created: {{ date('d F Y', strtotime($data->updated_at)) }}
                             </td>
                         </tr>
                     </table>
@@ -125,15 +124,14 @@
                     <table>
                         <tr>
                             <td>
-                                Sparksuite, Inc.<br>
-                                12345 Sunny Road<br>
-                                Sunnyville, CA 12345
+                                {{ ucwords($data->customer->name) }}<br>
+                                {{ $data->customer->email }}<br>
                             </td>
                             
                             <td>
-                                Acme Corp.<br>
-                                John Doe<br>
-                                john@example.com
+                                RG4ES<br>
+                                administrator<br>
+                                admin@rg43s.com
                             </td>
                         </tr>
                     </table>
@@ -152,11 +150,11 @@
             
             <tr class="details">
                 <td>
-                    Check
+                    Transfers
                 </td>
                 
                 <td>
-                    1000
+                   Rp. {{ number_format($data->total) }}
                 </td>
             </tr>
             
@@ -172,31 +170,21 @@
             
             <tr class="item">
                 <td>
-                    Website design
+                    {{ $data->product->name }}
                 </td>
                 
                 <td>
-                    $300.00
+                    Rp. {{ number_format($data->product->price_idr) }}
                 </td>
             </tr>
             
             <tr class="item">
                 <td>
-                    Hosting (3 months)
+                    Unique Code
                 </td>
                 
                 <td>
-                    $75.00
-                </td>
-            </tr>
-            
-            <tr class="item last">
-                <td>
-                    Domain name (1 year)
-                </td>
-                
-                <td>
-                    $10.00
+                    Rp. {{ number_format($data->unique_code) }}
                 </td>
             </tr>
             
@@ -204,7 +192,7 @@
                 <td></td>
                 
                 <td>
-                   Total: $385.00
+                   Total: Rp. {{ number_format($data->total) }}
                 </td>
             </tr>
         </table>

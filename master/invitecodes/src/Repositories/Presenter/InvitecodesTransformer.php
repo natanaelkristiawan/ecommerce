@@ -21,7 +21,7 @@ class InvitecodesTransformer extends TransformerAbstract
 			'id'   => $model->id,
 			'code' => $model->code,
       'customer' => is_null($model->customer) ? null : $model->customer->name,
-			'status'=> $model->status == 0 ? 'Draft' : 'Live',
+			'status'=> '<span class="badge badge-'.config('color.status.'.$model->status).'">'.($model->status == 0 ? 'Draft' : 'Live').'</span>',
 			'action'=> $action
 		];
 	}
