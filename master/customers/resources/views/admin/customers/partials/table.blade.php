@@ -4,7 +4,6 @@
       <th>Created At</th>
       <th>Name</th>
       <th>Email</th>
-      <th>Phone</th>
       <th>Invite Code</th>
       <th>Status</th>
       <th width="10%">Action</th>
@@ -15,7 +14,6 @@
       <th>Created At</th>
       <th>Name</th>
       <th>Email</th>
-      <th>Phone</th>
       <th>Invite Code</th>
       <th>Status</th>
       <th width="10%">Action</th>

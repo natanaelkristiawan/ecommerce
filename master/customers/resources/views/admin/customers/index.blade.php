@@ -62,7 +62,7 @@ $(document).ready(function() {
     dom: 'lrtip',
     order: [[ 0, "asc" ]],
     columnDefs: [
-      { orderable: false, targets: 6 },
+      { orderable: false, targets: 5 },
     ],
     processing: true,
     serverSide: true,
@@ -94,7 +94,6 @@ $(document).ready(function() {
       {data : 'created_at'},
       {data : 'name'},
       {data : 'email'},
-      {data : 'phone'},
       {data : 'invite_code'},
       {data : 'status'},
       {data : 'action'},
