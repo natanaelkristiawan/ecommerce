@@ -17,7 +17,7 @@ class DashboardResourceController extends Controller
   public function __construct()
   {
     $this->middleware('auth:web');
-    Meta::title('Order Pending');
+
   }
 
   public function index(Request $request)
@@ -71,7 +71,7 @@ class DashboardResourceController extends Controller
   public function orderPending(Request $request)
   {
     $customer = Auth::guard('web')->user();
-
+    Meta::title('Order Pending');
     if($request->ajax()){
       $pageLimit = $request->length;
       $filtered = $request->search;
@@ -188,7 +188,7 @@ class DashboardResourceController extends Controller
   public function orderSuccess(Request $request)
   {
     $customer = Auth::guard('web')->user();
-    
+    Meta::title('Order Success');
     if($request->ajax()){
       $pageLimit = $request->length;
       $filtered = $request->search;
@@ -296,6 +296,62 @@ class DashboardResourceController extends Controller
       abort(404);
     }
     return view('orders::admin.invoice.index', compact('data'));
+  }
 
+
+  public function profile()
+  {
+    Meta::title('Profile');
+    $data = Auth::guard('web')->user();
+    return view('site::dashboard.profile', compact('data'));
+  }
+
+
+  public function doUpdateProfile(Request $request)
+  {
+    $customer = Auth::guard('web')->user();
+    $validator = Validator::make($request->all(), [
+      'name'  => 'required',
+    ]);
+
+    if ($validator->fails()) {
+      return redirect()->back()
+              ->withErrors($validator)
+              ->withInput();
+    }
+
+
+    if (!(bool)empty($request->password)) {
+      if (strlen($request->password) < 6) {
+        return redirect()->back()
+                    ->withErrors(array('password' => 'Minimal Password 6 Character'))
+                    ->withInput();
+      }
+    }
+
+    $customer->name = $request->name;
+
+    if (!(bool)empty($request->password)) {
+      $customer->password = bcrypt($request->password);
+    }
+
+    $customer->save();
+
+    $request->session()->flash('status', 'Success Update Data!');
+
+    return redirect()->back();
+  }
+
+  public function updateProfilePicture(Request $request)
+  {
+    
+    $customer = Auth::guard('web')->user();
+  
+    $customer->photo = $request->photo;
+    $customer->save();
+
+    return response()->json(array(
+      'status' => true
+    ));
   }
 }

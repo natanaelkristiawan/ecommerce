@@ -21,4 +21,8 @@ $route->group(['middleware' => ['web']], function ($route) {
 
   $route->get('order-delete/{id}', 'DashboardResourceController@deleteOrder')->name('public.orderDelete');
   $route->get('invoice/{id}', 'DashboardResourceController@invoice')->name('public.invoice');
+
+  $route->get('profile', 'DashboardResourceController@profile')->name('public.profile');
+  $route->post('profile', 'DashboardResourceController@doUpdateProfile');
+  $route->post('update-profile-picture', 'DashboardResourceController@updateProfilePicture')->name('public.update-profile-picture');
 });

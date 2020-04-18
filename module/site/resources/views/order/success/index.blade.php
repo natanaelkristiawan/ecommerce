@@ -8,7 +8,7 @@
         <div class="col-lg-6 col-7">
           <h6 class="h2 text-white d-inline-block mb-0">{!! Meta::get('title') !!}</h6>
           <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-          {{ Breadcrumbs::render('orderSuccess') }}
+          {{ Breadcrumbs::render('siteOrderSuccess') }}
           </nav>
         </div>
       </div>

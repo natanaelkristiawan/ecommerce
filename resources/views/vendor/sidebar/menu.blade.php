@@ -11,7 +11,11 @@
 <!-- Navigation -->
 <ul class="navbar-nav mb-md-3">
   <li class="nav-item">
+    @if ($guard_now == 'admin')
     <a class="nav-link" href="">
+    @else
+    <a class="nav-link" href="{{ route('public.profile') }}">
+    @endif
       <i class="ni ni-spaceship"></i>
       <span class="nav-link-text">Profile</span>
     </a>
