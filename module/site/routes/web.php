@@ -14,6 +14,7 @@ $route->group(['middleware' => ['web']], function ($route) {
 
   $route->get('order-pending', 'DashboardResourceController@orderPending')->name('public.orderPending');
   $route->get('order-success', 'DashboardResourceController@orderSuccess')->name('public.orderSuccess');
+  $route->get('myproduct', 'DashboardResourceController@myproduct')->name('public.myproduct');
 
   $route->post('order-create', 'DashboardResourceController@orderCreate')->name('public.orderCreate');
   $route->post('order-waiting', 'DashboardResourceController@orderWaitingConfirmation')->name('public.orderWaitingConfirmation');

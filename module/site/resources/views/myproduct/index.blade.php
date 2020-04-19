@@ -8,7 +8,7 @@
         <div class="col-lg-6 col-7">
           <h6 class="h2 text-white d-inline-block mb-0">{!! Meta::get('title') !!}</h6>
           <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-          {{ Breadcrumbs::render('siteOrderSuccess') }}
+          {{ Breadcrumbs::render('myproduct') }}
           </nav>
         </div>
         <div class="col-lg-6 col-5 text-right">
@@ -29,7 +29,7 @@
           <h3 class="mb-0">Data Order Success</h3>
         </div>
         <div class="table-responsive py-4">
-            @include('site::order.success.partials.table')
+            @include('site::myproduct.partials.table')
         </div>
       </div>
     </div>
@@ -53,9 +53,9 @@ $(document).ready(function() {
     pageLength: 10,
     responsive: true,
     dom: 'lrtip',
-    order: [[ 0, "asc" ]],
+    order: [[ 0, "desc" ]],
     columnDefs: [
-      { orderable: false, targets: 8},
+      { orderable: false, targets: 4},
     ],
     processing: true,
     serverSide: true,
@@ -66,7 +66,7 @@ $(document).ready(function() {
       }
     },
     ajax: {
-      url: "{{ route('public.orderSuccess') }}",
+      url: "{{ route('public.myproduct') }}",
       dataType: "json",
       type: "GET",
       data: function ( d ) {
@@ -84,12 +84,8 @@ $(document).ready(function() {
       page = parseInt(api.rows().page()) + 1;
     },
     columns: [
-      {data : 'updated_at'},
-      {data : 'invoice'},
-      {data : 'email'},
+      {data : 'buy_at'},
       {data : 'product'},
-      {data : 'unique_code'},
-      {data : 'transfer_confirmation'},
       {data : 'total'},
       {data : 'download_link'},
       {data : 'status'}

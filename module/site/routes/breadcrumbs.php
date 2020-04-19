@@ -14,3 +14,8 @@ Breadcrumbs::for('profile', function ($trail) {
   $trail->push('Profile', route('public.profile'));
 });
 
+
+Breadcrumbs::for('myproduct', function ($trail) {
+  $trail->push('My Product', route('public.myproduct'));
+});
+

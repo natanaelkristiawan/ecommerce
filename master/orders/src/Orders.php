@@ -37,7 +37,9 @@ class Orders
               default_orders.timeout AS timeout,
               default_orders.download_link AS download_link,
               default_orders.status AS status,
-              default_orders.created_at AS created_at
+              default_orders.created_at AS created_at,
+              default_orders.updated_at AS updated_at,
+              default_orders.updated_at AS buy_at
             '))->join('customers', function ($join) {
               $join->on('orders.customer_id', '=', 'customers.id');
             })->join('products', function($join) {

@@ -33,6 +33,11 @@ class ExtenderSidebar implements SidebarExtender
         });
       });
 
+
+      $group->item('My Product', function(Item $item){
+         $item->icon('ni ni-basket text-red');
+         $item->url(route('public.myproduct'));
+      });
     });
     return $menu;
   }

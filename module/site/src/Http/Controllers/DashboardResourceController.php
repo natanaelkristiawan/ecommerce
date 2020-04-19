@@ -202,7 +202,7 @@ class DashboardResourceController extends Controller
       $query->where('orders.status', 1);
 
       $headerOrder = array(
-        'created_at',
+        'updated_at',
         'invoice',
         'email',
         'product',
@@ -237,7 +237,7 @@ class DashboardResourceController extends Controller
 
         $transfer_confirmation = '<a href="'.url('image/original/').'/'.$value->transfer_confirmation.'" data-featherlight="image"><img style="max-width:100px; display:block; margin:auto; border-radius:10px" class="img-fluid mb-2" alt="Responsive image" src="'.url('image/preview/').'/'.$value->transfer_confirmation.'"></img></a>';
         $dataList[] = array(
-          'created_at'=> $value->created_at,
+          'updated_at'=> $value->updated_at,
           'invoice'=> '<a target="_blank" href="'.route('public.invoice', array('id'=>$value->order_id)).'">'.$value->invoice.'</a>',
           'email'=> $value->email,
           'product'=> $value->product,
@@ -245,7 +245,7 @@ class DashboardResourceController extends Controller
           'transfer_confirmation'=> $transfer_confirmation,
           'total'=> $value->total,
           'download_link'=> $download_link,
-          'status'=> $value->status,
+          'status'=> '<span class="badge badge-'.config('master.orders.color.'.$value->status).'">'.config('master.orders.status.'.$value->status).'</span>',
         );
 
       }
@@ -360,5 +360,73 @@ class DashboardResourceController extends Controller
     return response()->json(array(
       'status' => true
     ));
+  }
+
+
+  public function myproduct(Request $request)
+  {
+    $customer = Auth::guard('web')->user();
+    Meta::title('Order Success');
+    if($request->ajax()){
+      $pageLimit = $request->length;
+      $filtered = $request->search;
+      $columns = $request->columns;
+      $order   = $request->order;
+
+
+      $query = Orders::datatable($request, $customer->id);
+
+      $query->where('orders.status', 1);
+
+      $headerOrder = array(
+        'buy_at',
+        'product',
+        'total',
+        'download_link',
+        'status',
+      );
+      
+
+      $sortBy = $headerOrder[$order[0]['column']];
+      $sortOrder = $order[0]['dir'];
+
+      if (isset($sortBy) && !empty($sortBy)) {
+        $query->orderBy($sortBy, $sortOrder);
+      }
+
+
+      $dataFromModel = $query->paginate($pageLimit);
+      $dataList = array();
+
+      
+      $paginationMeta = $dataFromModel->toArray();
+
+      foreach ($dataFromModel->items() as $key => $value) {
+
+        $download_link = '';
+        if (!(bool)is_null($value->download_link)) {
+          $download_link = '<a download class="btn btn-sm btn-primary" href="'.Storage::disk('public')->url($value->download_link).'" >Download</a>';
+        } 
+
+        $dataList[] = array(
+          'buy_at'=> $value->buy_at,
+          'product'=> $value->product,
+          'total'=> $value->total,
+          'download_link'=> $download_link,
+          'status'=> '<span class="badge badge-'.config('master.orders.color.'.$value->status).'">'.config('master.orders.status.'.$value->status).'</span>',
+        );
+
+      }
+
+      $response = array(
+        'draw' => $request->draw,
+        'data' => $dataList,
+        'recordsTotal' => (int)$paginationMeta['to'],
+        'recordsFiltered' => (int)$paginationMeta['total'], 
+      );
+
+      return response()->json($response);
+    }
+    return view('site::myproduct.index');
   }
 }
