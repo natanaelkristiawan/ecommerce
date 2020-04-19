@@ -11,6 +11,7 @@ use Auth;
 use Orders;
 use Meta;
 use Validator;
+use Storage;
 class DashboardResourceController extends Controller
 {
 
@@ -228,6 +229,12 @@ class DashboardResourceController extends Controller
       $paginationMeta = $dataFromModel->toArray();
 
       foreach ($dataFromModel->items() as $key => $value) {
+
+        $download_link = '';
+        if (!(bool)is_null($value->download_link)) {
+          $download_link = '<a download class="btn btn-sm btn-primary" href="'.Storage::disk('public')->url($value->download_link).'" >Download</a>';
+        } 
+
         $transfer_confirmation = '<a href="'.url('image/original/').'/'.$value->transfer_confirmation.'" data-featherlight="image"><img style="max-width:100px; display:block; margin:auto; border-radius:10px" class="img-fluid mb-2" alt="Responsive image" src="'.url('image/preview/').'/'.$value->transfer_confirmation.'"></img></a>';
         $dataList[] = array(
           'created_at'=> $value->created_at,
@@ -237,7 +244,7 @@ class DashboardResourceController extends Controller
           'unique_code'=> $value->unique_code,
           'transfer_confirmation'=> $transfer_confirmation,
           'total'=> $value->total,
-          'download_link'=> $value->download_link,
+          'download_link'=> $download_link,
           'status'=> $value->status,
         );
 

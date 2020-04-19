@@ -9,6 +9,7 @@ use Master\Orders\Models\Orders;
 use Validator;
 use Meta;
 use DB;
+use Storage;
 class OrderSuccessController extends Controller {
 
   protected $repository;
@@ -86,6 +87,13 @@ class OrderSuccessController extends Controller {
 
 
       foreach ($dataFromModel->items() as $key => $value) {
+
+        $download_link = '';
+        if (!(bool)is_null($value->download_link)) {
+          $download_link = '<a download class="btn btn-sm btn-primary" href="'.Storage::disk('public')->url($value->download_link).'" >Download</a>';
+        } 
+
+
         $dataList[] = array(
           'updated_at'=> $value->updated_at,
           'invoice'=> '<a target="_blank" href="'.route('admin.orderSuccess.invoice', array('id'=>$value->order_id)).'">'.$value->invoice.'</a>',
@@ -94,7 +102,7 @@ class OrderSuccessController extends Controller {
           'unique_code'=> $value->unique_code,
           'transfer_confirmation'=> '<a href="'.url('image/original/').'/'.$value->transfer_confirmation.'" data-featherlight="image"><img style="max-width:100px; display:block; margin:auto; border-radius:10px" class="img-fluid mb-2" alt="Responsive image" src="'.url('image/preview/').'/'.$value->transfer_confirmation.'"></img></a>',
           'total'=> $value->total,
-          'download_link'=> $value->download_link,
+          'download_link'=> $download_link,
           'status'=> '<span class="badge badge-'.config('master.orders.color.'.$value->status).'">'.config('master.orders.status.'.$value->status).'</span>'
         );
 

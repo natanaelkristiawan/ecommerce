@@ -10,6 +10,12 @@ use Validator;
 use Meta;
 use DB;
 use Settings;
+
+use File;
+use ZipArchive;
+use Storage;
+use Illuminate\Support\Str;
+
 class OrderPendingController extends Controller {
   
 
@@ -150,20 +156,46 @@ class OrderPendingController extends Controller {
 
 
     $order = $this->repository->find($id);
+    // nanti di sini dibuatkan download linknya
+    $product = $order->product;
+    $customer = $order->customer;
+    $download_link = self::createZip($product, $customer); 
 
     $order->status = 1;
     $order->invoice = $invoice;
+    $order->download_link = $download_link;
     $order->save();
 
-
     Settings::updateCreate('invoice', $latestInv);
-
-    // nanti di sini dibuatkan download linknya
-
-
     $request->session()->flash('status', 'Success Confirm Data!');
 
     return redirect()->back();
+  }
+
+
+  private function createZip($product, $customer)
+  {
+
+    $public_dir =  base_path('storage/uploads');
+    $zipFileName = uniqid().'.zip';
+    $zip = new ZipArchive;
+
+    if ($zip->open($public_dir . '/' . $zipFileName, ZipArchive::CREATE) === TRUE) {
+      $zip->setPassword($customer->invite_code);
+      foreach ($product->file as $key => $value) {
+        $zip->addFile($public_dir.'/'.$value['path'], $value['file']);
+        $zip->setEncryptionName($value['file'], ZipArchive::EM_AES_256);
+      }
+
+      $zip->close();
+    }
+
+    $filetopath= File::get($public_dir.'/'.$zipFileName);
+
+    $newLocation = Str::slug($customer->email, '-').'/'.$zipFileName;
+    $test = Storage::disk('public')->put($newLocation, $filetopath);
+
+    return $newLocation;
   }
 
   private function invoice_num ($input, $pad_len = 7, $prefix = null) {

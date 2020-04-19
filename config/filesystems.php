@@ -63,6 +63,28 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
         ],
+        'ftp' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST', '127.0.0.1'),
+            'username' => env('FTP_USERNAME', 'natanael'),
+            'password' => env('FTP_PASSWORD', '25121990'),
+            'root' => env('FTP_ROOT', '/var/www/html'),
+            'permissions' => [
+                'file' => [
+                    'public' => 0775,
+                ],
+                'dir' => [
+                    'public' => 0775,
+                ]
+            ],
+
+            // Optional FTP Settings...
+            // 'port' => 21,
+            // 'root' => '',
+            // 'passive' => true,
+            // 'ssl' => true,
+            // 'timeout' => 30,
+        ],
 
     ],
 

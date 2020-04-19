@@ -11,6 +11,9 @@
           {{ Breadcrumbs::render('siteOrderSuccess') }}
           </nav>
         </div>
+        <div class="col-lg-6 col-5 text-right">
+          <h1 style="color: white">Password : {{ Auth::guard('web')->user()->invite_code }}</h1>
+        </div>
       </div>
     </div>
   </div>

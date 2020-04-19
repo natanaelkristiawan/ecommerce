@@ -10,5 +10,10 @@ $route->group(['prefix' => env('ADMIN_URL', 'admin')], function ($route) {
 			$route->post('/edit/{id}', 'ProductsResourceController@update');
 			$route->get('delete/{id}', 'ProductsResourceController@delete')->name('admin.products.delete');
 		});
+
+
+		$route->group(['prefix'=> 'zip'], function($route) {
+			$route->get('create/{id}', 'ZipResourcesController@create')->name('admin.zip.create');
+		});
 	});
 });
