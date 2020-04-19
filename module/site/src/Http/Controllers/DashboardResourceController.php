@@ -366,7 +366,7 @@ class DashboardResourceController extends Controller
   public function myproduct(Request $request)
   {
     $customer = Auth::guard('web')->user();
-    Meta::title('Order Success');
+    Meta::title('My Product');
     if($request->ajax()){
       $pageLimit = $request->length;
       $filtered = $request->search;
