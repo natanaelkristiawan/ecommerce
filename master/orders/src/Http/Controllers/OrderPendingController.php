@@ -56,7 +56,7 @@ class OrderPendingController extends Controller {
                 $join->whereNull('customers.deleted_at');
               })->join('products', function($join){
                 $join->on('orders.product_id', '=', 'products.id');
-              })->whereNotIn('orders.status', array(1, 4));
+              })->whereNotIn('orders.status', array(1, 4))->whereNull('orders.deleted_at');
 
       if (!(bool)empty($filtered['unique_code'])) {
         $query->where('unique_code', 'like', '%'.$filtered['unique_code'].'%');

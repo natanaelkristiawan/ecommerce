@@ -45,7 +45,7 @@ class Orders
               $join->whereNull('customers.deleted_at'); 
             })->join('products', function($join) {
               $join->on('orders.product_id', '=', 'products.id');
-            })->where('orders.customer_id', $customer_id);
+            })->where('orders.customer_id', $customer_id)->whereNull('orders.deleted_at');
 
     return $query;
   }

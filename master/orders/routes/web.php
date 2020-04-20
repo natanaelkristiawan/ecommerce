@@ -10,6 +10,7 @@ $route->group(['prefix' => env('ADMIN_URL', 'admin')], function ($route) {
 		$route->group(['prefix' => 'orders-success'], function($route) {
       $route->get('', 'OrderSuccessController@index')->name('admin.orderSuccess');
       $route->get('invoice/{id}', 'OrderSuccessController@invoice')->name('admin.orderSuccess.invoice');
+      $route->get('delete/{id}', 'OrderSuccessController@delete')->name('admin.orderSuccess.delete');
 		});
 	});
 });

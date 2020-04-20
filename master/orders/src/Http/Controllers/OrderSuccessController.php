@@ -53,7 +53,7 @@ class OrderSuccessController extends Controller {
                 $join->whereNull('customers.deleted_at'); 
               })->join('products', function($join) use ($filtered){
                 $join->on('orders.product_id', '=', 'products.id');
-              })->where('orders.status', 1);
+              })->where('orders.status', 1)->whereNull('orders.deleted_at');
 
       if (!(bool)empty($filtered['unique_code'])) {
         $query->where('unique_code', 'like', '%'.$filtered['unique_code'].'%');
@@ -104,9 +104,11 @@ class OrderSuccessController extends Controller {
           'transfer_confirmation'=> '<a href="'.url('image/original/').'/'.$value->transfer_confirmation.'" data-featherlight="image"><img style="max-width:100px; display:block; margin:auto; border-radius:10px" class="img-fluid mb-2" alt="Responsive image" src="'.url('image/preview/').'/'.$value->transfer_confirmation.'"></img></a>',
           'total'=> $value->total,
           'download_link'=> $download_link,
-          'status'=> '<span class="badge badge-'.config('master.orders.color.'.$value->status).'">'.config('master.orders.status.'.$value->status).'</span>'
+          'status'=> '<span class="badge badge-'.config('master.orders.color.'.$value->status).'">'.config('master.orders.status.'.$value->status).'</span>',
+          'action'=>'<div class="btn-group">
+              <a href="'.route('admin.orderSuccess.delete', ['id'=>$value->order_id]).'" onclick="return confirm(\'Are you delete this item?\')" class="btn btn-sm btn-danger btn-flat btn-delete" data-id="'.$value->order_id.'"><i class="fa fa-fw fa-trash"></i></a>
+            </div>'
         );
-
       }
 
 
@@ -121,6 +123,15 @@ class OrderSuccessController extends Controller {
 
     }
     return view('orders::admin.success.index');
+  }
+
+  public function delete(Request $request, $id = '')
+  {
+    $order = $this->repository->delete($id);
+
+    $request->session()->flash('status', 'Success Delete Data!');
+
+    return redirect()->back();
   }
 
 

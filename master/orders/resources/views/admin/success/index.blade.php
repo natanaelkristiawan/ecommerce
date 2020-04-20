@@ -65,7 +65,7 @@ $(document).ready(function() {
     dom: 'lrtip',
     order: [[ 0, "asc" ]],
     columnDefs: [
-      { orderable: false, targets: 8 },
+      { orderable: false, targets: 9 },
     ],
     processing: true,
     serverSide: true,
@@ -103,6 +103,7 @@ $(document).ready(function() {
       {data : 'total'},
       {data : 'download_link'},
       {data : 'status'},
+      {data : 'action'},
     ],
   });
 
