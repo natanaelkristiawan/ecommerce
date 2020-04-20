@@ -37,12 +37,33 @@
         </div>
 
         <div class="card-body mt-6 mb-5 pb-0">
-          <div class="text-center">
-            <h5 class="h3">
-              {{ $data->name }}
-            </h5>
-            <div class="h5 font-weight-300">
-              <i class="ni location_pin mr-2"></i>{{ $data->email }}
+          <div class="text-left">
+            @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <ul>
+                  @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
+            <form role="form" method="POST" action="" data-toggle="validator" role="form" data-disable="false">
+            @csrf
+            <div class="form-group">
+              <label class="form-control-label">Name</label>
+              <input type="text" class="form-control" name="name" value="{{ $data->name }}">
+            </div>  
+            <div class="form-group">
+              <label class="form-control-label">Email</label>
+              <input type="email" class="form-control" name="email" value="{{ $data->email }}">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-control-label">Password</label>
+              <input type="password" class="form-control" name="password" value="">
             </div>
             <div class="h5 mt-4">
               <i class="ni business_briefcase-24 mr-2"></i>Registered At
@@ -50,6 +71,10 @@
             <div>
               <i class="ni education_hat mr-2"></i>{{ date('d F Y', strtotime($data->created_at)) }}
             </div>
+            <div class="form-group">
+              <button class="btn btn-danger btn-sm float-right">Update</button>
+            </div>
+            </form>
           </div>
         </div>
       </div>

@@ -14,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
 	public function boot()
 	{
 		parent::boot();
-		if (Request::is('*/customers/profile/*')) {
+		if (Request::is('*/customers/profile/*') || Request::is('*/customers/delete/*')) {
 			Route::bind('id', function ($id) {
 				$model = $this->app->make('Master\Customers\Interfaces\CustomersRepositoryInterface');
 				return $model->find($id);

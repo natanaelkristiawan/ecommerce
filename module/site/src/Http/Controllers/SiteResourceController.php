@@ -193,7 +193,6 @@ class SiteResourceController extends Controller
 	public function logout()
 	{
 		Auth::guard('web')->logout();
-    session()->flush();
     return redirect()->route('login');	
 	}
 }

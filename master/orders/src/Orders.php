@@ -42,6 +42,7 @@ class Orders
               default_orders.updated_at AS buy_at
             '))->join('customers', function ($join) {
               $join->on('orders.customer_id', '=', 'customers.id');
+              $join->whereNull('customers.deleted_at'); 
             })->join('products', function($join) {
               $join->on('orders.product_id', '=', 'products.id');
             })->where('orders.customer_id', $customer_id);

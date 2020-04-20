@@ -50,6 +50,7 @@ class OrderSuccessController extends Controller {
                 if (!(bool)empty($filtered['email'])) {
                   $join->where('customers.email', 'like', "%{$filtered['email']}%");
                 }
+                $join->whereNull('customers.deleted_at'); 
               })->join('products', function($join) use ($filtered){
                 $join->on('orders.product_id', '=', 'products.id');
               })->where('orders.status', 1);

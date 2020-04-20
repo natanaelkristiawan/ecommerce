@@ -100,4 +100,89 @@ class CustomersResourceController extends Controller
     }
     return view('customers::admin.customers.profile', compact('data'));
   }
+
+
+  public function create(Request $request)
+  {
+    $data = $this->repository->newInstance([]);
+
+    return view('customers::admin.customers.form', compact('data'));
+  }
+
+
+  public function store(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'name'  => 'required',
+      'email' => 'required|unique:customers',
+      'password' => 'required|min:6'
+    ]);
+
+
+    if ($validator->fails()) {
+      return redirect()->back()
+              ->withErrors($validator)
+              ->withInput();
+    }
+
+    $dataInsert = array(
+      'name'  => $request->name,
+      'email' => $request->email,
+      'password' => bcrypt($request->password),
+      'status'  => 1
+    );
+
+    $data = $this->repository->create($dataInsert);
+
+    if ($request->submit == 'submit_exit') {
+      return redirect()->route('admin.customers');
+    }
+    return redirect()->route('admin.customers.profile', ['id' => $data->id]);
+  }
+
+
+  public function update(Request $request, Customers $data)
+  {
+    $validator = Validator::make($request->all(), [
+      'name'  => 'required',
+      'email' => 'required|unique:customers,email,'.$data->id,
+    ]);
+
+    if ($validator->fails()) {
+      return redirect()->back()
+              ->withErrors($validator)
+              ->withInput();
+    }
+
+
+    if (!(bool)empty($request->password)) {
+      if (strlen($request->password) < 6) {
+        return redirect()->back()
+                    ->withErrors(array('password' => 'Minimal Password 6 Character'))
+                    ->withInput();
+      }
+    }
+
+    $data->name = $request->name;
+    $data->email = $request->email;
+
+    if (!(bool)empty($request->password)) {
+      $data->password = bcrypt($request->password);
+    }
+
+    $data->save();
+
+    $request->session()->flash('status', 'Success Update Data!');
+
+    return redirect()->back();
+  }
+
+  public function delete(Request $request, Customers $data)
+  {
+    $data = $this->repository->delete($data->id);
+    $request->session()->flash('status', 'Success Delete Data!');
+
+    return redirect()->route('admin.customers');
+  }
+
 }

@@ -12,6 +12,7 @@
           </nav>
         </div>
         <div class="col-lg-6 col-5 text-right">
+          <a href="{{ route('admin.customers.create') }}" class="btn btn-sm btn-danger">New</a>
           <button type="button" data-toggle="modal" data-target="#modal-filter" class="btn btn-sm btn-neutral">Filter</button>
         </div>
       </div>

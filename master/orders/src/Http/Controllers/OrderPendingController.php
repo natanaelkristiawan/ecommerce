@@ -53,6 +53,7 @@ class OrderPendingController extends Controller {
                 if (!(bool)empty($filtered['email'])) {
                   $join->where('customers.email', 'like', "%{$filtered['email']}%");
                 }
+                $join->whereNull('customers.deleted_at');
               })->join('products', function($join){
                 $join->on('orders.product_id', '=', 'products.id');
               })->whereNotIn('orders.status', array(1, 4));
