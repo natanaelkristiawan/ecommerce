@@ -92,7 +92,7 @@
     }
     .sidenav .navbar-brand{
       padding: 0px !important;
-      margin-top: 10px;
+      margin-top: 0px;
       margin-left: 10px;
     }
   }
