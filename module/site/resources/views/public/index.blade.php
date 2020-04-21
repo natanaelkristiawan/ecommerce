@@ -172,7 +172,7 @@
 
 
 <div class="modal fade" id="modal-filter" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="modal-filter" aria-hidden="true">
-  <div style="margin-top: 30vh" class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-lg" id="disclaimer" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h3>Term Of Service / Term Of Use/ Disclaimer</h3>
@@ -190,6 +190,19 @@
 
 @section('script')
 @parent
+
+<style type="text/css">
+  #disclaimer {
+    margin-top: 30vh
+  }
+
+  @media (max-width: 600px) {
+    #disclaimer {
+      margin-top: 10vh;
+    }
+  }
+</style>
+
 <script type="text/javascript">
   $(document).ready(function() {
     $('.popup').on('click', function(){
