@@ -8,7 +8,6 @@
       <th>Unique Code</th>
       <th>Transfer Confirmation</th>
       <th>Total</th>
-      <th>Download Link</th>
       <th>Status</th>
     </tr>
   </thead>
@@ -21,7 +20,6 @@
       <th>Unique Code</th>
       <th>Transfer Confirmation</th>
       <th>Total</th>
-      <th>Download Link</th>
       <th>Status</th>
     </tr>
   </tfoot>

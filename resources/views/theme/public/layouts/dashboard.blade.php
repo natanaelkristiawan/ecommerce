@@ -92,6 +92,7 @@
   <!-- Argon JS -->
   <script src="{{ asset('template/argon') }}/assets/js/argon.js?v=1.1.0"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+  <script src="{{ asset('template/argon') }}/additionals/toastr/toastr.min.js"></script>
   <style type="text/css">
     ul {
       padding-left: 0;
@@ -310,6 +311,17 @@
 
     }
   </style>
+
+  <script type="text/javascript">
+    @if(session()->has('status'))
+      toastr.success("{{session()->get('status')}}");
+    @endif
+
+
+    @if(session()->has('status_error'))
+      toastr.error("{{session()->get('status_error')}}");
+    @endif
+  </script>
   @section('script')
   @show
 </body>

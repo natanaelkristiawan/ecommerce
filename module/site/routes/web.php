@@ -7,6 +7,11 @@ $route->group(['middleware' => ['web']], function ($route) {
   $route->get('logout', 'SiteResourceController@logout')->name('logout');
   $route->post('register', 'SiteResourceController@doRegister');
 
+  $route->get('management', function(){
+    session()->flash('status', 'Comming Soon!');
+    return redirect()->route('dashboard');
+  })->name('public.management');
+
 
   // dashboard
 

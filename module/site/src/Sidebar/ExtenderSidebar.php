@@ -38,6 +38,11 @@ class ExtenderSidebar implements SidebarExtender
          $item->icon('ni ni-basket text-red');
          $item->url(route('public.myproduct'));
       });
+
+      $group->item('RG43S management', function(Item $item){
+        $item->icon('ni ni-app text-orange');
+        $item->url(route('public.management'));
+      });
     });
     return $menu;
   }
