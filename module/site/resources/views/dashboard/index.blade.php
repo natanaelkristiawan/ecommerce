@@ -92,10 +92,6 @@
           <i class="ni ni-bell-55 ni-3x"></i>
           <h4 class="heading mt-4">Success</h4>
           {!! Settings::find('notif_ordersuccess') !!}
-
-           @foreach($accounts as $account)
-            <p>{{ $account['bank'] }} - {{ $account['account'] }} ({{ $account['name'] }})</p>
-          @endforeach
         </div>
       </div>
       <div class="modal-footer">
