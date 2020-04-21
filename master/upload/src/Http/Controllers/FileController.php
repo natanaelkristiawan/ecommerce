@@ -16,9 +16,9 @@ class FileController extends Controller
     {
         $file_path = base_path(config('filer.folder')).'/'.str_replace('..', '', $path);
 
-        dd($file_path);
 
         if (file_exists($file_path) && is_file($file_path)) {
+            dd($file_path);
             // file found
             return response()->download($file_path);
         }
