@@ -86,7 +86,7 @@
 
 
 <div class="modal fade" id="modal-filter" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="modal-filter" aria-hidden="true">
-  <div style="margin-top: 30vh" class="modal-dialog modal-sm" role="document">
+  <div id="dialog-privacy" class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header pb-0">
         <h3>Privacy Policy</h3>
@@ -105,6 +105,19 @@
 
 @section('script')
 @parent
+
+<style type="text/css">
+  #dialog-privacy {
+    margin-top: 20vh
+  }
+
+  @media(max-width: 600px){
+    #dialog-privacy {
+      margin-top: 5vh
+    }
+  }
+
+</style>
 
 <script type="text/javascript">
   $(document).on('click', '#customCheckRegister', function() {
