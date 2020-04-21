@@ -396,18 +396,15 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   background: url("../img/rnd.png");
   position: relative;
-  padding: 100px 0 0 0;
+  padding: 100px 100px 105px 0;
   z-index: 10;
   margin: 0%;
-}
 
-#hero .container {
-  height: 45vh;
 }
 
 #hero:before {
   content: "";
-  background: rgba(0, 91, 234, 0.85);
+  background: rgba(0, 91, 234, 0.93);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -420,16 +417,16 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 48px;
   font-weight: 700;
   line-height: 56px;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 #hero h1 span {
   color: #fff;
-  border-bottom: 4px solid #1acc8d;
+  border-bottom: 4px solid #ea8f00;
 }
 
 #hero h2 {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 40px;
   font-size: 24px;
 }
