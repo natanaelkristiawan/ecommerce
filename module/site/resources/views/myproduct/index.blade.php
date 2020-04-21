@@ -11,7 +11,7 @@
           {{ Breadcrumbs::render('myproduct') }}
           </nav>
         </div>
-        <div class="col-lg-6 col-5 text-right">
+       <div class="col-lg-6 text-lg-right">
           <h3 style="color: white">Password : {{ Auth::guard('web')->user()->invite_code }}</h3>
         </div>
       </div>
