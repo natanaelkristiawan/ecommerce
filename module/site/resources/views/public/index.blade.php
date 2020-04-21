@@ -101,7 +101,7 @@
                 <h4><sup>$</sup>{{ $list->price_dollar }}<span> ({{ $list->price_idr }} IDR)</span></h4>
                 {!! $list->detail !!}
                 <div class="btn-wrap">
-                  <a href="#" class="btn-buy">Buy Now</a>
+                  <a href="{{ route('login') }}" class="btn-buy">Buy Now</a>
                 </div>
               </div>
             </div>
@@ -198,7 +198,7 @@
 
   @media (max-width: 600px) {
     #disclaimer {
-      margin-top: 10vh;
+      margin-top: 5vh;
     }
   }
 </style>
