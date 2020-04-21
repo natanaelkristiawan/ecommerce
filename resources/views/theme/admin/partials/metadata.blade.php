@@ -88,7 +88,12 @@
 
   @media(max-width: 600px){
     .navbar-vertical .navbar-brand-img, .navbar-vertical .navbar-brand > img {
-      max-height: 2em;
+      max-height: 3em;
+    }
+    .sidenav .navbar-brand{
+      padding: 0px !important;
+      margin-top: 10px;
+      margin-left: 10px;
     }
   }
 </style>
