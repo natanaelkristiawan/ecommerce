@@ -91,7 +91,7 @@ class OrderSuccessController extends Controller {
 
         $download_link = '';
         if (!(bool)is_null($value->download_link)) {
-          $download_link = '<a download class="btn btn-sm btn-primary" href="'.Storage::disk('public')->url($value->download_link).'" >Download</a>';
+          $download_link = '<a download class="btn btn-sm btn-primary" href="'.env('LINK_DOWNLOAD').$value->download_link.'" >Download</a>';
         } 
 
 
