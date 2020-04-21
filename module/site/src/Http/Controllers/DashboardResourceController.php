@@ -53,7 +53,7 @@ class DashboardResourceController extends Controller
       'customer_id' => $customer->id,
       'unique_code' => $request->unique_code,
       'total' => $request->total,
-      'timeout' => date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' +1 day')),
+      'timeout' => date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' +30 minutes')),
       'status'  => 0
     );
 

@@ -18,6 +18,14 @@ class Orders
 
   public function datatable(Request $request, $customer_id)
   {
+
+
+    // filter dulu yang masih pending
+
+    $dateNow = date('Y-m-d H:i:s');
+
+    $this->repository->where('timeout', '<=', $dateNow)->where('status', 0)->where('customer_id', $customer_id)->update(array('status'=>4));
+
     $pageLimit = $request->length;
     $filtered = $request->search;
     $columns = $request->columns;
@@ -67,4 +75,25 @@ class Orders
     return $this->repository->findWhere($params);
   }
 
+
+  public function countAllPending()
+  {
+    return $this->repository->findWhereIn('status', array(0, 2))->count();
+  }
+
+  public function countAllPendingThisMonth()
+  {
+    return $this->repository->whereBetween('created_at', array(date('Y-m-01').' 00:00:01', date('Y-m-t').' 23:59:59'))->whereIn('status', array(0, 2))->get()->count();
+  }
+
+  public function countAllSuccess()
+  {
+    return $this->repository->where('status', 1)->count();
+  }
+
+  public function countAllSuccessThisMonth()
+  {
+    return $this->repository->whereBetween('created_at', array(date('Y-m-01').' 00:00:01', date('Y-m-t').' 23:59:59'))->where('status', 1)->get()->count();
+
+  }
 }
