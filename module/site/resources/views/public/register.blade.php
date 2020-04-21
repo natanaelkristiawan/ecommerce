@@ -88,11 +88,11 @@
 <div class="modal fade" id="modal-filter" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="modal-filter" aria-hidden="true">
   <div style="margin-top: 30vh" class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header pb-0">
         <h3>Privacy Policy</h3>
       </div>
-      <div class="modal-body" id="modal-data">
-
+      <div class="modal-body pt-0" id="modal-data">
+        {!! Settings::find('notif_privacy') !!}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>

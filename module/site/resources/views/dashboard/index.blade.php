@@ -18,6 +18,7 @@
           <button 
             data-unique="{{ mt_rand(0, 1000) }}" 
             data-product="{{ $product->id }}" 
+            data-product_name="{{ $product->name }}" 
             data-description='{!! $product->detail !!}' 
             data-price_idr="{{ number_format($product->price_idr) }}" 
             data-price_dollar="{{ number_format($product->price_dollar) }}" 
@@ -90,7 +91,7 @@
         <div class="py-3 text-center">
           <i class="ni ni-bell-55 ni-3x"></i>
           <h4 class="heading mt-4">Success</h4>
-          <p>Lorem Ipsum</p>
+          {!! Settings::find('notif_ordersuccess') !!}
 
            @foreach($accounts as $account)
             <p>{{ $account['bank'] }} - {{ $account['account'] }} ({{ $account['name'] }})</p>
@@ -121,7 +122,7 @@
       <input type="hidden" name="total" value="@{{total_price_nonformat}}" />
       <div class="product">
         <div class="product-details">
-          <div class="product-title">@{{ product }}</div>
+          <div class="product-title">@{{ product_name }}</div>
           <p class="product-description">@{{{ description }}}</p>
         </div>
         <div class="product-price">@{{ price_idr }}</div>
@@ -178,6 +179,7 @@
       var template = $('#template').html();
 
       var product = $(this).data('product');
+      var product_name = $(this).data('product_name');
       var description = $(this).data('description');
       var price_dollar = $(this).data('price_dollar');
       var price_idr = $(this).data('price_idr');
@@ -188,6 +190,7 @@
 
       var data = {
         product : product,
+        product_name : product_name,
         description : description,
         price_dollar : price_dollar,
         price_idr : price_idr,

@@ -50,6 +50,9 @@
               </li> 
               <li class="nav-item">
                 <a class="nav-link" id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="false">Bank Account</a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" id="notification-tab" data-toggle="tab" href="#notification" role="tab" aria-controls="notification" aria-selected="false">Notification</a>
               </li>
             </ul>
             <div class="tab-content" id="myTabContent">
@@ -95,7 +98,7 @@
                   </div> 
                   <div class="form-group">
                     <label class="form-control-label">Sub Title</label> 
-                    <input type="text"  placeholder="Sub Title" name="setting[section2_sub_title]" value="{{ $setting->section2_title }}" class="form-control">
+                    <input type="text"  placeholder="Sub Title" name="setting[section2_sub_title]" value="{{ $setting->section2_sub_title }}" class="form-control">
                   </div>
                   <div class="form-group">
                     <label class="form-control-label">Data</label> 
@@ -197,6 +200,21 @@
                 </div>
               </div>
 
+
+
+              <div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">
+                <div class="mt-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Privacy Policy</label> 
+                    <textarea name="setting[notif_privacy]" class="form-control textarea">{!! $setting->notif_privacy !!}</textarea>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Order Success</label> 
+                    <textarea name="setting[notif_ordersuccess]" class="form-control textarea">{!! $setting->notif_ordersuccess !!}</textarea>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -245,6 +263,17 @@
   var count_quote=0;
   var count_account=0;
   $(document).ready(function() {
+
+    $('.textarea').summernote({
+      tabsize: 2,
+      height: 300,
+      callbacks: {
+        onImageUpload: function(files) {
+          sendFile(files[0], $(this), "{{ url(env('ADMIN_URL', 'admin').'/upload/'.'master.articles/'.date('Y/m/d').'/articles/file') }}");
+        }
+      }
+    });
+
 
     var data = {!! json_encode($setting->section2_data) !!};
 

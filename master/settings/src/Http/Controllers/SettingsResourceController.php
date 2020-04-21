@@ -111,11 +111,15 @@ class SettingsResourceController extends Controller
 		$meta_description = $request->setting['meta_description'];
 		$this->repository->insertData('meta_description', 'meta_description', $meta_description);
 
-
-
 		// bank account
 		$account = isset($request->setting['account']) ?  array_values($request->setting['account']) : array();
 		$this->repository->insertData('account', 'account', $account, array());
+
+		$notif_privacy = $request->setting['notif_privacy'];
+		$this->repository->insertData('notif_privacy', 'notif_privacy', $notif_privacy);
+		
+		$notif_ordersuccess = $request->setting['notif_ordersuccess'];
+		$this->repository->insertData('notif_ordersuccess', 'notif_ordersuccess', $notif_ordersuccess);
 
 		$request->session()->flash('status', 'Data has been update!');
 
