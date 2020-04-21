@@ -85,6 +85,12 @@
     margin-top: 20px;
     margin-left: 20px;
   }
+
+  @media(max-width: 600px){
+    .navbar-vertical .navbar-brand-img, .navbar-vertical .navbar-brand > img {
+      max-height: 2em;
+    }
+  }
 </style>
 @section('style')
 @show
