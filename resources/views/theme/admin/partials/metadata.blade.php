@@ -75,5 +75,16 @@
     var TOKEN = {'_token' : "{{ csrf_token() }}"};
 </script>
 
+
+<style type="text/css">
+  .navbar-vertical .navbar-brand-img, .navbar-vertical .navbar-brand > img {
+    max-height: none;
+  }
+  .sidenav .navbar-brand{
+    padding: 0px !important;
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+</style>
 @section('style')
 @show
