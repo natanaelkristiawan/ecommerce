@@ -18,8 +18,6 @@ class FileController extends Controller
 
 
         if (file_exists($file_path) && is_file($file_path)) {
-            dd($file_path);
-            // file found
             return response()->download($file_path);
         }
         abort(404);
