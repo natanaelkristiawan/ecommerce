@@ -55,7 +55,7 @@ class ExtenderSidebar implements SidebarExtender
       });
       $group->item('Demo Tutorial', function(Item $item){
         $item->icon('ni ni-notification-70 text-purple');
-        $item->url(route('public.management'));
+        $item->url(route('public.demo'));
       });
     });
     return $menu;

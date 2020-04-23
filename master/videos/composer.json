@@ -1,0 +1,24 @@
+{
+    "name": "master/videos",
+    "description": "This module additional",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Master\\Videos\\": "src"
+        },
+        "classmap": [ "src" ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Master\\Videos\\VideosServiceProvider"
+            ],
+            "aliases" : {
+                "Videos" : "Master\\Videos\\Facades\\Videos"
+            }
+        }
+    },
+    "minimum-stability": "dev"
+}

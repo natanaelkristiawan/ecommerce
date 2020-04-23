@@ -12,6 +12,7 @@ use Orders;
 use Meta;
 use Validator;
 use Storage;
+use Videos;
 class DashboardResourceController extends Controller
 {
 
@@ -428,5 +429,12 @@ class DashboardResourceController extends Controller
       return response()->json($response);
     }
     return view('site::myproduct.index');
+  }
+
+
+  public function demo()
+  {
+    $data = Videos::all();
+    return view('site::dashboard.demo', compact('data'));
   }
 }

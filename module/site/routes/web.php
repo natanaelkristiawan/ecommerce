@@ -12,7 +12,6 @@ $route->group(['middleware' => ['web']], function ($route) {
     return redirect()->route('dashboard');
   })->name('public.management');
 
-
   // dashboard
 
   $route->get('dashboard', 'DashboardResourceController@index')->name('dashboard');
@@ -31,4 +30,5 @@ $route->group(['middleware' => ['web']], function ($route) {
   $route->get('profile', 'DashboardResourceController@profile')->name('public.profile');
   $route->post('profile', 'DashboardResourceController@doUpdateProfile');
   $route->post('update-profile-picture', 'DashboardResourceController@updateProfilePicture')->name('public.update-profile-picture');
+  $route->get('demo', 'DashboardResourceController@demo')->name('public.demo');
 });

@@ -45,6 +45,7 @@ return [
         base_path('master/customers/routes/breadcrumbs.php'),
         base_path('master/invitecodes/routes/breadcrumbs.php'),
         base_path('master/orders/routes/breadcrumbs.php'),
+        base_path('master/videos/routes/breadcrumbs.php'),
         base_path('module/site/routes/breadcrumbs.php'),
     ],
 

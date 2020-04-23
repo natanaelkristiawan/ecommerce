@@ -9,6 +9,7 @@ return [
     '\Master\Orders\Sidebar\ExtenderSidebar',
     // '\Master\Articles\Sidebar\ExtenderSidebar',
     '\Master\Invitecodes\Sidebar\ExtenderSidebar',
-    '\Master\Settings\Sidebar\ExtenderSidebar'
+    '\Master\Settings\Sidebar\ExtenderSidebar',
+    '\Master\Videos\Sidebar\ExtenderSidebar'
 	]
 ];

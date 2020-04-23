@@ -21,6 +21,7 @@
         "master/products": "@dev",
         "master/settings": "@dev",
         "master/upload": "@dev",
+        "master/videos": "@dev",
         "module/site": "@dev"
     },
     "repositories" : [
@@ -83,6 +84,13 @@
         {
             "type"      : "path",
             "url"       : "master/invitecodes",
+            "options"   : {
+                "symlink" : true
+            }
+        },
+        {
+            "type"      : "path",
+            "url"       : "master/videos",
             "options"   : {
                 "symlink" : true
             }
