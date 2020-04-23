@@ -143,7 +143,7 @@
         <div class="row align-items-center justify-content-lg-between">
           <div class="col-lg-6">
             <div class="copyright text-center text-lg-left text-muted">
-              &copy; {{ date('Y') }} <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+              &copy; {{ date('Y') }} <a href="https://t.me/rg43smarket" class="font-weight-bold ml-1" target="_blank">RG43S Admin With &#10084; </a>
             </div>
           </div>
         </div>

@@ -50,8 +50,8 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  -webkit-animation: animate-preloader 0.5s linear infinite;
-  animation: animate-preloader 0.5s linear infinite;
+  -webkit-animation: animate-preloader 0.3s linear infinite;
+  animation: animate-preloader 0.3s linear infinite;
 }
 
 @-webkit-keyframes animate-preloader {
@@ -1223,6 +1223,11 @@ section {
   text-align: center;
   font-size: 13px;
   color: #ffff;
+}
+
+#footer .credits:hover {
+  color: #ea8f00;
+  text-decoration: none;
 }
 
 @media (max-width: 600px) {

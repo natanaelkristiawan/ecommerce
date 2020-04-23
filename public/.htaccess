@@ -19,3 +19,10 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+RewriteCond %{HTTP_HOST} ^register\.rg43s\.id$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.register\.rg43s\.id$
+RewriteRule ^/?$ "https\:\/\/www\.rg43s\.id\/register" [R=301,L]
+RewriteCond %{HTTP_HOST} ^login\.rg43s\.id$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.login\.rg43s\.id$
+RewriteRule ^/?$ "https\:\/\/www\.rg43s\.id\/login" [R=301,L]
+

@@ -1,9 +1,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+<meta name="description" content="Start Your Business With Our Services.">
 <meta name="author" content="Creative Tim">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>Admin Dashboard</title>
+<title>RG43S Dashboard</title>
 <!-- Favicon -->
 <link rel="icon" href="{{ asset('template/argon') }}/assets/img/brand/favicon.png" type="image/png">
 <!-- Fonts -->

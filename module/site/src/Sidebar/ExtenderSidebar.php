@@ -20,8 +20,8 @@ class ExtenderSidebar implements SidebarExtender
       });
 
 
-      $group->item('Orders', function(Item $item){
-        $item->icon('ni ni-box-2 text-green');
+      $group->item('My Orders', function(Item $item){
+        $item->icon('ni ni-cart text-green');
         $item->url('Orders');
 
         $item->item('Pending', function(Item $item){
@@ -34,13 +34,27 @@ class ExtenderSidebar implements SidebarExtender
       });
 
 
-      $group->item('My Product', function(Item $item){
-         $item->icon('ni ni-basket text-red');
+      $group->item('Download Product', function(Item $item){
+         $item->icon('ni ni-cloud-download-95 text-red');
          $item->url(route('public.myproduct'));
       });
 
-      $group->item('RG43S management', function(Item $item){
+      $group->item('RG43S Management', function(Item $item){
         $item->icon('ni ni-app text-orange');
+        $item->url(route('public.management'));
+      });
+      
+      $group->item('RG43S Shortlink', function(Item $item){
+        $item->icon('ni ni-ui-04 text-info');
+        $item->url(route('public.management'));
+      });
+      
+      $group->item('RG43S Antibot', function(Item $item){
+        $item->icon('ni ni-building text-purple');
+        $item->url(route('public.management'));
+      });
+      $group->item('Demo Tutorial', function(Item $item){
+        $item->icon('ni ni-notification-70 text-purple');
         $item->url(route('public.management'));
       });
     });

@@ -53,7 +53,7 @@ class DashboardResourceController extends Controller
       'customer_id' => $customer->id,
       'unique_code' => $request->unique_code,
       'total' => $request->total,
-      'timeout' => date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' +30 minutes')),
+      'timeout' => date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' +15 minutes')),
       'status'  => 0
     );
 
@@ -232,7 +232,7 @@ class DashboardResourceController extends Controller
 
         $download_link = '';
         if (!(bool)is_null($value->download_link)) {
-          $download_link = '<a download class="btn btn-sm btn-primary" href="'.env('LINK_DOWNLOAD').$value->download_link.'" >Download</a>';
+          $download_link = '<a download class="btn btn-sm btn-primary" href="'.env('CUSTOMER_DOWNLOAD').$value->download_link.'" >Download</a>';
         } 
 
         $transfer_confirmation = '<a href="'.url('image/original/').'/'.$value->transfer_confirmation.'" data-featherlight="image"><img style="max-width:100px; display:block; margin:auto; border-radius:10px" class="img-fluid mb-2" alt="Responsive image" src="'.url('image/preview/').'/'.$value->transfer_confirmation.'"></img></a>';
@@ -281,7 +281,7 @@ class DashboardResourceController extends Controller
     $order->status = 4;
     $order->save();
 
-    $request->session()->flash('status', 'Success Delete Data!');
+    $request->session()->flash('status', 'Success Deleted!');
 
     return redirect()->back();
   }
@@ -344,7 +344,7 @@ class DashboardResourceController extends Controller
 
     $customer->save();
 
-    $request->session()->flash('status', 'Success Update Data!');
+    $request->session()->flash('status', 'Success Updated!');
 
     return redirect()->back();
   }
@@ -405,7 +405,7 @@ class DashboardResourceController extends Controller
 
         $download_link = '';
         if (!(bool)is_null($value->download_link)) {
-          $download_link = '<a download class="btn btn-sm btn-primary" href="'.Storage::disk('public')->url($value->download_link).'" >Download</a>';
+          $download_link = '<a download class="btn btn-sm btn-primary" href="'.env('CUSTOMER_DOWNLOAD').$value->download_link.'" >Download</a>';
         } 
 
         $dataList[] = array(

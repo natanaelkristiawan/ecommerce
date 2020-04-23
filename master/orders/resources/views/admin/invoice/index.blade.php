@@ -129,9 +129,9 @@
                             </td>
                             
                             <td>
-                                RG4ES<br>
+                                RG43S<br>
                                 administrator<br>
-                                admin@rg43s.com
+                                admin@rg43s.id
                             </td>
                         </tr>
                     </table>

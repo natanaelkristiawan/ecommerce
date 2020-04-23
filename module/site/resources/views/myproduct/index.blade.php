@@ -12,13 +12,14 @@
           </nav>
         </div>
        <div class="col-lg-6 text-lg-right">
-          <h3 style="color: white">Password : {{ Auth::guard('web')->user()->invite_code }}</h3>
+	<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-filter">  How to use  </button>
+          <h3 style="color: white">Your Product Password : {{ Auth::guard('web')->user()->invite_code }}</h3>
         </div>
       </div>
     </div>
   </div>
 </div>
-
+<div>
 <div class="container-fluid mt--6">
   <!-- Table -->
   <div class="row">
@@ -26,7 +27,7 @@
       <div class="card">
         <!-- Card header -->
         <div class="card-header">
-          <h3 class="mb-0">Data Order Success</h3>
+          <h3 class="mb-0">Download Product</h3>
         </div>
         <div class="table-responsive py-4">
             @include('site::myproduct.partials.table')
@@ -37,11 +38,38 @@
   <!-- Footer -->
   @include('theme.admin.partials.copyright')
 </div>
+</div>
 @stop
 
 
 @section('script')
 @parent
+
+<div class="modal fade" id="modal-filter" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="modal-filter" aria-hidden="true">
+  <div id="dialog-privacy" class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header pb-0">
+        <h3>How to use RG43S Product</h3>
+      </div>
+      <div class="modal-body pt-0" id="modal-data">
+          <strong>English &#x2B07;<br></strong>
+        <br>➤ Download your product first.
+        <br>➤ Extract with WinRAR.
+        <br>➤ Use the password bellow
+         <strong><br><br>Indonesia &#x2B07;<br></strong>
+        <br>➤ Download productmu terlebih dahulu.
+        <br>➤ Extract file product mu menggunakan WinRAR.
+        <br>➤ Gunakan password dibawah ini untuk lanjut mengExtract.
+        <br><br><strong>Password : {{ Auth::guard('web')->user()->invite_code }}</strong></br>
+        <br><br><strong>Contact Admin : <a href="https://t.me/rg43smarket" target="blank_">Mathias</strong></br></a>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <link href="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css" type="text/css" rel="stylesheet" />
 <script src="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
