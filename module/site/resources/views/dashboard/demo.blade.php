@@ -11,6 +11,9 @@
           {{ Breadcrumbs::render('demo') }}
           </nav>
         </div>
+        <div class="col-lg-6 text-lg-right">
+          <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-filter">  Button Modal  </button>
+        </div>
       </div>
     </div>
   </div>
@@ -63,6 +66,23 @@
 
 @section('script')
 @parent
+<div class="modal fade" id="modal-filter" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="modal-filter" aria-hidden="true">
+  <div id="dialog-privacy" class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header pb-0">
+        <h3>Modal Title</h3>
+      </div>
+      <div class="modal-body pt-0" id="modal-data">
+        <p>Isi Modal</p>    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script type="text/javascript" src="https://www.youtube.com/iframe_api"></script>
 
 
