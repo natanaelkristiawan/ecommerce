@@ -94,6 +94,5 @@ class Orders
   public function countAllSuccessThisMonth()
   {
     return $this->repository->whereBetween('created_at', array(date('Y-m-01').' 00:00:01', date('Y-m-t').' 23:59:59'))->where('status', 1)->get()->count();
-
   }
 }

@@ -127,6 +127,14 @@ class OrderSuccessController extends Controller {
 
   public function delete(Request $request, $id = '')
   {
+    $find = $this->repository->find($id);
+
+
+    // delete file storage
+
+    Storage::disk('public')->delete($find->download_link);
+
+
     $order = $this->repository->delete($id);
 
     $request->session()->flash('status', 'Success Delete Data!');

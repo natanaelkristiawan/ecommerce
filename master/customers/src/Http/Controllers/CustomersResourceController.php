@@ -182,6 +182,10 @@ class CustomersResourceController extends Controller
     $data = $this->repository->delete($data->id);
     $request->session()->flash('status', 'Success Delete Data!');
 
+
+
+    
+
     return redirect()->route('admin.customers');
   }
 
