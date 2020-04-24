@@ -35,7 +35,7 @@ class ExtenderSidebar implements SidebarExtender
 
 
       $group->item('Download Product', function(Item $item){
-         $item->icon('ni ni-cloud-download-95 text-red');
+         $item->icon('ni ni-cloud-download-95 text-blue');
          $item->url(route('public.myproduct'));
       });
 
@@ -54,7 +54,7 @@ class ExtenderSidebar implements SidebarExtender
         $item->url(route('public.management'));
       });
       $group->item('Demo Tutorial', function(Item $item){
-        $item->icon('ni ni-notification-70 text-purple');
+        $item->icon('ni ni-notification-70 text-red');
         $item->url(route('public.demo'));
       });
     });

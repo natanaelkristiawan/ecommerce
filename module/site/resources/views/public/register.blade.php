@@ -67,7 +67,7 @@
               </div>
             </div>
             <div class="text-center">
-              <button type="submit" disabled="" class="btn btn-primary mt-4" id="btn-submit">Create account</button>
+              <button type="submit" disabled="" class="btn btn-primary2 mt-4" id="btn-submit">Create account</button>
             </div>
           </form>
         </div>

@@ -12,7 +12,7 @@
           </nav>
         </div>
         <div class="col-lg-6 text-lg-right">
-          <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-filter">  Button Modal  </button>
+          <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-filter">  Tutorial Buy & Checkout  </button>
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
     <div class="col-lg-3">
       <div class="card">
         <div class="card-header">
-          <h3 class="mb-0">Playlist</h3>
+          <h3 class="mb-0">Demo Playlist</h3>
         </div>
         <div class="card-body">
           <div class="row" style="max-height: 65vh; overflow-y: auto;">
@@ -70,10 +70,15 @@
   <div id="dialog-privacy" class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header pb-0">
-        <h3>Modal Title</h3>
+        <h3>Tutorial Buy & Checkout</h3>
       </div>
       <div class="modal-body pt-0" id="modal-data">
-        <p>Isi Modal</p>    
+        <p>➤ Pilih product yang ingin dibeli</p> 
+        <p>➤ Check apakah sudah benar productnya</p> 
+        <p>➤ Click checkout dan Transfer sesuai data payment methods tersebut</p>
+        <p>➤ Jika sudah Transfer click ke Pending Order dan lakukan upload Screenshot Transfer</p>
+        <p>➤ Tunggu admin mengkonfirmasi pembayaran anda</p>
+        <br><strong>Regards RG43S Admin ❤</strong></br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>

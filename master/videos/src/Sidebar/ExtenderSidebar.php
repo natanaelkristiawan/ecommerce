@@ -15,7 +15,7 @@ class ExtenderSidebar implements SidebarExtender
 	{
 		$menu->group('Main Navigator', function(Group $group) {
 			$group->item('Videos', function(Item $item){
-				$item->icon('ni ni-book-bookmark');
+				$item->icon('ni ni-book-bookmark text-red');
 				$item->url(route('admin.videos'));
 			});
 		});
