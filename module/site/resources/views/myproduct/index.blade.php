@@ -82,6 +82,7 @@ $(document).ready(function() {
     dom: 'lrtip',
     order: [[ 0, "desc" ]],
     columnDefs: [
+      { orderable: false, targets: 2},
       { orderable: false, targets: 4},
     ],
     processing: true,
@@ -113,7 +114,7 @@ $(document).ready(function() {
     columns: [
       {data : 'buy_at'},
       {data : 'product'},
-      {data : 'total'},
+      {data : 'how_to_use'},
       {data : 'download_link'},
       {data : 'status'}
     ],

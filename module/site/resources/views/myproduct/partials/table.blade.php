@@ -3,7 +3,7 @@
     <tr>
       <th>Date Buy</th>
       <th>Product</th>
-      <th>Total</th>
+      <th>How To Use</th>
       <th>Download Link</th>
       <th>Status</th>
     </tr>
@@ -13,7 +13,7 @@
       <th>Date Buy</th>
       <th>Product</th>
       <th>Total</th>
-      <th>Download Link</th>
+      <th>How To Use</th>
       <th>Status</th>
     </tr>
   </tfoot>
