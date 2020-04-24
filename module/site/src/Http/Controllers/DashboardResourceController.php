@@ -434,6 +434,7 @@ class DashboardResourceController extends Controller
 
   public function demo()
   {
+    Meta::title('Demo Tutorial');
     $data = Videos::all();
     return view('site::dashboard.demo', compact('data'));
   }
