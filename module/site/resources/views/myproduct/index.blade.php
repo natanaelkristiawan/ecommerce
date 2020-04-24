@@ -12,7 +12,6 @@
           </nav>
         </div>
        <div class="col-lg-6 text-lg-right">
-	<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-filter">  How to use  </button>
           <h3 style="color: white">Your Product Password : {{ Auth::guard('web')->user()->invite_code }}</h3>
         </div>
       </div>
