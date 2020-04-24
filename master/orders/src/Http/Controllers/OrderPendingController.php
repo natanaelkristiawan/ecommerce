@@ -48,7 +48,7 @@ class OrderPendingController extends Controller {
                 default_orders.timeout as timeout,
                 default_orders.status as status,
                 default_orders.created_at as created_at
-              '))->join('customers', function ($join){
+              '))->join('customers', function ($join) use ($filtered) {
                 $join->on('orders.customer_id', '=', 'customers.id');
                 if (!(bool)empty($filtered['email'])) {
                   $join->where('customers.email', 'like', "%{$filtered['email']}%");

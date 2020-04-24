@@ -27,6 +27,16 @@ class CoreServiceProvider extends ServiceProvider
 	{
 		$manager->register('Master\Core\Sidebar\ConfigSidebar');
 
+		$this->app->bind('master.reports', function ($app) {
+			return $this->app->make('Master\Core\Reports');
+		});   
+
+		// Bind reports to repository
+		$this->app->bind(
+			'Master\Core\Interfaces\ReportsRepositoryInterface',
+			\Master\Core\Repositories\Eloquent\ReportsRepository::class
+		);
+
 		View::creator(
 			'theme.admin.partials.sidebar',
 			\Master\Core\View\Creator\SidebarCreator::class

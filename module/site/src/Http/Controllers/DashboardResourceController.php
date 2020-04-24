@@ -13,6 +13,9 @@ use Meta;
 use Validator;
 use Storage;
 use Videos;
+use Reports;
+
+
 class DashboardResourceController extends Controller
 {
 
@@ -437,5 +440,33 @@ class DashboardResourceController extends Controller
     Meta::title('Demo Tutorial');
     $data = Videos::all();
     return view('site::dashboard.demo', compact('data'));
+  }
+
+
+  public function report(Request $request)
+  {
+    $customer = Auth::guard('web')->user();
+    $validator = Validator::make($request->all(), [
+      'report'  => 'required',
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json(array(
+        'status' => false
+      ));
+    }
+
+    $dataReport = array(
+      'customer_id' => $customer->id,
+      'report' => $request->report
+    );
+
+
+    Reports::create($dataReport);
+
+    return response()->json(array(
+      'status' => true
+    ));
+
   }
 }

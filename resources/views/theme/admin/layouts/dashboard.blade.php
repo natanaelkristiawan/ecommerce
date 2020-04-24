@@ -138,6 +138,59 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col-lg-6">
+                  <h3 class="mb-0">Data Reporting Bug</h3>
+                </div>
+
+                <div class="col-lg-6 text-right">
+                  <button  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-filter">Filters</button>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush" id="table-report">
+                <thead class="thead-light">
+                  <tr>
+                    <th width="15%">Created At</th>
+                    <th width="15%">Email</th>
+                    <th>Report</th>
+                    <th width="15%">Action</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modal fade" id="modal-filter" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="modal-filter" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label>Email</label> 
+                    <input type="text" placeholder="Search Email" name="search[email]" class="form-control filter-field">
+                  </div>
+                </div>
+              </div>
+             
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger filter-btn">Filter</button>
+              <button type="button" class="btn btn-primary filter-clean">Clear</button>
+              <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Footer -->
       <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
@@ -160,8 +213,79 @@
   <!-- Optional JS -->
   <script src="{{ asset('template/argon') }}/assets/vendor/chart.js/dist/Chart.min.js"></script>
   <script src="{{ asset('template/argon') }}/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+
+  <script src="{{ asset('template/argon') }}/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="{{ asset('template/argon') }}/assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="{{ asset('template/argon') }}/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="{{ asset('template/argon') }}/assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+  <script src="{{ asset('template/argon') }}/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="{{ asset('template/argon') }}/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="{{ asset('template/argon') }}/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="{{ asset('template/argon') }}/assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+
   <!-- Argon JS -->
   <script src="{{ asset('template/argon') }}/assets/js/argon.js?v=1.1.0"></script>
+
+
+
+
+  <script type="text/javascript">
+    var oTable;
+    var page = 1;
+    $(document).ready(function() {
+      oTable = $('#table-report').dataTable({
+        pageLength: 10,
+        responsive: true,
+        dom: 'lrtip',
+        order: [[ 0, "asc" ]],
+        columnDefs: [
+          { orderable: false, targets: 3 },
+        ],
+        processing: true,
+        serverSide: true,
+        language: { 
+          paginate: {
+            previous: "<i class='fas fa-angle-left'>",
+            next: "<i class='fas fa-angle-right'>"
+          }
+        },
+        ajax: {
+          url: "{{ route('admin.report') }}",
+          dataType: "json",
+          type: "GET",
+          data: function ( d ) {
+            oSearch = {};
+            $('.filter-field').each( function () {
+              key = $(this).attr('name');
+              val = $(this).val();
+              oSearch[key] = val;
+            });
+            return $.extend(false, TOKEN, {page : page}, oSearch, d);
+          }
+        },
+        preDrawCallback: function( settings ) {
+          var api = this.api();
+          page = parseInt(api.rows().page()) + 1;
+        },
+        columns: [
+          {data : 'created_at'},
+          {data : 'email'},
+          {data : 'report'},
+          {data : 'action'},
+        ],
+      });
+
+      $('.filter-btn').on('click', function(){
+        oTable.api().draw();
+      }); 
+
+      $('.filter-clean').on('click', function(){
+        $('.filter-field').val('');
+        oTable.api().draw();
+      });
+    });
+  </script>
 
 </body>
 

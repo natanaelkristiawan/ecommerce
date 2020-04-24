@@ -31,4 +31,7 @@ $route->group(['middleware' => ['web']], function ($route) {
   $route->post('profile', 'DashboardResourceController@doUpdateProfile');
   $route->post('update-profile-picture', 'DashboardResourceController@updateProfilePicture')->name('public.update-profile-picture');
   $route->get('demo', 'DashboardResourceController@demo')->name('public.demo');
+
+
+  $route->post('report', 'DashboardResourceController@report')->name('public.report');
 });

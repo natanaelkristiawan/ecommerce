@@ -25,7 +25,8 @@
                 "Eusonlito\\LaravelMeta\\MetaServiceProvider"
             ],
             "aliases": {
-                "Meta" : "Eusonlito\\LaravelMeta\\Facade"
+                "Meta" : "Eusonlito\\LaravelMeta\\Facade",
+                "Reports": "Master\\Core\\Facades\\Reports"
             }
         }
     },
