@@ -412,7 +412,7 @@ class DashboardResourceController extends Controller
         $dataList[] = array(
           'buy_at'=> $value->buy_at,
           'product'=> $value->product,
-          'how_to_use'=> '<br/> <button class="mt-2 btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-filter">  How to use  </button>',
+          'how_to_use'=> '<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-filter">  How to use  </button>',
           'download_link'=> $download_link,
           'status'=> '<span class="badge badge-'.config('master.orders.color.'.$value->status).'">'.config('master.orders.status.'.$value->status).'</span>',
         );
