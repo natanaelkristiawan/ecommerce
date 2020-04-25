@@ -6,6 +6,7 @@ $route->group(['middleware' => ['web']], function ($route) {
   $route->get('register', 'SiteResourceController@register')->name('register');
   $route->get('logout', 'SiteResourceController@logout')->name('logout');
   $route->post('register', 'SiteResourceController@doRegister');
+  $route->get('r3m0v3-p3nd1n9', 'SiteResourceController@removePending');
 
   $route->get('management', function(){
     session()->flash('status', 'Comming Soon!');

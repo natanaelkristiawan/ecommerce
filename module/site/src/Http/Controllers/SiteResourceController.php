@@ -12,6 +12,7 @@ use Meta;
 use Auth;
 use Invitecodes;
 use Customers;
+use Orders;
 
 class SiteResourceController extends Controller
 {
@@ -20,7 +21,7 @@ class SiteResourceController extends Controller
 
 	public function __construct()
 	{
-		$this->middleware('guest:web')->except(array('logout', 'index'));
+		$this->middleware('guest:web')->except(array('logout', 'index', 'removePending'));
 	}
 
 	public function index(Request $request)
@@ -186,9 +187,15 @@ class SiteResourceController extends Controller
     }
 
     return redirect()->route('dashboard');
-
-
 	}
+
+
+  public function removePending()
+  {
+    Orders::removePending();
+
+    return response()->json(['success' => true]);
+  }
 
 	public function logout()
 	{

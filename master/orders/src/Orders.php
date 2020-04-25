@@ -95,4 +95,11 @@ class Orders
   {
     return $this->repository->whereBetween('created_at', array(date('Y-m-01').' 00:00:01', date('Y-m-t').' 23:59:59'))->where('status', 1)->get()->count();
   }
+
+
+  public function removePending()
+  {
+    $dateNow = date('Y-m-d H:i:s');
+    $this->repository->where('timeout', '<=', $dateNow)->where('status', 0)->update(array('status'=>4));
+  }
 }
