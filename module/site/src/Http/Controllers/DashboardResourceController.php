@@ -27,11 +27,14 @@ class DashboardResourceController extends Controller
 
   public function index(Request $request)
   {
+    $customer = Auth::guard('web')->user();
     $products = Products::all();
+    $productOrder = Orders::findOrderSuccess($customer->id);
+
 
     $accounts = Settings::find('account');
 
-    return view('site::dashboard.index', compact('products', 'accounts'));
+    return view('site::dashboard.index', compact('products', 'accounts', 'productOrder'));
   }
 
 

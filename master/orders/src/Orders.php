@@ -102,4 +102,18 @@ class Orders
     $dateNow = date('Y-m-d H:i:s');
     $this->repository->where('timeout', '<=', $dateNow)->where('status', 0)->update(array('status'=>4));
   }
+
+
+  public function findOrderSuccess($customer_id = '')
+  {
+    $data = $this->repository->where('customer_id', $customer_id)->where('status', 1)->get();
+
+    $product_id = array();
+
+    foreach ($data as $key => $value) {
+      $product_id[] = $value->product_id;
+    }
+
+    return $product_id;
+  }
 }

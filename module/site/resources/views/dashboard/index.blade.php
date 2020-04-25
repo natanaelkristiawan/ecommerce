@@ -15,6 +15,10 @@
           <div class="display-3">${{ number_format($product->price_dollar) }}</div>
           <span class=" text-muted">{{ number_format($product->price_idr) }} IDR</span>
           {!! $product->detail !!}
+
+          @if(in_array($product->id, $productOrder))
+             <button style="background-color: grey; border-color: grey" class="btn btn-primary mb-3" disabled="">Buy</button>
+          @else
           <button 
             data-unique="{{ mt_rand(0, 1000) }}" 
             data-product="{{ $product->id }}" 
@@ -28,6 +32,8 @@
             class="btn btn-primary mb-3 btn-buy">
             Buy
           </button>
+          
+          @endif
         </div>
       </div>
     </div>
