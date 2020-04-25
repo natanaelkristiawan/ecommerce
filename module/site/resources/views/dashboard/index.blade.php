@@ -105,7 +105,7 @@
           <div class="row">
           @foreach($accounts as $account)
             <div class="col-lg-3">
-              <a data-featherlight="image" href="{{url('image/original/'.$account['image'])}}" class="btn btn-primary btn-default btn-block">{{$account['name']}}</a>
+              <a data-featherlight="image" href="{{url('image/original/'.$account['image'])}}" class="btn btn-primary btn-default btn-block">{{$account['bank']}}</a>
             </div> 
           @endforeach
           </div> 
