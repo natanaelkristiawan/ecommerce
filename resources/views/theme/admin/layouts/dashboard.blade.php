@@ -159,6 +159,7 @@
                     <th width="15%">Created At</th>
                     <th width="15%">Email</th>
                     <th>Report</th>
+                    <th>Images</th>
                     <th width="15%">Action</th>
                   </tr>
                 </thead>
@@ -226,6 +227,9 @@
 
   <!-- Argon JS -->
   <script src="{{ asset('template/argon') }}/assets/js/argon.js?v=1.1.0"></script>
+  <link href="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+<script src="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
 
 
 
@@ -241,6 +245,7 @@
         order: [[ 0, "asc" ]],
         columnDefs: [
           { orderable: false, targets: 3 },
+          { orderable: false, targets: 4 },
         ],
         processing: true,
         serverSide: true,
@@ -272,6 +277,7 @@
           {data : 'created_at'},
           {data : 'email'},
           {data : 'report'},
+          {data : 'images'},
           {data : 'action'},
         ],
       });

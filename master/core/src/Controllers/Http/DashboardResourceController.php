@@ -61,6 +61,7 @@ class DashboardResourceController extends Controller
                 default_customers.email as email,
                 default_reports.id as report_id,
                 default_reports.report as report,
+                default_reports.images as images,
                 default_reports.created_at as created_at
               '))->join('customers', function ($join) use ($filtered){
                 $join->on('reports.customer_id', '=', 'customers.id');
@@ -75,6 +76,7 @@ class DashboardResourceController extends Controller
       $headerOrder = array(
         'created_at',
         'email',
+        'images',
         'report',
       );
       
@@ -98,11 +100,22 @@ class DashboardResourceController extends Controller
         $btn = '<div class="btn-group">
               <a href="'.route('admin.report.delete', ['id'=>$value->report_id]).'" onclick="return confirm(\'Are you delete this item?\')" class="btn btn-sm btn-danger btn-flat btn-delete" data-id="'.$value->report_id.'"><i class="fa fa-fw fa-trash"></i></a>
             </div>';
+        $images = '';
+
+
+        if (!(bool)is_null($value->images)) {
+          # code...
+          foreach (json_decode($value->images)as $key => $list) {
+            $images .= '<a href="'.url('image/original/').'/'.$list.'" data-featherlight="image"><img style="max-width:100px; float:left; margin-left: 1em; border-radius:10px" class="img-fluid mb-2" alt="Responsive image" src="'.url('image/preview/').'/'.$list.'"></img></a>';
+          }
+        }
+
 
         $dataList[] = array(
           'created_at'=> $value->created_at,
           'email'=> $value->email,
           'report'=> $value->report,
+          'images'=> $images,
           'action' => $btn
         );
 

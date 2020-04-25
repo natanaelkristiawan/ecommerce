@@ -12,6 +12,7 @@ class CreateReportsTable extends Migration
     Schema::create('reports', function (Blueprint $table) {
       $table->bigIncrements('id');
       $table->integer('customer_id')->nullable();
+      $table->text('images')->nullable();
       $table->text('report')->nullable();
       $table->softDeletes();
       $table->timestamps();

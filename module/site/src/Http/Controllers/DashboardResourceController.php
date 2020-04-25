@@ -458,7 +458,8 @@ class DashboardResourceController extends Controller
 
     $dataReport = array(
       'customer_id' => $customer->id,
-      'report' => $request->report
+      'report' => $request->report,
+      'images' => $request->images
     );
 
 

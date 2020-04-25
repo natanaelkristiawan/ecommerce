@@ -14,5 +14,11 @@ class Reports extends Model
     'id',
     'customer_id',
     'report',
+    'images'
   ];
+
+
+  protected $casts = array(
+    'images' => 'array'
+  );
 }

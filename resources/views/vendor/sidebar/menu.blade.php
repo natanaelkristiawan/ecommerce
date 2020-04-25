@@ -52,6 +52,7 @@
 
 @if ($guard_now == 'web')
 @section('script')
+<form style="display: none;" id="upload-picture-attach">@csrf</form>
 <div class="modal fade" id="modal-report-bug" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="modal-filter" aria-hidden="true">
   <div id="dialog-privacy" class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -59,8 +60,20 @@
         <h3>Report Bug</h3>
       </div>
       <div class="modal-body pt-0">
-         <div class="form-group">
+        <div class="form-group">
           <textarea class="form-control textarea-report" rows="8" name="bug_report"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-control-label">Attach File</label>
+          <div>
+            <button class="btn btn-danger btn-sm btn-upload-attach">Upload</button>
+            <input accept="image/x-png,image/gif,image/jpeg"  type="file" class="attach-file-upload" name="attachment" style="display:none">
+          </div>
+
+          <table class="table table-flush" id="table_attachment">
+           
+          </table>
+
         </div>
         <div class="form-group">
           <button class="btn btn-primary btn-sm" type="button" id="save-report-bug">Save</button>
@@ -82,6 +95,58 @@
     ajax_running = false;
   }
 
+  var attachmentCounter = 0;
+
+
+  var listdata;
+
+  function readURLAttach(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      
+
+
+      reader.readAsDataURL(input.files[0]);
+
+      var formData = new FormData($('#upload-picture-attach')[0]);
+      var real = $('.attach-file-upload').prop('files')[0];
+      formData.append('attachment', real);
+
+      $.ajax({
+        url: "{{ route('public.upload', array('config'=> 'module.site')).'/'.date('Y').'/'.date('m').'/'.date('d').'/file/attachment' }}",   
+        data : formData,
+        dataType : 'json',
+        type : 'post',
+        contentType: false,       // The content type used when sending data to the server.
+        cache: false,             // To unable request pages to be cached
+        processData:false,
+        success : function(result){
+         if (typeof result.path !== 'undefined') {
+          var html =  '<tr id="attach_'+attachmentCounter+'">'+
+              '<td class="image-attach" data-path="'+result.path+'">'+result.file+'</td>'+
+              '<td><button onclick="$(\'#attach_'+attachmentCounter+'\').remove()" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button></td>'+
+            '</tr>';
+          $('#table_attachment').append(html);
+          attachmentCounter++;
+         }
+        }
+      });
+    }
+  }
+
+  $(".attach-file-upload").change(function() {
+    readURLAttach(this);
+  });
+
+  $(document).ready(function() {
+    $('.btn-upload-attach').on('click', function(){
+      $('.attach-file-upload').click();
+    });
+  });
+
+
+
+
 
   $(document).on('click', '#save-report-bug', function() {
     if (ajax_running) {
@@ -97,14 +162,22 @@
 
     }
 
+    var image_path = [];
+
+
+    $.each($('.image-attach'), function(){
+      var path = $(this).data('path');
+      image_path.push(path)
+    });
+
     $.ajax({
       url : "{{ route('public.report') }}",
       type : "POST",
       dataType : 'json',
-      data : $.extend(false, TOKEN, {report : report}),
+      data : $.extend(false, TOKEN, {report : report, images: image_path}),
       beforeSend : function(){
         ajax_start();
-        $('#modal-report-bug').modal('hide')
+        $('#modal-report-bug').modal('hide');
       },
       success : function(result) {
         if (result.status) {
@@ -117,6 +190,7 @@
       complete: function() {
         ajax_stop();
         $('.textarea-report').val('');
+        $('#table_attachment').html('');
       }
     });
   })
