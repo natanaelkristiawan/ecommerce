@@ -48,6 +48,9 @@
 
 @section('script')
 @parent
+<link href="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+<script src="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
 
 <script type="text/javascript" src="{{ asset('js') }}/jquery.number.min.js"></script>
 
@@ -84,8 +87,8 @@
   </div>
 </div>
 
-<div class="modal fade show" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-modal="true">
-  <div style="min-height: calc(50vh)"  class="modal-dialog modal-danger modal-" role="document">
+<div class="modal fade show" id="modal-notification" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-modal="true">
+  <div  class="modal-dialog modal-danger modal-lg" role="document">
     <div class="modal-content bg-gradient-danger">
       <div class="modal-header">
         <h6 class="modal-title" id="modal-title-notification">Notification</h6>
@@ -99,9 +102,13 @@
           <h4 class="heading mt-4">Success!</h4>
           {!! Settings::find('notif_ordersuccess') !!}
 
-           @foreach($accounts as $account)
-            <p>{{ $account['bank'] }} - {{ $account['account'] }} ({{ $account['name'] }})</p>
+          <div class="row">
+          @foreach($accounts as $account)
+            <div class="col-lg-3">
+              <a data-featherlight="image" href="{{url('image/original/'.$account['image'])}}" class="btn btn-primary btn-default btn-block">{{$account['name']}}</a>
+            </div> 
           @endforeach
+          </div> 
         </div>
       </div>
       <div class="modal-footer">

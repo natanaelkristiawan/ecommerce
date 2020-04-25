@@ -1,7 +1,7 @@
 @extends('theme.admin.layouts.blank')
 
 @section('content')
-
+<form style="display: none;" id="upload-picture">@csrf</form>
 <form method="POST" action="" data-toggle="validator" role="form" data-disable="false">
   @csrf
   <div class="header bg-primary pb-6">
@@ -174,6 +174,8 @@
               </div>
 
               <div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="account-tab">
+                <input accept="image/x-png,image/gif,image/jpeg"  type="file" class="file-upload" name="file" style="display:none">
+                
                 <div class="mt-4">
                   <div class="form-group">
                     <label class="form-control-label">List</label>
@@ -183,12 +185,13 @@
                           <th>Bank</th>
                           <th>Account</th>
                           <th>Name</th>
+                          <th>Image</th>
                           <th width="10%">Action</th>
                         </tr>
                       </thead>
                       <tfoot>
                         <tr>
-                          <td colspan="3"></td>
+                          <td colspan="4"></td>
                           <td width="10%"><button type="button" class="btn btn-sm btn-primary btn-add-account">Add Account</button></td>
                         </tr>
                       </tfoot>
@@ -231,6 +234,9 @@
 @section('script')
 @parent
 
+<link href="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+<script src="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
 
 <script type="x-tmpl-mustache" id="template">
   <tr id="data@{{count}}">
@@ -253,6 +259,24 @@
     <td><input type="text"  class="form-control" value="@{{bank}}" name="setting[account][@{{count}}][bank]"></td>
     <td><input type="text"  class="form-control" value="@{{account}}" name="setting[account][@{{count}}][account]"></td>
     <td><input type="text"  class="form-control" value="@{{name}}" name="setting[account][@{{count}}][name]"></td>
+    @{{#hasImage}}
+       <td>
+        <a data-featherlight="image" id="image_account_real@{{count}}" href="{{ url('image/original') }}/@{{image}}">
+        <img class="img-fluid mb-2" src="{{ url('image/profile') }}/@{{image}}" id="image_account_@{{count}}" style="display:block;max-width:100px; margin:auto; border-radius:10px">
+        </a>
+        <input type="hidden"  class="form-control" value="@{{image}}" name="setting[account][@{{count}}][image]" id="image_account_value_@{{count}}">
+        <button class="btn btn-block btn-sm btn-default btn-upload-account" data-id="@{{count}}" type="button">Upload
+      </td>
+    @{{/hasImage}}
+    @{{^hasImage}}
+      <td>
+        <a data-featherlight="image" id="image_account_real@{{count}}" href="">
+        <img class="img-fluid mb-2" src="" id="image_account_@{{count}}" style="display:none;max-width:100px; margin:auto; border-radius:10px">
+        </a>
+        <input type="hidden"  class="form-control" value="" name="setting[account][@{{count}}][image]" id="image_account_value_@{{count}}">
+        <button class="btn btn-block btn-sm btn-default btn-upload-account" data-id="@{{count}}" type="button">Upload
+      </td>
+    @{{/hasImage}}
     <td><button onclick="$('#data_account@{{count}}').remove()" class="btn btn-sm btn-danger">Delete</button></td>
   </tr>
 </script>
@@ -326,7 +350,9 @@
         count : count,
         bank: value.bank,
         account: value.account,
-        name: value.name
+        name: value.name,
+        image: value.image,
+        hasImage : Boolean(value.image.length)
       };
 
       htmlBody = Mustache.render(template, data);
@@ -385,6 +411,56 @@
     });
 
   })
+
+
+  var account_image_click = 0;
+
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      
+
+
+      reader.readAsDataURL(input.files[0]);
+
+      var formData = new FormData($('#upload-picture')[0]);
+      var real = $('.file-upload').prop('files')[0];
+      formData.append('account', real);
+
+      $.ajax({
+        url: "{{ route('public.upload', array('config'=> 'module.site')).'/'.date('Y').'/'.date('m').'/'.date('d').'/file/account' }}",   
+        data : formData,
+        dataType : 'json',
+        type : 'post',
+        contentType: false,       // The content type used when sending data to the server.
+        cache: false,             // To unable request pages to be cached
+        processData:false,
+        success : function(result){
+         if (typeof result.path !== 'undefined') {
+          $('#image_account_'+account_image_click).css('display', 'block');
+          $('#image_account_'+account_image_click).attr('src', '{{ url('image/profile') }}/'+result.path);
+          $('#image_account_real'+account_image_click).attr('href', '{{ url('image/original') }}/'+result.path);
+          $('#image_account_value_'+account_image_click).val(result.path)
+         }
+        },
+        complete: function(){
+          account_image_click = 0;
+        }
+      });
+    }
+  }
+
+  $(".file-upload").change(function() {
+    readURL(this);
+  });
+
+  $(document).on('click', '.btn-upload-account', function() {
+
+    $('.file-upload').click();
+    account_image_click = $(this).data('id');
+
+  });
 </script>
 
 @stop
