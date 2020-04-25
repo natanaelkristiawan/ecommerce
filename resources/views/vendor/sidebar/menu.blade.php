@@ -16,21 +16,21 @@
     @else
     <a class="nav-link" href="{{ route('public.profile') }}">
     @endif
-      <i class="ni ni-spaceship"></i>
+      <i class="ni ni-single-02"></i>
       <span class="nav-link-text">Profile</span>
     </a>
   </li>
   @if ($guard_now == 'web')
   <li class="nav-item">
     <a class="nav-link" href="{{ route('public') }}">
-      <i class="ni ni-app"></i>
+      <i class="ni ni-spaceship"></i>
       <span class="nav-link-text">Go To Site</span>
     </a>
   </li>
 
   <li class="nav-item">
     <a class="nav-link" href="javascript:;" data-toggle="modal" data-target="#modal-report-bug">
-      <i class="ni ni-app"></i>
+      <i class="ni ni-send"></i>
       <span class="nav-link-text">Report Bug</span>
     </a>
   </li>
