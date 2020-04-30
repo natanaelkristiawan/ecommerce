@@ -12,7 +12,7 @@ class InvitecodesTransformer extends TransformerAbstract
 
 		if ($model->status == 0) {
 			$action = '<div class="btn-group">
-                  <a href="'.route('admin.invitecodes.delete', ['id'=>$model->id]).'" onclick="return confirm(\'Are you delete this item?\')" class="btn btn-sm btn-danger btn-flat btn-delete" data-id="'.$model->id.'"><i class="fa fa-fw fa-trash"></i></a>
+                  <a href="'.route('admin.invitecodes.delete', ['id'=>$model->id]).'" onclick="return confirm(\'Are you want delete this item?\')" class="btn btn-sm btn-danger btn-flat btn-delete" data-id="'.$model->id.'"><i class="fa fa-fw fa-trash"></i></a>
                  </div>';
 		}
 

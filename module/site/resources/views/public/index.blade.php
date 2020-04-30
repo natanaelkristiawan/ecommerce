@@ -19,7 +19,7 @@
         <li class="active"><a href="#header">Home</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#pricing">Pricing</a></li>
-        <li><a href="https://t.me/rg43smarket" target="_blank">Contact Us</a></li>
+        <li><a href="https://t.me/rg43sid" target="_blank">Contact Us</a></li>
         @if(Auth::guard('web')->check())
         <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
         @else
@@ -161,7 +161,7 @@
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bootslander-free-bootstrap-landing-page-template/ -->
-        Designed by <a href="https://t.me/rg43smarket" target="_blank">RG43S Admin With &#10084;	</a>
+        Designed by <a href="https://t.me/rg43sid" target="_blank">RG43S Admin With &#10084;	</a>
       </div>
       <div class="credits">
           Our Partner <a href="https://t.me/swallowjnck" target="_blank">Heart Sender&nbsp;</a><a href="https://ostravacs.com" target="_blank">&&nbsp;Ostrava</a>

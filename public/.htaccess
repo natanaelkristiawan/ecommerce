@@ -25,4 +25,7 @@ RewriteRule ^/?$ "https\:\/\/www\.rg43s\.id\/register" [R=301,L]
 RewriteCond %{HTTP_HOST} ^login\.rg43s\.id$ [OR]
 RewriteCond %{HTTP_HOST} ^www\.login\.rg43s\.id$
 RewriteRule ^/?$ "https\:\/\/www\.rg43s\.id\/login" [R=301,L]
+RewriteCond %{HTTP_HOST} ^demo\.rg43s\.id$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.demo\.rg43s\.id$
+RewriteRule ^/?$ "https\:\/\/rg43s\.id\/demo" [R=301,L]
 

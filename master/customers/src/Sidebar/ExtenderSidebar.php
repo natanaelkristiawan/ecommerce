@@ -15,7 +15,7 @@ class ExtenderSidebar implements SidebarExtender
 	{
 		$menu->group('Main Navigator', function(Group $group) {
 			$group->item('Customers', function(Item $item){
-				$item->icon('ni ni-chart-bar-32 text-green');
+				$item->icon('ni ni-chart-bar-32 text-orange');
 				$item->url(route('admin.customers'));
 			});
 		});

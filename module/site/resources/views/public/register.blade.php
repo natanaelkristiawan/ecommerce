@@ -1,5 +1,6 @@
 @extends('theme.public.layouts.login')
 
+<title>RG43S - Register</title>
 @section('content')
 <div class="container mt--8 pb-5">
   <div class="row justify-content-center">
@@ -41,7 +42,7 @@
             <div class="form-group">
               <div class="input-group input-group-merge input-group-alternative">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+                  <span class="input-group-text"><i class="ni ni-key-25"></i></span>
                 </div>
                 <input class="form-control" name="invite_code" required="" placeholder="Invite Code" type="text">
               </div>

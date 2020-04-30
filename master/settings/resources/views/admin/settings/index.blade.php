@@ -345,14 +345,18 @@
 
     $.each(account, function(key, value){
       var template = $('#template-account').html();
-
+        
+        var hasImage = true;
+        if(typeof value.image == "undefined"){
+            hasImage = false
+        }
       var data = {
         count : count,
         bank: value.bank,
         account: value.account,
         name: value.name,
         image: value.image,
-        hasImage : Boolean(value.image.length)
+        hasImage : hasImage
       };
 
       htmlBody = Mustache.render(template, data);
