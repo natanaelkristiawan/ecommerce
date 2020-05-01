@@ -18,5 +18,8 @@ class Customers extends Authenticatable
     'photo',
     'invite_code',
     'status',
+    'public_key',
+    'private_key',
+    'api_token',
 	];
 }

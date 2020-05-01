@@ -14,7 +14,7 @@ use Validator;
 use Storage;
 use Videos;
 use Reports;
-
+use Illuminate\Support\Str;
 
 class DashboardResourceController extends Controller
 {
@@ -470,6 +470,36 @@ class DashboardResourceController extends Controller
 
     return response()->json(array(
       'status' => true
+    ));
+  }
+
+  public function managementSender()
+  {
+    $data = Auth::guard('web')->user();
+
+    Meta::title('Generate Token');
+    return view('site::dashboard.managementSender', compact('data'));
+  }
+
+
+  public function generateToken()
+  {
+    $customer = Auth::guard('web')->user();
+    $public_key = Str::random(25);
+    $private_key = Str::random(25);
+    $api_token = base64_encode(md5($public_key.$private_key));
+
+
+    $customer->public_key = $public_key;
+    $customer->private_key = $private_key;
+    $customer->api_token = hash('sha256', $api_token);
+
+    $customer->save();
+
+    return response()->json(array(
+      'publicKey' => $public_key,
+      'privateKey' => $private_key,
+      'apiToken' => $api_token
     ));
 
   }

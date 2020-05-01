@@ -48,8 +48,8 @@ return [
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
-            'hash' => false,
+            'provider' => 'customers',
+            'hash' => true,
         ],
     ],
 

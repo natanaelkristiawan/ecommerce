@@ -1,5 +1,6 @@
 <?php
 $route->group(['middleware' => ['web']], function ($route) {
+
 	$route->get('', 'SiteResourceController@index')->name('public');
   $route->get('login', 'SiteResourceController@login')->name('login');
   $route->post('login', 'SiteResourceController@doLogin');
@@ -32,6 +33,9 @@ $route->group(['middleware' => ['web']], function ($route) {
   $route->post('profile', 'DashboardResourceController@doUpdateProfile');
   $route->post('update-profile-picture', 'DashboardResourceController@updateProfilePicture')->name('public.update-profile-picture');
   $route->get('demo', 'DashboardResourceController@demo')->name('public.demo');
+  $route->get('management-sender', 'DashboardResourceController@managementSender')->name('public.managementSender');
+
+  $route->post('generate-token', 'DashboardResourceController@generateToken')->name('public.generateToken');
 
 
   $route->post('report', 'DashboardResourceController@report')->name('public.report');

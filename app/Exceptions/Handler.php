@@ -64,10 +64,21 @@ class Handler extends ExceptionHandler
           case 'admin':
             $login = 'admin.login';
             break;
+          case 'api':
+            $login = 'api.failed';
+            break;
           default:
             $login = 'login';
             break;
         }
+
+        if ($login == 'api.failed') {
+            return response()->json(array(
+                'status' => false
+            ));
+        }
+
+
         return redirect()->guest(route($login));
     }
 }

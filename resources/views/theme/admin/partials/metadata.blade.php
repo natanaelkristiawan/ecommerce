@@ -32,7 +32,9 @@
 <link href="{{ asset('template/argon') }}/additionals/dropzone/basic.min.css" rel="stylesheet">
 <link href="{{ asset('template/argon') }}/additionals/dropzone/dropzone.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('template/argon') }}/additionals/style/additional.css">
-
+<script src="{{ asset('template/argon') }}/assets/vendor/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="{{ asset('package') }}/dist/sweetalert2.all.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ asset('package') }}/dist/sweetalert2.css">
 
 <style type="text/css">
   table {

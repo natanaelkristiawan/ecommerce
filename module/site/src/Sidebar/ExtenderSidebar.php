@@ -26,8 +26,8 @@ class ExtenderSidebar implements SidebarExtender
 
         $item->item('Pending', function(Item $item){
           $item->url(route('public.orderPending'));
-        });
-        
+        });        
+
         $item->item('Success', function(Item $item){
           $item->url(route('public.orderSuccess'));
         });
@@ -41,7 +41,11 @@ class ExtenderSidebar implements SidebarExtender
 
       $group->item('RG43S Management', function(Item $item){
         $item->icon('ni ni-app text-orange');
-        $item->url(route('public.management'));
+        $item->url('Management');
+        $item->item('Sender', function(Item $item){
+         $item->url(route('public.managementSender'));
+          
+        });
       });
       
       $group->item('RG43S Shortlink', function(Item $item){

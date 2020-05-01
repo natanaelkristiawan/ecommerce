@@ -23,3 +23,7 @@ Breadcrumbs::for('myproduct', function ($trail) {
   $trail->push('My Product', route('public.myproduct'));
 });
 
+Breadcrumbs::for('managementSender', function ($trail) {
+  $trail->push('Management Sender', route('public.managementSender'));
+});
+
