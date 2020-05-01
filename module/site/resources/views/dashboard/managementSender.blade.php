@@ -114,6 +114,20 @@
     })
 
     $('#addDeviceBtn').on('click', function(){
+
+      var total = 0
+
+
+
+      $.each($('.deviceList'), function(){
+        total++;
+      }) 
+
+      if (total > 2) {
+        return false;
+      }
+
+
       var template = $('#template').html();
       htmlBody = Mustache.render(template, {count : count});
       $('#data-device-id').append(htmlBody);
@@ -121,6 +135,10 @@
     })
 
     $('#saveDevice').on('click', function(){
+
+
+
+
       if (ajax_running) {
         return false;
       }
