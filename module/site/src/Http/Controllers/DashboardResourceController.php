@@ -501,6 +501,16 @@ class DashboardResourceController extends Controller
       'privateKey' => $private_key,
       'apiToken' => $api_token
     ));
+  }
 
+  public function saveDeviceID(Request $request)
+  {
+    $deviceID = $request->device_id;
+
+    $customer = Auth::guard('web')->user();
+    $customer->device_id = $deviceID;
+    $customer->save();
+
+    return response()->json(array('status' => true));
   }
 }

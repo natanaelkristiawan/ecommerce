@@ -21,5 +21,10 @@ class Customers extends Authenticatable
     'public_key',
     'private_key',
     'api_token',
+    'device_id'
 	];
+
+    protected $casts = array(
+        'device_id' => 'array'
+    );
 }

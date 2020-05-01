@@ -36,6 +36,7 @@ $route->group(['middleware' => ['web']], function ($route) {
   $route->get('management-sender', 'DashboardResourceController@managementSender')->name('public.managementSender');
 
   $route->post('generate-token', 'DashboardResourceController@generateToken')->name('public.generateToken');
+  $route->post('save-device-id', 'DashboardResourceController@saveDeviceID')->name('public.saveDeviceID');
 
 
   $route->post('report', 'DashboardResourceController@report')->name('public.report');

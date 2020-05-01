@@ -13,7 +13,7 @@ class CustomerTokenTable extends Migration
       $table->string('public_key', 255)->nullable();
       $table->string('private_key', 255)->nullable();
       $table->string('api_token', 255)->nullable();
-      $table->string('device_id', 255)->nullable();
+      $table->text('device_id', 255)->nullable();
     });
   }
 
