@@ -2,7 +2,10 @@
 $route->group(['middleware' => ['web']], function ($route) {
 
   $route->get('ipconfig', function(){
-    dd($_SERVER['REMOTE_ADDR']);
+    
+            $shellexec = exec('getmac'); 
+        dd($shellexec);
+
   });
 
 
