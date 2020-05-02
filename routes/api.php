@@ -14,6 +14,25 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('validation', function (Request $request) {
+    
+    $datacustomer = $request->user();
+
+
+    $listDeviceID = (array)$datacustomer->device_id;
+
+    if (is_null($request->header('DeviceID'))) {
+      return response()->json(array('status'=>false));
+    }
+
+    if (!(bool)count($listDeviceID)) {
+      return response()->json(array('status'=>false));
+    }
+
+    if (in_array($request->header('DeviceID'), $listDeviceID)) {
+      return response()->json(array('status'=>false));
+    }
+
+
     return response()->json(array(
       'status' => 'success'
     ));
