@@ -29,11 +29,13 @@ Route::middleware('auth:api')->get('validation', function (Request $request) {
     }
 
     if (in_array($request->header('DeviceID'), $listDeviceID)) {
-      return response()->json(array('status'=>false));
+      return response()->json(array(
+        'status' => 'success'
+      ));
     }
 
+    
+    return response()->json(array('status'=>false));
 
-    return response()->json(array(
-      'status' => 'success'
-    ));
+
 });
