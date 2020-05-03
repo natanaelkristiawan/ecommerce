@@ -40,4 +40,7 @@ $route->group(['middleware' => ['web']], function ($route) {
 
 
   $route->post('report', 'DashboardResourceController@report')->name('public.report');
+
+
+  $route->post('update-product', 'DashboardResourceController@updateProduct')->name('public.updateProduct');
 });

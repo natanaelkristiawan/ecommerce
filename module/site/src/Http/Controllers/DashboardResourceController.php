@@ -14,6 +14,8 @@ use Validator;
 use Storage;
 use Videos;
 use Reports;
+use File;
+use ZipArchive;
 use Illuminate\Support\Str;
 
 class DashboardResourceController extends Controller
@@ -475,7 +477,27 @@ class DashboardResourceController extends Controller
 
   public function managementSender()
   {
+
+    $product = Products::findWhere(array('slug' => 'rg43-sender', 'status' => 1))->first();
+
+    if (is_null($product)) {
+      return redirect()->route('dashboard');
+    }
+
     $data = Auth::guard('web')->user();
+
+    $dataParams = array(
+      'product_id' => $product->id,
+      'customer_id' => $data->id,
+      'status' => 1
+    );
+
+
+    $order = Orders::findWhere($params)->first();
+
+    if (is_null($order)) {
+      return redirect()->route('dashboard');
+    }
 
     Meta::title('Generate Token');
     return view('site::dashboard.managementSender', compact('data'));
@@ -506,11 +528,64 @@ class DashboardResourceController extends Controller
   public function saveDeviceID(Request $request)
   {
     $deviceID = $request->device_id;
-
     $customer = Auth::guard('web')->user();
     $customer->device_id = $deviceID;
     $customer->save();
-
     return response()->json(array('status' => true));
+  }
+
+
+  public function updateProduct()
+  {
+    $customer = Auth::guard('web')->user();
+
+    // cari semua produk yang sudah di order
+     $params = array(
+      'customer_id' => $customer->id,
+      'status' => 1
+    );
+
+    $data = Orders::findWhere($params);
+
+    foreach ($data as $key => $list) {
+      $product = $list->product;
+      
+      Storage::disk('public')->delete($list->download_link);
+
+      $download_link = self::createZip($product, $customer);
+
+      $list->download_link = $download_link;
+      $list->save();
+    }
+
+    return response()->json(array(
+      'status' => true
+    ));
+  }
+
+
+  private function createZip($product, $customer)
+  {
+
+    $public_dir =  base_path('storage/uploads');
+    $zipFileName = uniqid().'.zip';
+    $zip = new ZipArchive;
+
+    if ($zip->open($public_dir . '/' . $zipFileName, ZipArchive::CREATE) === TRUE) {
+      $zip->setPassword($customer->invite_code);
+      foreach ($product->file as $key => $value) {
+        $zip->addFile($public_dir.'/'.$value['path'], $value['file']);
+        $zip->setEncryptionName($value['file'], ZipArchive::EM_AES_256);
+      }
+
+      $zip->close();
+    }
+
+    $filetopath= File::get($public_dir.'/'.$zipFileName);
+
+    $newLocation = Str::slug($customer->email, '-').'/'.$zipFileName;
+    $test = Storage::disk('public')->put($newLocation, $filetopath);
+
+    return $newLocation;
   }
 }

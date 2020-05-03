@@ -18,6 +18,12 @@ class Products
     return $this->repository->all();
   }
 
+
+  public function findWhere($params = array())
+  {
+    return $this->repository->findWhere($params);
+  }
+
   public function findWhereNotIn($field, $exclude = array())
   {
     return $this->repository->findWhereNotIn($field, $exclude);
