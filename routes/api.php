@@ -43,7 +43,7 @@ Route::middleware('auth:api')->get('validation', function (Request $request) {
     );
 
 
-    $order = Orders::findWhere($params)->first();
+    $order = Orders::findWhere($dataParams)->first();
 
     if (is_null($order)) {
       return response()->json(array('status'=>false));
