@@ -38,7 +38,7 @@ Route::middleware('auth:api')->get('validation', function (Request $request) {
 
     $dataParams = array(
       'product_id' => $product->id,
-      'customer_id' => $data->id,
+      'customer_id' => $datacustomer->id,
       'status' => 1
     );
 
