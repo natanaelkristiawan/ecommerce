@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
-use Products;
-use Orders;
+use Master\Products\Facades\Products;
+use Master\Orders\Facades\Orders;
 /*
 |--------------------------------------------------------------------------
 | API Routes
