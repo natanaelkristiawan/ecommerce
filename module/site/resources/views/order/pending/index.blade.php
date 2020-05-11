@@ -79,7 +79,7 @@
   </div>
   <div class="row mb-5">
     <div class="col-12 mb-3" style="text-align: center;">
-      <button data-path="" id="btn-save" data-order_id="@{{ order_id }}" class="btn btn-danger w-100" >Save</button>
+      <button data-path="" disabled id="btn-save" data-order_id="@{{ order_id }}" class="btn btn-danger w-100" >Save</button>
     </div>
     <div class="col-12" style="max-height: 150px; overflow-y: auto;">
       <h3>Transfer Account</h3>
@@ -160,7 +160,8 @@ $(document).on('click', '.btn-upload', function(){
       this.on("success", function(file, response) {
         if (response === ""){
           toastr.error('Files maximum size.', 'Error');
-        } else {  
+        } else {
+          $('#btn-save').removeAttr('disabled');
           $('#btn-save').attr('data-path', response.path);
         }
       });
